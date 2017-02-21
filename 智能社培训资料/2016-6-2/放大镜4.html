@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            float: left;
+            margin-left: 20px;
+            position: relative;
+        }
+        #small{
+            width: 190px;
+            height: 220px;
+            border: 1px solid #000;
+        }
+        #small span{
+            width: 50px;
+            height: 50px;
+            background: yellow;
+            opacity: 0.5;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        #big{
+            width: 190px;
+            height: 220px;
+            border: 1px solid #000;
+            overflow: hidden;
+            display: none;
+        }
+        #big img{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        function getPos(obj){
+            var l=0;
+            var t=0;
+
+            while(obj){
+                l+=obj.offsetLeft;
+                t+=obj.offsetTop;
+
+                obj=obj.offsetParent;
+            }
+            return {left: l, top: t};
+        }
+        window.onload = function () {
+            var oSmall=document.getElementById('small');
+            var oSpan=oSmall.children[0];
+            var oBig=document.getElementById('big');
+            var oImg=oBig.children[0];
+
+            // 移入
+            oSmall.onmouseover=function(){
+                oSpan.style.display='block';
+                oBig.style.display='block';
+            };
+            // 移动
+            oSmall.onmousemove=function(ev){
+                var oEvent=ev || event;
+                var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+                var scrollLeft=document.documentElement.scrollLeft || document.body.scrollLeft;
+                var l=oEvent.clientX-getPos(oSmall).left-oSpan.offsetWidth/2+scrollLeft;
+                var t=oEvent.clientY-getPos(oSmall).top-oSpan.offsetHeight/2+scrollTop;
+                oSpan.style.left=l+'px';
+                oSpan.style.top=t+'px';
+            };
+            // 移出
+            oSmall.onmouseout=function(){
+                oSpan.style.display='none';
+                oBig.style.display='none';
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="small">
+        <span></span>
+        <img src="2.jpg">
+    </div>
+    <div id="big">
+        <img src="1.jpg">
+    </div>
+</body>
+</html>

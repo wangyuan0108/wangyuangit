@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        #tmp_li{
+            display: none;
+        }
+    </style>
+    <script>
+        function format(str, json){
+            return str.replace(/\{\{\w+\}\}/g, function(s){
+                s= s.substring(2, s.length-2);
+                return json[s];
+            });
+        }
+        function dupEle(obj, json){
+            var oTmp=obj.cloneNode(true);
+            oTmp.removeAttribute('id');
+            oTmp.innerHTML=format(oTmp.innerHTML, json);
+            return oTmp;
+        }
+        window.onload=function(){
+            var oName=document.getElementById('name');
+            var oAge=document.getElementById('age');
+            var oContent=document.getElementById('content');
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+            var oTmp=document.getElementById('tmp_li');
+
+            oBtn.onclick=function(){
+                var oLi=dupEle(oTmp, {
+                    name: oName.value,
+                    age: oAge.value,
+                    content: oContent.value
+                });
+                oUl.appendChild(oLi);
+                oName.value=oAge.value=oContent.value='';
+            };
+        };
+    </script>
+</head>
+<body>
+    name: <input type="text" id="name"><br>
+    age: <input type="text" id="age"><br>
+    content：<input type="text" id="content"><br>
+    <input type="button" value="留言" id="btn1">
+    <ul id="ul1">
+        <li id="tmp_li">我叫{{name}},今年{{age}}岁,我想告诉你{{content}}这些事</li>
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

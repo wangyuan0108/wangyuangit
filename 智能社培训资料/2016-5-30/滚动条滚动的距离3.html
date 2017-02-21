@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #btn1{
+            position: fixed;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+
+            oBtn.onclick=function(){
+                var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+                alert(scrollTop);
+            };
+        };
+    </script>
+</head>
+<body style="height: 3000px;">
+<input type="button" value="当前距离" id="btn1">
+</body>
+</html>

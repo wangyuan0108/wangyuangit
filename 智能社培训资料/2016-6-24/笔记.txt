@@ -1,0 +1,387 @@
+笔记
+
+ajax   无刷新从服务器取数据
+jsonp  跨域取数据
+
+正则：操作字符串
+MVC：
+    M  module  模型  数据
+    V  view    视图  展示
+    C  controller  控制器  把M里面的数据拿到V里面展示
+前端模板
+
+----------------------------------
+
+jQuery：
+
+选择器：
+    基本选择器：
+        $('#id')
+        $('.class')
+        $('li')
+        $('ul li')
+        $('li.active')
+        $('p,div')
+    伪类选择器：
+        $('div:first')
+        $('div:last')
+        $('div:eq(n)')
+        $('div:odd')
+        $('div:even')
+        $('div:gt(n)')
+        $('div:lt(n)')
+    属性选择器：
+        $('input[type=button]')
+    包含选择器：
+        $('div:has(p)')
+        $('div:contains(f)')
+class：
+    addClass()
+    removeClass()
+css：
+    $(obj).css('width')
+    $(obj).css('width', '500px')
+    $(obj).css({})
+attr：
+    $(obj).attr('aaa')
+    $(obj).attr('aaa', 'bbb')
+    $(obj).attr({})
+this：
+    $(this)
+索引：
+    $(obj).index();
+内容：
+    $(obj).val();
+    $(obj).html();
+DOM：
+    创建元素：
+        $('<p>asd</p>')
+    添加元素：
+        $('<p>asd</p>').appendTo();
+        $('<p>asd</p>').prependTo();
+        $('<p>asd</p>').insertBefore();
+        $('<p>asd</p>').insertAfter();
+    删除元素：
+        $(obj).remove();
+
+    父级：
+        $(obj).parent();
+        $(obj).offsetParent();
+运动：
+    $(obj).animate(json, options);
+        options:
+            duration:时间
+            easing:运动形式
+            complete：运动结束灰调函数
+
+    * 使用animate之前最好.stop();
+
+事件：
+    $(obj).click(function(){
+
+    });
+
+    事件绑定：
+        $(obj).bind(sEv, fn);
+    事件解绑定：
+        $(obj).unbind(sEv, fn);
+
+        * 不能解除匿名函数
+
+        $(obj).unbind(sEv);
+            解除所有sEv事件
+        $(obj).unbind();
+            解除obj所有事件
+
+    $(obj).on(sEv, 'li', fn);
+    $(obj).off(sEv, 'li', fn);
+
+        $(obj).off(sEv, 'li');
+        $(obj).off();
+
+事件对象：
+    ev    兼容
+阻止事件冒泡：
+    return false;
+
+    ev.stopPropagation();
+阻止默认事件：
+    return false;
+
+    ev.preventDefault();
+
+----------------------------------
+
+定时器：
+    以前怎么用，现在怎么用
+
+        getStyle     offsetWidth
+类型     string         number
+大小    实际大小        盒模型
+none    实际大小           0
+
+物体信息：
+    $(obj).width()    物体实际的宽度
+    $(obj).height()   物体实际的高度
+
+    $(obj).outerWidth() 物体盒模型宽度
+    $(obj).outerHeight()物体盒模型高度
+
+
+    $(obj).offset().left    绝对位置
+    $(obj).offset().top     
+
+    $(obj).position().left  距离有定位父级的left
+    $(obj).position().top
+
+原生方法和jQuery不能混用
+
+原生对象转成jQuery
+    $(aDiv)
+jQeury对象转成原生对象
+    $(obj).get(0)
+    $(obj)[0]
+
+----------------------------------
+
+交互：
+    ajax：
+        $.ajax({
+            url: 'get.php',
+            data: {
+                a: 12,
+                b: 5
+            },
+            success: function(str){
+                alert(str);
+            }
+        });
+
+        $.ajax({
+            url: 'post.php',
+            type: 'post',
+            data: {
+                a: 12,
+                b: 5
+            },
+            success: function(str){
+                alert(str);
+            },
+            error: function(json){
+                // console.log(json);
+                alert(json.status);
+            }
+        });
+    jsonp：
+        $.ajax({
+            url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+            data: {
+                wd: 'a'
+            },
+            jsonp: 'cb',    // cbName
+            dataType: 'jsonp', // 使用jsonp
+            success: function(json){
+                alert(json.s);
+            }
+        });
+    百度：
+        https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=show
+
+----------------------------------
+
+jQuery插件：
+1、怎么写插件
+    $.fn.toRed=function(){
+        this.css('background', 'red');
+    };
+
+    * jQuery里面，只有写插件this
+
+    $.fn.extend({
+        toRed: function(){
+            this.css('background', 'red');
+        },
+        toBlue: function(){
+            this.css('background', 'blue');
+        }
+    });
+
+    $(obj).find('li')  从obj下面获取li
+    $(obj).each();
+
+    $('div').each(function(index, element){
+        // index   索引值
+        // element 原生对象 (this)
+    });
+2、怎么用插件
+    a). 一定要先引入jQuery
+    b). 引入插件
+
+----------------------------------
+
+垃圾回收(GC Garbage Collection)：JAVA
+
+    我们不用回收垃圾：浏览器
+    var a=12;   内存
+
+    底层语言：内存溢出
+
+    评判标准：生存周期
+
+    生存周期：
+        作用域
+
+    作用域：
+        全局变量：在程序的任何地方都可以访问到，生存周期长，直到关闭浏览器
+
+        局部变量：只能在当前作用域内访问，
+        生存周期短，只有在函数执行过程中存在，执行结束就没了
+
+        闭包：子函数可以访问父函数的局部变量，生存周期可长可短，释放子函数，父函数的局部变量就得到释放，如果子函数得不到释放，整条作用域链上的变量都会被保存
+
+全局变量 > 局部变量
+
+var a=12;
+function show(){
+    var a=12;   // 局部变量
+    alert(a);
+}
+// alert(a);    没有a
+show();         有
+// alert(a);    没有a
+
+----------------------------------
+
+function show(){
+    var a=12;
+    document.onclick=function(){
+        alert(a);
+    };
+}
+show();
+
+作用域链：
+    优先访问自己的局部变量，如果没有，寻找父级的局部变量，依次往上查找，直到全局，如果全局没有，报错
+
+----------------------------------
+
+性能优化：
+    手机端
+    游戏
+
+项目：
+1、稳定性
+2、可维护性
+3、性能
+
+性能优化：
+1、网络性能
+2、执行性能
+
+网络性能：
+1、减少http请求
+    
+    合并js文件
+    合并css文件
+    雪碧图
+2、如果没有透明的图片使用jpg
+3、减少http请求大小
+    压缩js文件
+    压缩css文件
+
+    怎么压缩：
+    1、压缩工具  
+    http://tool.oschina.net/jscompress
+    2、自动化构建工具
+        grunt
+        gulp
+4、图片延迟加载
+5、CDN(Content Delivery Network)
+    内容分发网络
+    花钱
+6、阻塞加载
+    异步加载
+        img
+        css
+        html
+    同步加载
+        js(前一个js没有加载完，后一个不加载)
+
+    * 如果是别人的js，下载下来
+    * 如果是别人的js，放到body的最后，自己的可以选择放在head里面
+
+执行性能：好的习惯
+
+之前好的习惯：
+1、没有用的东西赶紧删掉   mouseup
+2、尽量使用局部变量
+3、操作字符串尽量使用正则
+4、封装函数
+5、运动用户注意力没有在上面，停止运动
+
+DOM操作是昂贵的 -> DOM操作非常耗性能
+
+全局变量 > 局部变量
+
+属性 > 全局变量 > 局部变量
+
+parseInt和Math
+
+关于数组length存还是不存     差不多
+
+----------------------------------
+
+递归：
+
+斐波那契数列(Fibonacci)：黄金分割数列、兔子数列
+
+兔子数列：
+
+假设：
+1、一对(一公一母)
+2、2个月生一对兔子(一公一母)
+3、兔子不死
+
+3年以后有多少兔子？
+4年以后有多少兔子？
+100个月以后有多少兔子？
+
+1   1
+2   1
+3   2   一老一小
+4   3   两老一小
+5   5   三老两小
+6   8
+7   13
+8   21
+9   34
+10  55
+11  89
+12  144
+
+递归非常快
+重复计算非常慢
+
+优化：
+    计算过的数存起来，下次直接用
+
+----------------------------------
+
+作业：
+    课件一遍
+    个人站  一定要开始动手写
+    jQuery(20-30)
+
+----------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

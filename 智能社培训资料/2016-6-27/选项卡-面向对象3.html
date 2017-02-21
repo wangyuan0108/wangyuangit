@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box input.active{
+            background: red;
+        }
+        #box div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            display: none;
+        }
+        #box div.active{
+            display: block
+        }
+    </style>
+    <script>
+        function Tab() {
+            this.oBox=document.getElementById('box');
+            this.aBtn=this.oBox.getElementsByTagName('input');
+            this.aDiv=this.oBox.getElementsByTagName('div');
+
+            var _this=this;
+            for(var i=0; i<this.aBtn.length; i++){
+                this.aBtn[i].index=i;
+                this.aBtn[i].onclick=function(){
+                    _this.fnClick(this);
+                };
+            }
+        }
+        Tab.prototype.fnClick=function(oBtn){
+            for(var i=0; i<this.aBtn.length; i++){
+                this.aBtn[i].className='';
+                this.aDiv[i].className='';
+            }
+            oBtn.className='active';
+            this.aDiv[oBtn.index].className='active';
+        };
+        window.onload = function(){
+            new Tab();
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input class="active" type="button" value="1111">
+        <input type="button" value="2222">
+        <input type="button" value="3333">
+        <div class="active">aaaa</div>
+        <div>bbbb</div>
+        <div>cccc</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

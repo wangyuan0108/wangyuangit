@@ -1,0 +1,312 @@
+笔记
+
+onkeydown
+onkeyup
+
+oEvent.keyCode
+
+----------------------------------
+
+js组成：
+1、ECMAScript
+    解释器
+2、DOM   Document Object Model
+         文档对象模型
+         所有跟页面有关的操作
+3、BOM   Browser Object Model
+         浏览器对象模型
+         所有跟浏览器有关的操作
+DOM：
+    DOM树：反映了页面各个节点之前的关系
+
+    DOM关系：
+        父级
+            obj.parentNode
+                一个元素
+        子级
+            obj.children
+                一组元素
+        首节点
+            obj.children[0]
+        尾节点
+            obj.children[obj.children.length-1]
+    DOM操作：
+        创建
+            document.createElement('标签名')
+        添加
+            obj.appendChild();
+                添加到父级的最后
+            obj.insertBefore(添加的元素, 谁之前);
+
+            添加已有元素，相当于剪切
+        删除
+            obj.removeChild(子级);
+属性操作：
+1、.     操作已知属性
+2、[]    可以操作变量
+3、attribute 操作自定义属性
+
+设置自定义属性
+    obj.setAttribute(属性名, 属性值);
+获取自定义属性
+    obj.getAttribute(属性名);
+删除自定义属性
+    obj.removeAttribute(属性名);
+
+各种距离：
+    滚动条滚动的距离
+        var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollLeft=document.documentElement.scrollLeft || document.body.scrollLeft;
+    可视区的宽高
+        var clientH=document.documentElement.clientHeight;
+        var clientW=document.documentElement.clientWidth;
+    物体的宽高
+        var oH=obj.offsetHeight;
+        var oW=obj.offsetWidth;
+
+        offsetHeight        getStyle
+类型       number            string
+none         0               可以获取
+大小       盒模型            实际大小
+
+父级：
+    obj.offsetParent        有定位的父级
+    obj.parentNode          结构上的父级
+
+页面的父级：
+    有定位的祖宗：document.body
+    结构上的祖宗：document
+
+左边和上面：有定位父级
+    obj.offsetLeft      
+    obj.offsetTop
+
+绝对位置：
+    function getPos(obj){
+        var l=0;
+        var t=0;
+
+        while(obj){
+            l+=obj.offsetLeft;
+            t+=obj.offsetTop;
+
+            obj=obj.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+
+物体内容高度：
+    obj.scrollHeight
+
+----------------------------------
+
+事件
+    事件对象：描述了更加详细的信息
+        var oEvent=ev || event;
+
+        oEvent.clientX  X轴坐标
+        oEvent.clientY  Y轴坐标
+
+        * 可视区的坐标，scrollTop，scrllLeft加上
+
+onclick         点击
+onmouseover     鼠标移入
+onmouseout      鼠标移出
+onmousedown     鼠标按下
+onmousemove     鼠标移动
+onmouseup       鼠标抬起
+onchange        改变
+onfocus         获取焦点  obj.focus();
+onblur          失去焦点  obj.blur();
+oninput         输入内容
+onpropertychange 输入内容
+onerror         加载失败
+onmouseenter    鼠标移入
+onmouseleave    鼠标移出
+onkeydown       键盘按下
+onkeyup         键盘抬起
+onreadystatechange  加载完成
+oncontextmenu   鼠标右击
+
+onresize        窗口改变大小
+onload          加载完成
+onscroll        滚动条滚动
+
+DOMContentLoaded    DOM加载完成
+    必须通过绑定添加
+
+事件冒泡：触发子元素的事件，传递给父级，如果父级有这个事件则会触发，如果没有则会继续传递
+    阻止冒泡：
+        oEvent.cancelBubble=true;
+    * 如果冒泡没有影响到你，不用管
+
+阻止默认事件：
+    return false;
+
+事件绑定：
+    obj.addEventListener(事件名, 函数, false);
+        事件名：不能加on
+        false：事件冒泡
+            子元素 -> 父元素
+        true：事件捕获
+            父元素 -> 子元素
+    obj.attachEvent(事件名, 函数);
+        事件名：需要加on
+
+    function addEvent(obj, sEv, fn){
+        if(obj.addEventListener){
+            obj.addEventListner(sEv, function(){
+                fn && fn();
+            }, false);
+        }else{
+            obj.attachEvent('on'+sEv, function(){
+                fn && fn();
+            });
+        }
+    }
+
+事件解绑定：不能解除匿名函数
+    obj.removeEventListener();
+    obj.detachEvent();
+
+    function removeEvent(obj, sEv, fn){
+        if(obj.removeEventListener){
+            obj.removeEventListener(sEv, fn, false);
+        }else{
+            obj.detachEvent('on'+sEv, fn);
+        }
+    }
+匿名函数：
+    每一个函数都是new出来
+
+键盘事件：
+    onkeydown
+    onkeyup
+
+    oEvent.keyCode
+
+(事件捕获)：
+    obj.setCapture();
+    obj.releaseCapture();
+
+解决onmouseover和onmouseout的BUG：
+
+onmouseover：
+    var from=oEvent.formElement || oEvent.reletedTarget;
+
+    if(父级.contains(from))return;
+    // code
+onmouseout：
+    var to=oEvent.toElement || oEvent.reletadTarget;
+    if(父级.contains(to))return;
+    // code
+
+onmouseenter
+onmouseleave
+
+this：
+1、定时器
+2、多包了一层
+3、行间
+4、attachEvent
+
+if简写：
+1、不写大括号
+2、三目
+    条件?语句一:语句二;
+3、条件 && 语句
+
+----------------------------------
+
+碰撞检测：
+
+----------------------------------
+
+事件委托：
+    oEvent.srcElement
+    兼容性：Chrome、IE系列
+    oEvent.target
+    兼容性：高级浏览器
+
+    处理兼容：
+        var target=oEvent.srcElement || oEvent.target;
+
+    瑕疵：如果ul下面有div也可以变红
+
+    tagName：标签名(大写)
+
+好处：
+1、性能高
+2、可以给未来元素添加事件
+
+----------------------------------
+
+碰撞检测：
+function collTest(obj, obj2){
+    var l1=obj.offsetLeft;
+    var r1=obj.offsetWidth+l1;
+    var t1=obj.offsetTop;
+    var b1=obj.offsetHeight+t1;
+
+    var l2=obj2.offsetLeft;
+    var r2=obj2.offsetWidth+l2;
+    var t2=obj2.offsetTop;
+    var b2=obj2.offsetHeight+t2;
+
+    if(r1<l2 || b1<t2 || l1>r2 || t1>b2){
+        return false;
+    }else{  
+        return true;
+    }
+}
+
+事件委托：把事件委托给父级
+    var target=oEvent.srcElement || oEvent.target;
+
+    target.tagName  ->  触发事件的标签(大写)
+
+好处：
+1、性能高
+2、给未来元素添加事件
+
+----------------------------------
+
+滚轮事件：
+    obj.onmousewheel
+    兼容性：Chrome、IE系列
+    obj.addEventListener('DOMMouseScroll', fn, false);
+
+    处理兼容：
+        if
+
+    滚动方向：
+        obj.onmousewheel=function(ev){
+            var oEvent=ev || event;
+
+            oEvent.wheelDelta
+        };
+
+        wheelDelta：
+            下：-120
+            上：120
+        detail:
+            下：3
+            上：-3
+
+
+    问题：
+        如果出现滚动条，滚动条也会跟着动
+        return false;   火狐里面不兼容
+
+        addEventListener return false失效
+        阻止默认事件
+        oEvent.preventDefault();
+
+----------------------------------
+
+作业：
+    课件一遍
+    右键菜单
+
+----------------------------------
+

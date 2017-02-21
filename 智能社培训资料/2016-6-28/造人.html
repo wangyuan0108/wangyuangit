@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[];
+        // 属性
+        arr.name='i++';
+        arr.age=18;
+        // 方法
+        arr.showName=function(){
+            return this.name;
+        };
+        arr.showAge=function(){
+            return this.age;
+        };
+        alert('我叫'+arr.showName()+'今年'+arr.showAge());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

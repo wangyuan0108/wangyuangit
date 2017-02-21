@@ -1,0 +1,301 @@
+笔记
+
+进度条
+瀑布流
+好123
+假数据
+留言板
+
+--------------------------------------
+
+js组成：
+1、ECMAScript
+    解释器、核心
+    兼容性：很好
+2、DOM   Document Object Model
+         文档对象模型
+         兼容性：大部分都兼容，不兼容我们可以处理
+3、BOM   Browser Object Model
+         浏览器对象模型
+
+         兼容性：不好，不兼容不可以处理
+         能用就用
+
+--------------------------------------
+
+元素、对象、节点
+
+DOM：
+    DOM树：可以体现整个页面的节点关系
+
+    DOM关系：
+        父级
+            obj.parentNode    结构上的父节点
+            obj.offsetParent  有定位的父节点
+        子级
+            obj.children
+        兄节点
+            obj.previousElementSibling || obj.previousSibling
+        弟节点
+            obj.nextElementSibling || obj.nextSibling
+        首节点
+            obj.firstElementChild || obj.firstChild
+
+            obj.children[0]
+        尾节点
+            obj.lastElementChild || obj.lastChild 
+
+            obj.children[obj.children.length-1]
+    DOM操作：
+        创建
+            document.createElement(标签名)
+        添加
+            obj.appendChild();
+            添加到最后
+            obj.insertBefore(要添加的元素, 谁之前);
+            插入到某一项的前面
+        删除
+            obj.removeChild(子级);
+
+        简易留言板
+
+--------------------------------------
+
+右下角广告：
+1、滚动条滚动的距离
+    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+2、可视区的高度
+    var clientH=document.documentElement.clientHeight;
+    var clientW=document.documentElement.clientWidth;
+3、物体的高度
+    var oH=obj.offsetHeight;
+    var oW=obj.offsetWidth;
+4、滚动条滚动事件
+    window.onscroll
+5、窗口改变事件
+    window.onresize
+
+--------------------------------------
+
+BOM：
+    window.open(地址, 打开方式);
+    window.close();
+
+    window.location
+
+    历史记录：
+        window.history
+
+        window.history.forward();
+        window.history.back();
+
+        window.history.go();
+
+--------------------------------------
+
+物体信息：
+    obj.offsetLeft      距离有定位父级的left
+    obj.offsetTop       距离有定位父级的top
+
+function getPos(obj){
+    var l=0;
+    var t=0;
+    while(obj){
+        l+=obj.offsetLeft;
+        t+=obj.offsetTop;
+
+        obj=obj.offsetParent;
+    }
+    return {left: l, top: t};
+}
+
+图片延迟加载：
+1、怎么让图片不显示
+    _src
+2、什么时候显示
+    可视区高度+滚动的距离>=图片的top
+        aImg[i].src=aImg[i].getAttribute('_src');
+
+自定义属性：
+    获取：
+        getAttribute('属性名');
+    设置：
+        setAttribute('属性名', '值');
+    删除：
+        removeAttribute('属性名');
+
+属性操作：
+1、.     操作已知属性
+2、[]    可以操作变量
+3、attribute     操作自定义属性
+
+--------------------------------------
+
+吸顶条：
+    找一个东西占位置
+
+--------------------------------------
+
+图片预加载：
+    var oImg=new Image();
+    
+    oImg.onload     加载完成
+    oImg.onerror    加载失败
+
+    oImg.onerror=function(){
+        this.src='xxx';    // 给一张默认图片
+    };
+
+进度条：
+    通过oImg.onload确定当前加载了多少场图片
+
+    求比例，算宽度
+
+--------------------------------------
+
+innerHTML：
+    重新赋值，之前子元素的所有事件都没有了
+
+搜索输入框：
+    obj.onfocus     获取焦点事件
+    obj.onblur      失去焦点事件
+
+    obj.focus();    强制获取焦点
+    obj.blur();     强制失去焦点
+
+瀑布流：
+    sort
+    scrollHeight
+
+--------------------------------------
+
+offsetHeight：物体盒模型的高度
+scrollHeight：内容的高度
+
+如果内容大于容器的高度：
+    scrollHeight：内容的高度
+如果内容小于容器的高度：
+    scrollHeight：容器的高度
+
+--------------------------------------
+
+        getStyle         offsetHeight
+类型     string             number
+none     可以获取             0
+大小     实际大小           盒模型
+
+--------------------------------------
+
+不能一上来就给未来元素添加事件
+
+--------------------------------------
+
+表单：
+    form
+
+    action
+    name
+    value
+
+    method：
+        GET：不安全、32K、有缓存
+        POST：相对安全、1G、没有缓存
+
+    那种较好：
+        GET：分享、收藏
+
+缓存(cache)：浏览器对于同一个URL只会访问一0
+    好：对于用户来说
+    不好：对于程序员
+
+https://detail.tmall.com/item.htm?spm=a1z10.4-b.w5003-14257465808.2.79DTmr&id=531592303195&scene=taobao_shop
+
+分享：
+
+--------------------------------------
+
+关于父级：
+
+    obj.offsetParent
+    obj.parentNode
+
+    结构上祖宗：document
+    定位上祖宗：document.body
+
+
+事件：用户的操作
+    
+    onclick
+    onmouseover
+    onmouseout
+    onchange
+    onfocus
+    onblur
+    onresize
+    onscroll
+    onload
+    onerror
+
+    事件对象：包含(描述)了更加详细的信息
+        event：
+            兼容性：Chrome、IE全系列
+        ev：
+            兼容性：高级浏览器
+
+        处理兼容：
+            var oEvent=ev || event;
+
+        可视区的坐标：
+            oEvent.clientX
+            oEvent.clientY
+        * 以后大家使用clientX、clientY需要加上滚动条的距离
+
+    onmousedown     鼠标按下
+    onmousemove     鼠标移动
+    onmouseup       鼠标抬起
+
+    事件冒泡：
+        触发子元素的事件，传递给父级，如果父级有这个事件，则会触发，如果没有继续传递，document为止
+    阻止冒泡：
+        oEvent.cancelBubble=true;
+
+    * 如果没有影响到你不用管
+
+--------------------------------------
+
+放大镜：准备2张图，一张大图，一张小图
+
+    l1/(oSmall.offsetWidth-oSpan.offsetWidth)
+
+    l2/(oImg.offsetWidth-oBig.offsetWidth)
+
+    l2=l1/(oSmall.offsetWidth-oSpan.offsetWidth)*(oImg.offsetWidth-oBig.offsetWidth);
+
+--------------------------------------
+
+作业：
+    今天课件
+
+--------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

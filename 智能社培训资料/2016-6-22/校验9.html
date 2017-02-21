@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        div span{
+            color: red;
+        }
+        div input.error{
+            border: 1px solid red;
+        }
+        div input.success{
+            border: 1px solid green;
+        }
+    </style>
+    <script src="check2.js"></script>
+    <script>
+        window.onload = function () {
+            checkForm('form');
+        };
+    </script>
+</head>
+<body>
+<form action="http://www.baidu.com" id="form" target="_blank">
+    <div>
+        email:<input type="text" name="email" data-err="* 邮件格式错误">
+        <span></span>
+    </div>
+    <div>
+        age:<input type="text" name="age" data-err="* 年龄不符合要求(18-100)">
+        <span></span>
+    </div>
+    <div>
+        tel:<input type="text" name="tel" data-err="* 座机号错误">
+        <span></span>
+    </div>
+    <div>
+        cnName:<input type="text" name="cnName" data-err="* 请输入2-4位汉字">
+        <span></span>
+    </div>
+    <br>
+    <input type="submit" value="注册">
+</form>
+</body>
+</html>

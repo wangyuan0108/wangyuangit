@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // parseInt  260
+        // Math.floor 30
+        window.onload = function () {
+            var arr=[];
+            var N=10000000;
+            for(var i=0; i<N; i++){
+                arr.push(Math.random());
+            }
+            var s=new Date().getTime();
+            for(var i=0; i<arr.length; i++){
+                // parseInt(arr[i]);
+                Math.floor(arr[i]);
+            }
+            alert(new Date().getTime()-s);
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

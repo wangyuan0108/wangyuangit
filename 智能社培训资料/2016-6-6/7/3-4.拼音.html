@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+ul, li, em {margin:0; padding:0; list-style:none;}
+#ul1 li {padding:6px 4px;}
+#ul1 li span {width: 150px; display:inline-block;}
+</style>
+<script>
+	window.onload=function(){
+		var oT=document.getElementById('txt1');
+		var oBtn=document.getElementById('btn1');
+		var oUl=document.getElementById('ul1');
+
+		oBtn.onclick=function(){
+			try{
+				var arr=eval(oT.value);
+			}catch(e){
+				console.log(e);
+			}
+
+			var arr2=[];
+			for(var i=0; i<arr.length; i++){
+				var arr3=arr[i].pin.split(' ');
+				var jp='';
+				for(var j=0; j<arr3.length; j++){
+					jp+=arr3[j].charAt(0);
+				}
+				arr2[i]={name: arr[i].name, pin: arr[i].pin, jp: jp};
+
+				var oLi=document.createElement('li');
+				oLi.innerHTML='姓名:<span>'+arr2[i].name+'</span>拼音:<span>'+arr2[i].pin+'</span>简拼:'+arr2[i].jp;
+				oUl.appendChild(oLi);
+			}
+		};
+	};
+</script>
+</head>
+
+<body>
+输入原始文本(json格式)：<br>
+<textarea style="width:500px; height:200px;" id="txt1">
+[
+	{name: '张三', pin: 'zhang san'},
+	{name: '王斌', pin: 'wang bin'},
+	{name: '张春桥', pin: 'zhang chun qiao'},
+	{name: '帕多瓦', pin: 'pa duo wa'},
+	{name: '王彬', pin: 'wang bin'},
+	{name: '张超群', pin: 'zhang chao qun'},
+	{name: '王保平', pin: 'wang bao ping'},
+	{name: '钟伟强', pin: 'zhong wei qiang'}
+]
+</textarea><br>
+<br>
+<input type="button" value="创建" id="btn1" />
+<br>
+这里输出结果：<br>
+<ul id="ul1">
+	<!--<li>姓名：<span></span>全拼：<span></span>简拼：<span></span></li>-->
+</ul>
+</body>
+</html>

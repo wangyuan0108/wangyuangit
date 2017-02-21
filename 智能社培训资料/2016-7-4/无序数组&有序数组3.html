@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 无序数组添加    40
+        // 有序数组添加    7800
+
+        // 无序数组查找    44
+        // 有序数组查找    5
+
+        // 无序数组综合   80
+        // 有序数组综合   7800
+        var arr=[];
+        function unfindAdd(n){
+            if(!unfindArr(n)){
+                arr.push(n);
+            }
+        }
+        function unfindArr(n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        function findAdd(n){
+            if(!findArr(n, 0, arr.length)){
+                arr.push(n);
+                arr.sort(function(n1, n2){
+                    return n1-n2;
+                });
+            }
+        }
+        function findArr(n, s, e){
+            if(s>e){
+                return false;
+            }else if(s==e){
+                if(n==arr[s]){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            var c=Math.floor((s+e)/2);
+            if(arr[c]==n){
+                return true;
+            }else{
+                if(arr[c]>n){
+                    return findArr(n, s, c);
+                }else{
+                    return findArr(n, c+1, e);
+                }
+            }
+        }
+
+        var N=10000;
+        var s=new Date().getTime();
+        for(var i=0; i<N; i++){
+            var n=parseInt(Math.random()*N);
+            unfindAdd(n);
+            // findAdd(n);
+        }
+        for(var i=0; i<N; i++){
+            var n=parseInt(Math.random()*N);
+            unfindArr(n);
+            // findArr(n, 0, arr.length-1);
+        }
+        alert(new Date().getTime()-s);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

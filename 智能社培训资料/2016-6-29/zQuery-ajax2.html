@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            float: left;
+            margin: 10px;
+        }
+    </style>
+    <script src="zQuery-ajax.js"></script>
+    <script>
+        $(function(){
+            $('input').click(function(){
+                $.ajax({
+                    url: 'post.php',
+                    type: 'post',
+                    data:{
+                        a: 12,
+                        b:5
+                    },
+                    success: function(str){
+                        alert(str);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="按钮">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

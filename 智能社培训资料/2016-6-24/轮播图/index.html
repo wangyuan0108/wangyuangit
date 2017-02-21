@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+    <link rel="stylesheet" href="css/edslider.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animate-custom.css">
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="jquery.edslider.js"></script>
+    <script>
+        $(document).ready(function(){
+            //Initiazile plugin with your preferences
+            $('.mySlideshow').edslider({
+                width:'960',
+                height:'400'
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <ul class="mySlideshow">
+        <li class="first">
+            <a href="#" target="_blank" class="animated fadeInLeft">
+                <img src="images/hd-logo.png" width="330" height="255" alt="Harley-Davidson">
+            </a>
+            <div class="animated fadeInRight">It's time to ride!</div>
+        </li>
+        <li class="second">
+            <img src="images/second-title.png" class="animated fadeInRight">
+        </li>
+        <li class="third">
+            <img src="images/third-title.png" class="animated fadeInLeft">
+        </li>
+        <li class="fourth">
+            <img src="images/fourth-title.png" class="animated fadeInRight">
+        </li>
+        <li class="fifth">
+            <img src="images/fifth-title.png" class="animated fadeInLeft">
+        </li>
+    </ul>
+</div>
+</body>
+</html>

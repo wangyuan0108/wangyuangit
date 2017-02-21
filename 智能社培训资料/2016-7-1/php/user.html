@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function () {
+            var oUser=document.getElementById('user');
+            var oPass=document.getElementById('pass');
+            var oBtn=document.getElementById('btn1');
+            var oBtn2=document.getElementById('btn2');
+
+            // 登录
+            var URL='user.php';
+            oBtn.onclick=function(){
+                ajax({
+                    url: URL,
+                    data:{
+                        act: 'login',
+                        user: oUser.value,
+                        pass: oPass.value
+                    },
+                    type: 'post',
+                    success: function(str){
+                        var json=eval('('+str+')');
+                        if(json.err){
+                            alert(json.msg);
+                        }else{
+                            alert(json.msg);
+                        }
+                    }
+                });
+            };
+            // 注册
+            oBtn2.onclick=function(){
+                ajax({
+                    url: URL,
+                    data: {
+                        act: 'add',
+                        user: oUser.value,
+                        pass: oPass.value
+                    },
+                    type: 'post',
+                    success: function(str){
+                        var json=eval('('+str+')');
+
+                        if(json.err){
+                            alert(json.msg);
+                        }else{
+                            alert(json.msg);
+                        }
+                    }
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+    user：<input type="text" id="user"><br>
+    pass：<input type="password" id="pass"><br>
+    <input type="button" value="登录" id="btn1">
+    <input type="button" value="注册" id="btn2">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

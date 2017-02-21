@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 12.5%;
+            height: 100px;
+            background: #3bb4f2;
+            float: left;
+            font-size: 100px;
+            line-height: 100px;
+            text-align: center;
+            color:#fff;
+        }
+    </style>
+    <script>
+        window.onresize=window.onload = function () {
+            var aDiv=document.getElementsByTagName('div');
+
+            var clientW=document.documentElement.clientWidth;
+
+            if(clientW>=600){
+                for(var i=0; i<aDiv.length; i++){
+                    aDiv[i].style.width='12.5%';
+                }
+            }else if(clientW>=400 && clientW<600){
+                for(var i=0; i<aDiv.length; i++){
+                    aDiv[i].style.width='25%';
+                }
+            }else{
+                for(var i=0; i<aDiv.length; i++){
+                    aDiv[i].style.width='50%';
+                }
+            }
+
+
+        };
+    </script>
+</head>
+<body>
+<div style="background: #1abc9c;">1</div>
+<div style="background: #33c5c5;">2</div>
+<div style="background: #4baaff;">3</div>
+<div style="background: #e6aee7;">4</div>
+<div style="background: #e67e22;">5</div>
+<div style="background: #34495e;">6</div>
+<div style="background: #9b59b6;">7</div>
+<div style="background: #f1c40f;">8</div>
+</body>
+</html>

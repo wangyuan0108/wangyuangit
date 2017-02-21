@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #66ccff;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: #ff6699;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+        }
+    </style>
+    <script>
+        function collTest(obj, obj2){
+            var l1=obj.offsetLeft;
+            var r1=obj.offsetWidth+l1;
+            var t1=obj.offsetTop;
+            var b1=obj.offsetHeight+t1;
+
+            var l2=obj2.offsetLeft;
+            var r2=obj2.offsetWidth+l2;
+            var t2=obj2.offsetTop;
+            var b2=obj2.offsetHeight+t2;
+
+            if(r1<l2 || b1<t2 || l1>r2 || t1>b2){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        window.onload = function () {
+            var oDiv=document.getElementById('div1');
+            var oDiv2=document.getElementById('div2');
+
+            oDiv.onmousedown=function(ev){
+                var oEvent=ev || event;
+                var disX=oEvent.clientX-oDiv.offsetLeft;
+                var disY=oEvent.clientY-oDiv.offsetTop;
+                document.onmousemove=function(ev){
+                    var oEvent=ev || event;
+
+                    oDiv.style.left=oEvent.clientX-disX+'px';
+                    oDiv.style.top=oEvent.clientY-disY+'px';
+
+                    if(collTest(oDiv, oDiv2)){
+                        oDiv2.style.background='#00FF88';
+                    }else{
+                        oDiv2.style.background='#FF6699';
+                    }
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+</html>

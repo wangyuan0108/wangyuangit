@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background:red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            $('#div1').mouseover(function(){
+                $(this).stop().animate({width: 500});
+            });
+            $('#div1').mouseout(function(){
+                $(this).stop().animate({width: 200});
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

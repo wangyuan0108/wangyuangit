@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function findInArr(arr, n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        function getByClass(oParent, sClass){
+            if(oParent.getElementsByClassName){
+                return oParent.getElementsByClassName(sClass);
+            }else{
+                var aEle=oParent.getElementsByTagName('*');
+                var arr=[];
+                // var reg=/sClass/;
+                var reg=new RegExp(sClass);
+                for(var i=0; i<aEle.length; i++){
+                    if(reg.test(aEle[i].className)){
+                        arr.push(aEle[i]);
+                    }
+                }
+                return arr;
+            }
+        }
+        window.onload = function () {
+            var aDiv=getByClass(document, 'div1');
+
+            alert(aDiv.length);
+        };
+    </script>
+</head>
+<body>
+<div class="div12 red blue"></div>
+<div class="div1 aa bb"></div>
+<div class="div1 box content"></div>
+<div class="div1 aa bb"></div>
+<div class="div1 box content"></div>
+</body>
+</html>

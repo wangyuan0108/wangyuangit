@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var str='<p>我是一个p标签</p>';
+            var oDiv=document.getElementById('div1');
+
+            // oDiv.insertAdjacentHTML('beforeEnd', str);
+            // oDiv.insertAdjacentHTML('afterBegin', str);
+            // oDiv.insertAdjacentHTML('beforeBegin', str);
+            oDiv.insertAdjacentHTML('afterEnd', str);
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <span>spanspanspan</span>
+    </div>
+</body>
+</html>

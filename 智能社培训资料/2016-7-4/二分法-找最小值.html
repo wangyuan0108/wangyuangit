@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[12, 5, 8, 90,-74,-200,123, 88, 35, 27, 103,-206,888,1023,-2,-66];
+        function findMin(arr, s, e){
+            if(s>e){
+                return null;
+            }else if(s==e){
+                return arr[s];
+            }
+            var c=Math.floor((s+e)/2);
+            var l=findMin(arr, s, c);
+            var r=findMin(arr, c+1, e);
+            if(l<r){
+                return l;
+            }else{
+                return r;
+            }
+        }
+        alert(findMin(arr, 0, arr.length-1));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 600px;
+            height: 358px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            position: relative;
+        }
+        #ul1{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -90px;
+        }
+        #ul1 li{
+            width: 260px;
+            height: 179px;
+            float: left;
+            padding: 0 10px;
+            position: relative;
+        }
+        #ul1 li img{
+            width: 100%;
+        }
+        #ul1 li span{
+            width: 100%;
+            height: 100%;
+            font-size: 100px;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            line-height: 179px;
+        }
+        #line{
+            width: 1px;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            background:red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.children;
+            var aImg=oUl.getElementsByTagName('img');
+
+            // 看看而已
+            for(var i=0; i<aLi.length; i++){
+                var oSpan=document.createElement('span');
+                oSpan.innerHTML=i;
+                aLi[i].appendChild(oSpan);
+            }
+
+
+            oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+            var oBoxC=oBox.offsetWidth/2;
+            // 拖拽
+            oUl.onmousedown=function(ev){
+                var oEvent=ev || event;
+                var disX=oEvent.clientX-oUl.offsetLeft;
+
+                document.onmousemove=function(ev){
+                    var oEvent=ev || event;
+                    oUl.style.left=oEvent.clientX-disX+'px';
+
+                    // 改变大小
+                    setSize();
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+            // 初始化ul的left
+            oUl.style.left=oBoxC-(2-0.5)*aLi[0].offsetWidth+'px';
+            function setSize(){
+                for(var i=0; i<aLi.length; i++){
+                    var c=Math.abs(oBoxC-(aLi[i].offsetLeft+aLi[i].offsetWidth/2+oUl.offsetLeft));
+
+                    var scale=1-c/500;
+                    scale<0.5 && (scale=0.5);
+                    // 改变大小
+                    aImg[i].style.width=scale*520+'px';
+                    // 让一个物体从中心变大
+                    aImg[i].style.marginLeft=-(scale*520-260)/2+'px';
+                    aImg[i].style.marginTop=-(scale*358-179)/2+'px';
+                    aLi[i].style.zIndex=scale*1000;
+                    // 看看而已
+                    aLi[i].children[1].innerHTML=scale.toFixed(2);
+                }
+            }
+            setSize();
+        };
+    </script>
+</head>
+<body>
+    <div id="line"></div>
+    <div id="box">
+        <ul id="ul1">
+            <li><img src="img/1.jpg"></li>
+            <li><img src="img/2.jpg"></li>
+            <li><img src="img/3.jpg"></li>
+            <li><img src="img/4.jpg"></li>
+            <li><img src="img/5.jpg"></li>
+            <li><img src="img/6.jpg"></li>
+            <li><img src="img/7.jpg"></li>
+            <li><img src="img/8.jpg"></li>
+        </ul>
+    </div>
+</body>
+</html>

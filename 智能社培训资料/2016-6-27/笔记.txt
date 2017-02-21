@@ -1,0 +1,348 @@
+笔记
+
+------------------------------------
+
+正则：
+    var reg=new RegExp('内容', '选项');
+
+    选项：
+        i   忽略大小写
+        m   多行
+        g   全部
+
+    var reg=/内容/选项;
+
+    量词：
+        {n}     刚好n个
+        {n,m}   最少n个，最多m个
+        {n,}    最少n个，最多不限
+
+        +   最少1个，最多不限   {1,}
+        *   可以没有，有了不限  {0,}
+        ?   可有可无            {0,1}
+    方括号：
+        1、[abc]     a|b|c
+            /ab[abc]d/  abad|abbd|abcd
+        2、[0-9]     范围
+           [a-z]
+        3、[^a]  取反
+    修饰：
+        1、^     开头
+        2、$     结尾
+    转义：
+        \d     数字
+        \w     数字字母_
+        \s     空白符
+
+        \D     非数字
+        \W     非数字字母_
+        \S     非空白符
+
+        \b     边界
+
+        .      任意字符(慎重考虑)
+        \.
+
+        \
+        \\
+
+    str.search(正则);   查找类似indexOf
+    str.match(正则);    匹配
+    str.replace(要替换的元素, 替换成什么);
+    str.replace(正则, function(s){
+        // s匹配上正则的小字符串
+    });
+
+    reg.test(str);      检测str是否符合正则
+
+------------------------------------
+
+jQuery：
+    
+选择器：
+    基本选择器：
+        $('#id')
+        $('.class')
+        $('ul')
+        $('ul li')
+        $('ul li.active')
+        $('div,p')
+    伪类选择器：
+        $('div:first')
+        $('div:last')
+        $('div:eq(n)')
+        $('div:odd')
+        $('div:even')
+        $('div:gt(n)')
+        $('div:lt(n)')
+    属性选择器：
+        $('input[type=button]')
+
+小方法：
+.show();
+.hide();
+
+css
+    $(obj).css('width') 
+    $(obj).css('width','300px')
+    $(obj).css({})
+
+attr
+    $(obj).attr('xxx')
+    $(obj).attr('xxx','yyyy')
+    $(obj).attr({})
+
+class
+    $(obj).addClass();
+    $(obj).removeClass();
+
+运动：
+    $(obj).animate(json, options);
+
+    * 使用animate最好先stop
+
+    使用插件：
+        jquery-easing
+DOM操作：
+    创建元素：
+        $('<p></p>')
+    添加元素：
+        $('<p></p>').appendTo();
+        $('<p></p>').prependTo();
+    删除元素：
+        $(obj).remove();
+父级：
+    $(obj).parent();
+    $(obj).offsetParent();
+
+事件：
+    click
+    mouseover
+    mouseout
+    ......
+
+事件绑定：
+    $(obj).bind(sEv, fn);
+
+    $(obj).unbind(sEv, fn);
+    * 不能解除匿名函数
+
+$(obj).on(sEv, 'li a', fn);
+$(obj).off(sEv, 'li a', fn);
+
+阻止冒泡：
+    return false;
+阻止默认事件：
+    return false;
+
+物体信息：
+    $(obj).width();
+    $(obj).height();    物体实际宽高
+
+    $(obj).outerWidth()
+    $(obj).outerHeight()
+
+    $(obj).offset().left
+    $(obj).offset().top     绝对位置
+
+    $(obj).position().left
+    $(obj).position().top
+
+交互：
+    $.ajax({
+        url: 
+        type:
+        data:
+        success:
+        error
+    });
+
+    $.ajax({
+        url:
+        data:
+        dataType:'jsonp',
+        jsonp: 'cb' // cbName
+        success: function(){}
+    });
+
+插件：
+
+写插件：
+    $.fn.xx=function(){};
+
+    $.fn.extend({
+        aa: function(){},
+        bb: function(){}
+    });
+this：
+    $(this)
+
+------------------------------------
+
+垃圾回收：
+    
+    生存周期：作用域
+
+    作用域：
+        全局变量：生存周期长，知道关闭浏览器
+        局部变量：生存周期短，只在函数执行过程中
+        闭包：生存周期可长可短，如果子函数没有得到释放，整条作用域链上的变量保存
+
+    作用域链：
+        优先访问自己的局部变量，如果没有，往上找，依次往上，直到全局，报错
+
+斐波那契数列：兔子数列
+    递归
+性能优化：
+
+1、网络性能
+    a). 减少http请求
+    b). 减少http请求大小
+    c). 图片延迟加载
+    d). CDN
+    e). 如果是别人的js放到body最下面
+        如果是自己的js可以放到Head里面
+2、执行性能
+    
+    一个良好的习惯
+
+    之前好习惯：
+        a). 不用的赶紧删 mouseup
+        b). 优先使用局部变量
+        c). 尽量减少DOM操作
+        d). Math > parseInt
+        e). 操作字符串尽量使用正则
+        .....
+
+------------------------------------
+
+面向对象：你只管用就行，怎么实现不用关心
+为什么要学
+
+
+对象：一切皆对象
+    狗  电脑  水杯  电风扇
+
+怎么用对象：舒服
+怎么写对象：$$
+
+
+对象：(人，名字，年龄)
+
+属性：属性属于某一个特定的对象
+方法：函数 方法就是某一个对象身上的函数
+
+
+人：
+属性：特征   名字、年龄
+方法：行为   展示年龄，展示名字
+
+this：当前触发事件的元素
+      当前方法属于谁
+    jsBUG：
+        函数this默认属于window
+
+空对象：new Object();
+
+new：
+1、系统会帮你准备一个空对象，并赋值给this
+2、返回给外界
+
+构造函数：普通函数
+    因为用途而得名
+
+设计模式：
+工厂模式：
+    原料 -> 加工 -> 出厂
+
+------------------------------------
+
+.box{width: 300px;}     类
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box" style="width: 400px;"></div>
+<div class="box"></div>
+
+<div></div>
+<div></div>
+
+原型：prototype
+    扩展系统方法
+    arr.indexOf()
+    str.trim()
+    oDate.getCnDay();
+
+类：构造函数          模子
+实例：new 构造函数    模子生产出来的
+
+new 后面都是构造函数
+
+
+优先级：对象身上的方法 > 原型
+
+instanceof：查看实例的类
+
+constructor：构造器
+    查看对象的构造函数
+
+诡异事件：
+1、Object instanceof Function // true
+   Object instanceof Object   // true
+   Function isntanceof Function // true
+   Function instanceof Object   // true
+
+2、Array instanceof Function // true
+   arr instanceof Function   // fasle
+3、
+    Object.prototype.a=12;
+    var a=5;
+    alert(a.a) -> 12
+    alert(a instanceof Object) // false
+
+this：
+    this优先级：多包一层失效
+    new -> object
+    定时器 -> window
+    事件 -> 触发事件的元素
+    方法 -> 方法属于谁
+
+改：
+1、window.onload= 后面函数提出去 封装成构造函数
+2、把事件提成方法
+    a). 把事件提出去，挂到prototype上 报错
+    b). 改this
+    c). 定义全局变量
+3、把变量变成属性
+4、调this
+
+* 在面向对象里面90%都是this的问题
+
+选项卡：面向对象版
+
+------------------------------------
+
+严格模式：
+    'use strict';
+好处：
+1、定义变量必须加var
+2、不能使用with
+3、不能在if for里面定义函数
+
+严格模式：不兼容IE9-
+
+作用范围：
+    函数、script标签、文件
+
+------------------------------------
+
+var a=12;   // 声明变量
+a=12;       // 声明一个全局变量
+
+------------------------------------
+
+作业：
+    个人站
+    课件一遍
+
+------------------------------------

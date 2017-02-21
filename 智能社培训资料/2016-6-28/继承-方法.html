@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function Person(name, age){
+            this.name=name;
+            this.age=age;
+        }
+        Person.prototype.showName=function(){
+            return this.name;
+        };
+        Person.prototype.showAge=function(){
+            return this.age;
+        };
+        function Worker(name, age, job){
+            Person.apply(this, arguments);
+            this.job=job;
+        }
+        Worker.prototype=Person.prototype;
+        Worker.prototype.showName=function(){
+            alert('哈哈');
+        }
+        var p1=new Person('i++', 18);
+        var w1=new Worker('blue', 58, '搬砖老大');
+        // alert(w1.showAge());
+        p1.showName();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

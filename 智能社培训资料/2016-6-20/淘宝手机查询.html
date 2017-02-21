@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script src="jsonp.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+            var oT=document.getElementById('t1');
+            var oBox=document.getElementById('box');
+
+            oBtn.onclick=function(){
+                jsonp({
+                    url: 'http://tcc.taobao.com/cc/json/mobile_tel_segment.htm',
+                    data: {
+                        tel: oT.value
+                    },
+                    success: function(json){
+                        alert(json);
+                    }
+                })
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="查询" id="btn1">
+<input type="text" id="t1">
+<div id="box"></div>
+</body>
+</html>

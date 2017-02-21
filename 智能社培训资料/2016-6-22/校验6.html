@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        div span{
+            color: red;
+        }
+        div input.error{
+            border: 1px solid red;
+        }
+        div input.success{
+            border: 1px solid green;
+        }
+    </style>
+    <script>
+        var reg={
+            email:/^\w+@[0-9a-zA-Z-]+(\.[a-z]{2,8}){1,2}$/,
+            age: /^(1[89]|[2-9]\d|100)$/,
+            tel: /^(0\d{2,3}-)?[1-9]\d{6,7}$/,
+            cnName: /^[\u4e00-\u9fa5]{2,4}$/
+        };
+        window.onload = function () {
+            var oForm=document.getElementById('form');
+            var aInput=document.getElementsByTagName('input');
+
+            function check(obj, reg){
+                if(obj.value){
+                    if(reg.test(obj.value)){
+                        obj.parentNode.children[1].innerHTML='';
+                        obj.className='success';
+                        return true;
+                    }else{
+                        obj.parentNode.children[1].innerHTML=obj.getAttribute('data-err');
+                        obj.className='error';
+                        return false;
+                    }
+                }else{
+                    obj.parentNode.children[1].innerHTML='* 内容不能为空';
+                    obj.className='error';
+                    return false;
+                }
+            }
+            oForm.onsubmit=function(){
+                var bFlag=true;
+                for(var i=0; i<aInput.length; i++){
+                    // 有没有这个正则
+                    if(reg[aInput[i].name]){
+                        // 如果通过返回true , 如果不通过false -> 阻止默认事件
+                        if(!check(aInput[i], reg[aInput[i].name])){
+                            bFlag=false;
+                        }
+                    }
+                }
+                return bFlag;
+            };
+        };
+    </script>
+</head>
+<body>
+<form action="http://www.baidu.com" id="form" target="_blank">
+    <div>
+        email:<input type="text" name="email" data-err="* 邮件格式错误">
+        <span></span>
+    </div>
+    <div>
+        age:<input type="text" name="age" data-err="* 年龄不符合要求(18-100)">
+        <span></span>
+    </div>
+    <div>
+        tel:<input type="text" name="tel" data-err="* 座机号错误">
+        <span></span>
+    </div>
+    <div>
+        cnName:<input type="text" name="cnName" data-err="* 请输入2-4位汉字">
+        <span></span>
+    </div>
+    <br>
+    <input type="submit" value="注册">
+</form>
+</body>
+</html>

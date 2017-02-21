@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[1,2,3,4,5];
+        var arr2=[1,2,3,4,5,6];
+        Array.prototype.sum=function(){
+            var res=0;
+            for(var i=0; i<this.length; i++){
+                res+=this[i];
+            }
+            return res;
+        };
+        alert(arr2.sum());
+        alert(arr.sum());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

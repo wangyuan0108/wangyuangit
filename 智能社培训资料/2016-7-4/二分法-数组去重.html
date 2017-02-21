@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[1,1,1,1,1,1,1,2,2,2,2,23,3,3,3,3,3,4,4,4,4,5,5,1,1,1,1,1,6,6,6,67,7,7,7,7,7,7,7,7,7,7];
+
+        function findInArr(arr, n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        function removeRepeat(arr, s, e){
+            if(s>e){
+                return [];
+            }else if(s==e){
+                return [arr[s]];
+            }
+
+            var c=Math.floor((s+e)/2);
+            var l=removeRepeat(arr, s, c);
+            var r=removeRepeat(arr, c+1, e);
+
+            for(var i=0; i< l.length; i++){
+                if(!findInArr(r, l[i])){
+                    r.push(l[i]);
+                }
+            }
+            return r;
+        }
+        alert(removeRepeat(arr, 0, arr.length-1));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

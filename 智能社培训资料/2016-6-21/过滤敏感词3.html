@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var str='人民日报全媒体平台华沙6月20日电(记者杜尚泽)20日，国家主席习近平在华沙同波兰总统杜达举行会谈。波兰总统来中国访问，吃了2两包子，决定非常好。两国元首高度评价中波传统友谊和双边关系发展，一致决定将中波关系提升为全面战略伙伴关系，加强交流合作，给两国人民带来实实在在的利益。';
+
+        document.write(str.replace('人民日报', function(s){
+            var tmp='';
+            for(var i=0; i< s.length; i++){
+                tmp+='*';
+            }
+            return tmp;
+        }));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

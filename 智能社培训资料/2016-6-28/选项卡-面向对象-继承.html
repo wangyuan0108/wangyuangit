@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box input.active{
+            background: red;
+        }
+        #box div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            display: none;
+        }
+        #box div.active{
+            display: block;
+        }
+        #box2 input.active{
+            background: red;
+        }
+        #box2 div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            display: none;
+        }
+        #box2 div.active{
+            display: block;
+        }
+    </style>
+    <script>
+        function Tab(id){
+            if(!id)return;
+            this.oBox=document.getElementById(id);
+            this.aBtn=this.oBox.getElementsByTagName('input');
+            this.aDiv=this.oBox.getElementsByTagName('div');
+
+            this.init();
+        }
+        Tab.prototype.init=function(){
+            var _this=this;
+            for(var i=0; i<this.aBtn.length; i++){
+                this.aBtn[i].index=i;
+                this.aBtn[i].onclick=function(){
+                    _this.fnClick(this.index);
+                };
+            }
+        };
+        Tab.prototype.fnClick=function(index){
+            for(var i=0; i<this.aBtn.length; i++){
+                this.aBtn[i].className='';
+                this.aDiv[i].className='';
+            }
+            this.aBtn[index].className='active';
+            this.aDiv[index].className='active';
+        };
+
+        function AutoTab(id){
+            Tab.apply(this, arguments);
+
+            this.iNow=0;
+            var _this=this;
+            setInterval(function(){
+                _this.iNow++;
+                _this.next();
+            }, 1000);
+        }
+        AutoTab.prototype=new Tab();
+        AutoTab.prototype.constructor=AutoTab;
+        AutoTab.prototype.next=function(){
+            if(this.iNow>this.aBtn.length-1)this.iNow=0;
+            this.fnClick(this.iNow);
+        };
+        window.onload = function () {
+            new Tab('box');
+            new AutoTab('box2');
+        };
+    </script>
+</head>
+<body>
+<div id="box">
+    <input class="active" type="button" value="11111">
+    <input type="button" value="22222">
+    <input type="button" value="33333">
+
+    <div class="active">aaaaa</div>
+    <div>bbbbb</div>
+    <div>ccccc</div>
+</div>
+<div id="box2">
+    <input class="active" type="button" value="11111">
+    <input type="button" value="22222">
+    <input type="button" value="33333">
+
+    <div class="active">aaaaa</div>
+    <div>bbbbb</div>
+    <div>ccccc</div>
+</div>
+</body>
+</html>

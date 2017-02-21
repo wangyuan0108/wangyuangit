@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        var znsWeb={
+            pc:{},
+            mobile:{}
+        };
+        znsWeb.pc={
+            util:{
+                getId: function(id){
+                    var obj=document.getElementById(id);
+                    return obj;
+                },
+                getTagName: function(tag){
+                    var aObj=document.getElementsByTagName(tag);
+                    return aObj;
+                },
+                drag: function(){
+                    alert(1);
+                }
+            },
+            effect: {
+                toRed: function(id){
+                    var obj=znsWeb.pc.util.getId(id);
+                    obj.onclick=function(){
+                        obj.style.background='red';
+                    };
+                },
+                drag: function(id){
+                    var obj=znsWeb.pc.util.getId(id);
+                    obj.onmousedown=function(ev){
+                        var oEvent=ev || event;
+                        var disX=oEvent.clientX-obj.offsetLeft;
+                        var disY=oEvent.clientY-obj.offsetTop;
+
+                        document.onmousemove=function(ev){
+                            var oEvent=ev || event;
+                            obj.style.left=oEvent.clientX-disX+"px";
+                            obj.style.top=oEvent.clientY-disY+'px';
+                        };
+                        document.onmouseup=function(){
+                            document.onmousemove=null;
+                            document.onmouseup=null;
+                        };
+                        return false;
+                    };
+                }
+            }
+        };
+        window.onload = function () {
+            znsWeb.pc.effect.toRed('div1');
+            znsWeb.pc.effect.drag('div2');
+        };
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>

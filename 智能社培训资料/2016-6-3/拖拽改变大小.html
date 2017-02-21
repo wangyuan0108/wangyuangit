@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: #3bb4f2;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+        }
+        #box .l{
+            width: 20px;
+            height: 100%;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .t{
+            width: 100%;
+            height: 20px;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .r{
+            width: 20px;
+            height: 100%;
+            background: #e74c3c;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #box .b{
+            width: 100%;
+            height: 20px;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        #box .lt{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .rt{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #box .lb{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        #box .rb{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+            var aDiv=oBox.children;
+
+            for(var i=0; i<aDiv.length; i++){
+                drag(aDiv[i]);
+            }
+
+            function drag(obj){
+                obj.onmousedown=function(ev){
+                    var oEvent=ev || event;
+                    // 右
+                    if(obj.className.indexOf('r')!=-1){
+                        var downX=oEvent.clientX;
+                        var oldW=oBox.offsetWidth;
+                    }
+                    // 下
+                    if(obj.className.indexOf('b')!=-1){
+                        var downY=oEvent.clientY;
+                        var oldH=oBox.offsetHeight;
+                    }
+                    // 左
+                    if(obj.className.indexOf('l')!=-1){
+                        var downX=oEvent.clientX;
+                        var oldW=oBox.offsetWidth;
+                        var oldL=oBox.offsetLeft;
+                    }
+                    // 上
+                    if(obj.className.indexOf('t')!=-1){
+                        var downY=oEvent.clientY;
+                        var oldH=oBox.offsetHeight;
+                        var oldT=oBox.offsetTop;
+                    }
+                    document.onmousemove=function(ev){
+                        var oEvent=ev || event;
+                        // 右
+                        if(obj.className.indexOf('r')!=-1){
+                            var targetX=oEvent.clientX-downX;
+                            var newW=oldW+targetX;
+                            oBox.style.width=newW+'px';
+                        }
+                        // 下
+                        if(obj.className.indexOf('b')!=-1){
+                            var targetY=oEvent.clientY-downY;
+                            var newH=oldH+targetY;
+                            oBox.style.height=newH+'px';
+                        }
+                        // 左
+                        if(obj.className.indexOf('l')!=-1){
+                            var targetX=downX-oEvent.clientX;
+                            var newW=oldW+targetX;
+                            var newL=oldL-targetX;
+                            oBox.style.width=newW+'px';
+                            oBox.style.left=newL+'px';
+                        }
+                        // 上
+                        if(obj.className.indexOf('t')!=-1){
+                            var targetY=downY-oEvent.clientY;
+                            var newH=oldH+targetY;
+                            var newT=oldT-targetY;
+                            oBox.style.height=newH+'px';
+                            oBox.style.top=newT+'px';
+                        }
+                    };
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    return false;
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<div id="box">
+    <div class="l"></div>
+    <div class="t"></div>
+    <div class="r"></div>
+    <div class="b"></div>
+    <div class="lt"></div>
+    <div class="rt"></div>
+    <div class="lb"></div>
+    <div class="rb"></div>
+</div>
+</body>
+</html>

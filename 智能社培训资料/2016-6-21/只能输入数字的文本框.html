@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+
+            oT.oninput=function(){
+                oT.value=oT.value.replace(/\D/, '');
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="text" id="t1">
+</body>
+</html>

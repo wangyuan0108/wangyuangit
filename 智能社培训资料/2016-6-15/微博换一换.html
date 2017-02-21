@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        #ul1 li{
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+        }
+        #ul1 li span{
+            float: right;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+
+            oBtn.onclick=function(){
+                ajax({
+                    url: 'weibo.txt',
+                    success: function(str){
+                        var arr=eval('('+str+')');
+                        oUl.innerHTML='';
+
+                        arr.sort(function(){
+                            return Math.random()-0.5;
+                        });
+                        for(var i=0; i<5; i++){
+                            var oLi=document.createElement('li');
+                            oLi.innerHTML='<a href="'+arr[i].href+'">'+arr[i].content+'</a><span>'+arr[i].num+'</span>';
+                            oUl.appendChild(oLi);
+                        }
+                    },
+                    error: function(){
+
+                    }
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="换一换" id="btn1">
+    <ul id="ul1">
+        <li><a href="javascript:;">#表情包大赛#</a><span>3413万</span></li>
+        <li><a href="javascript:;">#表情包大赛#</a><span>3413万</span></li>
+        <li><a href="javascript:;">#表情包大赛#</a><span>3413万</span></li>
+        <li><a href="javascript:;">#表情包大赛#</a><span>3413万</span></li>
+        <li><a href="javascript:;">#表情包大赛#</a><span>3413万</span></li>
+    </ul>
+</body>
+</html>

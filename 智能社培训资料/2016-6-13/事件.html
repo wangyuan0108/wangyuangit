@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+
+            oBox.onclick=function(){
+                alert(1);
+            };
+            oBox.oncontextmenu=function(){
+                oBox.onclick=function(){
+                    alert(3);
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

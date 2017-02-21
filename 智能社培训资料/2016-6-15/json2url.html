@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var json={
+            password: 123,
+            username: 456,
+            aa: 888
+        };
+        // password=123&username=456
+        function json2url(json){
+            var arr=[];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            return arr.join('&');
+        }
+        alert(json2url(json));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

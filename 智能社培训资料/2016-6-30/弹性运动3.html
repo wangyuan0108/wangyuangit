@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.getElementById('div1');
+
+            var left=0;
+            var iSpeed=20;   // 速度
+            oDiv.onclick=function(){
+                setInterval(function(){
+                    iSpeed--;   // 速度增加
+                    left+=iSpeed;
+                    oDiv.style.left=left+'px';
+                }, 30);
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

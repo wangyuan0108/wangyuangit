@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[];
+        function findAdd(n){
+            if(!findArr(n, 0, arr.length)){
+                arr.push(n);
+                arr.sort(function(n1, n2){
+                    return n1-n2;
+                });
+            }
+        }
+        function findArr(n, s, e){
+            if(s>e){
+                return false;
+            }else if(s==e){
+                if(n==arr[s]){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+            var c=Math.floor((s+e)/2);
+            if(arr[c]==n){
+                return true;
+            }else{
+                if(arr[c]>n){
+                    return findArr(n, s, c);
+                }else{
+                    return findArr(n, c+1, e);
+                }
+            }
+        }
+        findAdd(12);
+        findAdd(12);
+        findAdd(12);
+        findAdd(12);
+        findAdd(12);
+        findAdd(5);
+        findAdd(8);
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

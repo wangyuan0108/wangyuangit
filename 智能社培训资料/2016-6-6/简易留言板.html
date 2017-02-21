@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+
+            oBtn.onclick=function(){
+                var oLi=document.createElement('li');
+                oLi.innerHTML=oT.value+'<a href="javascript:;">删除</a>';
+                oUl.appendChild(oLi);
+                oT.value='';
+                var oA=oLi.children[0];
+
+                oA.onclick=function(){
+                    oUl.removeChild(this.parentNode);
+                };
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="text" id="t1">
+<input type="button" value="留言" id="btn1">
+<ul id="ul1">
+    <!--<li>今天是周一<a href="javascript:;">删除</a></li>-->
+</ul>
+</body>
+</html>

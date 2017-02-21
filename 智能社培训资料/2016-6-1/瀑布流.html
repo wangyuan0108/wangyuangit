@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 200px;
+            float: left;
+            border: 1px solid #000;
+            margin: 20px;
+        }
+        ul li{
+            width: 180px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function rnd(n, m){
+            return parseInt(Math.random()*(m-n))+n;
+        }
+        window.onload = function () {
+            var aUl=document.getElementsByTagName('ul');
+            var oLi=document.createElement('li');
+            oLi.style.height=rnd(100, 300)+'px';
+            oLi.style.background='rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')';
+
+            aUl[0].appendChild(oLi);
+        };
+    </script>
+</head>
+<body>
+<ul></ul>
+<ul></ul>
+<ul></ul>
+</body>
+</html>

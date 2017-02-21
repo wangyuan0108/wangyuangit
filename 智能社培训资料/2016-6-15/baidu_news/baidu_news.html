@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="智能社 - zhinengshe.com"/>
+    <meta name="copyright" content="智能社 - zhinengshe.com"/>
+    <meta name="description"
+          content="智能社是一家专注于web前端开发技术的公司，目前主要提供JavaScript培训和HTML5培训两项服务，同时还推出了大量javascript基础知识教程，智能课堂为你带来全新的学习方法和快乐的学习体验。"/>
+    <title>智能社— http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            font-size: 12px;
+            color: #000;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            overflow: hidden;
+            padding: 10px;
+            margin: 50px auto;
+            width: 430px;
+            border: 1px solid #000;
+        }
+
+        ul li {
+            margin: 5px 10px;
+        }
+
+        ul li.title {
+            font-size: 18px;
+            font-weight: bold;
+            clear: both;
+        }
+
+        ul li.fl {
+            float: left;
+        }
+    </style>
+    <script src="../ajax.js"></script>
+    <script>
+        window.onload=function(){
+            ajax({
+                url: 'baidu_news.php',
+                success: function(str){
+                    var arr=eval('('+str+')');
+
+                    var oUl=document.createElement('ul');
+                    for(var i=0; i<arr.length; i++){
+                        var oLi=document.createElement('li');
+                        if(i%3==0){
+                            oLi.className='title';
+                        }else{
+                            oLi.className='fl';
+                        }
+                        oLi.innerHTML='<a href="'+arr[i].href+'">'+arr[i].title+'</a>';
+                        oUl.appendChild(oLi);
+                    }
+                    document.body.appendChild(oUl);
+                }
+            });
+        };
+    </script>
+</head>
+<!--<ul>
+    <li class="title"><a href="">习近平十八大后首赴新疆 视察喀什军队武警</a></li>
+    <li class="fl"><a href="">借用戚家军鼓励民警</a></li>
+    <li class="fl"><a href="">疆村民为习近平戴上维吾尔族花帽</a></li>
+    <li class="title"><a href="">李克强提黄金水道战略 谋长江经济带促全局发展</a></li>
+    <li class="fl"><a href="">建设长江经济带 为中国经济提供重要支撑</a></li>
+    <li class="fl"><a href="">网评：让长江流域舞起来</a></li>
+    <li class="title"><a href="">中移动“诊断书”：进入下滑通道 离亏本不远</a></li>
+    <li class="fl"><a href="">正方：中国移动将会重新崛起</a></li>
+    <li class="fl"><a href="">反方：中移动结束黄金10年</a></li>
+</ul>-->
+<body>
+</body>
+</html>

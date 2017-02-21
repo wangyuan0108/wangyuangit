@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function addEvent(obj, sEv, fn){
+            if(obj.addEventListener){
+                obj.addEventListener(sEv, fn, false);
+            }else{
+                obj.attachEvent('on'+sEv, fn);
+            }
+        }
+        function removeEvent(obj, sEv, fn){
+            if(obj.removeEventListener){
+                obj.removeEventListener(sEv, fn, false);
+            }else{
+                obj.detachEvent('on'+sEv, fn);
+            }
+        }
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+
+            function fnClick(){
+                alert(1);
+            }
+
+
+            addEvent(oBtn, 'click', fnClick);
+            removeEvent(oBtn, 'click', fnClick);
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn1">
+</body>
+</html>

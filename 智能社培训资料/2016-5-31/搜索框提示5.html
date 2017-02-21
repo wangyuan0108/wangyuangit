@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        input{
+            margin: 100px;
+        }
+        #div1{
+            position: relative;
+        }
+        span{
+            font-size: 14px;
+            color: #999;
+            position: absolute;
+            left: 110px;
+            top: 101px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+            var oDiv=document.getElementById('div1');
+            var oSpan=oDiv.children[1];
+
+            // 获取焦点
+            oT.onfocus=function(){
+                oSpan.style.display='none';
+            };
+            // 失去焦点
+            oT.onblur=function(){
+                if(oT.value==''){
+                    oSpan.style.display='block';
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="div1">
+    <input type="text" id="t1">
+    <span>找工作 找房子</span>
+</div>
+</body>
+</html>

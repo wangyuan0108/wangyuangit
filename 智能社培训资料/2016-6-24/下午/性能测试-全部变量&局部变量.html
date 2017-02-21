@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 全局变量 215
+        // 局部变量 90
+        // var a=12;
+        window.onload = function () {
+            var a=12;
+            var N=100000000;
+            var s=new Date().getTime();
+            for(var i=0; i<N; i++){
+                a++;
+            }
+            alert(new Date().getTime()-s);
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

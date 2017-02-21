@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        /*
+        *   {
+        *       value: n,
+        *       l: ,
+        *       r:
+        *   }
+        * */
+        // 二叉树添加
+        // 12 5 22 33 45 15 17 4 8
+        var root=null;
+        function bstAdd(node, n){
+            if(root==null){
+                root={
+                    value: n,
+                    l: null,
+                    r: null
+                };
+            }else{
+                if(node.value==n){
+                    return;
+                }else{
+                    if(n<node.value){
+                        if(node.l==null){
+                            node.l={
+                                value: n,
+                                l: null,
+                                r: null
+                            }
+                        }else{
+                            bstAdd(node.l, n);
+                        }
+                    }else{
+                        if(node.r==null){
+                            node.r={
+                                value: n,
+                                l: null,
+                                r: null
+                            };
+                        }else{
+                            bstAdd(node.r, n);
+                        }
+                    }
+                }
+            }
+        }
+        // 二叉树查找
+        function bstFind(node, n){
+            if(root==null){
+                return false;
+            }else{
+                if(n==node.value){
+                    return true;
+                }else{
+                    if(n<node.value){
+                        if(node.l==null){
+                            return false;
+                        }else{
+                            return bstFind(node.l, n);
+                        }
+                    }else{
+                        if(node.r==null){
+                            return false;
+                        }else{
+                            return bstFind(node.r, n);
+                        }
+                    }
+                }
+            }
+        }
+        bstAdd(root, 12);
+        bstAdd(root, 5);
+        bstAdd(root, 22);
+        bstAdd(root, 33);
+        bstAdd(root, 45);
+        bstAdd(root, 15);
+        bstAdd(root, 17);
+        bstAdd(root, 4);
+        bstAdd(root, 8);
+
+        alert(bstFind(root, 45));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

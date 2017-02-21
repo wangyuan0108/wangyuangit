@@ -1,0 +1,294 @@
+笔记
+
+js组成：
+1、ECMAScript
+    ECMA4
+    兼容性：基本都兼容
+2、DOM(Document Object Model)
+    文档对象模型
+    所有跟页面相关的操作都是DOM
+3、BOM(Browser Object Model)
+    浏览器对象模型
+    所有跟浏览器相关的都是BOM
+
+DOM：
+    DOM树：反映了页面各个节点之间的关系
+
+    DOM关系：
+        父级
+            obj.parentNode
+        子级
+            obj.children
+        兄弟
+            obj.previousElementSibling || obj.previousSibling
+
+            obj.nextElementSibling || obj.nextSibling
+        首节点
+            obj.firstElementChild || obj.firstChild
+
+            obj.children[0]
+        尾节点
+            obj.lastElementChild || obj.lastChild
+
+            obj.children[obj.children.length-1];
+
+    DOM操作：
+        创建
+            document.createElement(标签名);
+        添加
+            obj.appendChild();
+                添加都父级的最后
+            obj.insertBefore(要添加的元素, 谁之前);
+                添加到谁之前
+
+            添加已有的元素，剪切的功能
+        删除
+            obj.removeChild(子级);
+
+    简易留言板
+        1、创建
+            document.createElement('li');
+        2、添加
+            if(oUl.children.length==0){
+                oUl.appendChild(xx);
+            }else{
+                oUl.insertBefore(xx, oUl.children[0]);
+            }
+        3、删除
+            oUl.removeChild(this.parentNode);
+        4、获取父级
+            obj.parentNode
+    上移下移
+
+-------------------------------------
+
+BOM：
+    window.open();  新打开一个页面
+    window.close(); 关闭页面
+
+    window.location
+
+        window.location.href 当前地址
+        window.location.search 数据
+        window.location.hash   锚点
+
+        其他信息：
+        window.location.host  主机名
+        window.location.hostname 域名
+        window.location.pathname 路径
+        window.location.port   端口号
+        window.location.protocol 协议
+
+    历史记录：
+        window.history
+
+        window.history.forward();
+        window.history.back();
+
+        window.history.go(0);
+        刷新当前页面
+
+----------------------------------
+
+右下角广告：
+    position: fixed; 不兼容IE6
+
+    1、判断浏览器
+        navigator.userAgent()
+    2、滚轮滚动的距离
+        var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+    3、可视区的高度
+        var clientH=document.documentElement.clientHeight;
+    4、物体的高度
+        var oH=oDiv.offsetHeight;
+    5、滚动滚动事件
+        window.onscroll
+    6、窗口改变事件
+        window.onresize
+
+
+        getStyle     offsetHeight
+类型     string         number
+大小    实际大小        盒模型
+none    实际大小           0
+
+----------------------------------
+
+作业：
+    对联广告
+    浏览器宽度-控制列数
+    浏览器宽度-控制颜色 
+
+----------------------------------
+
+物体信息：
+obj.offsetWidth    物体宽度
+obj.offsetHeight   物体高度
+
+obj.offsetLeft     物体距离左边的距离
+obj.offsetTop      物体距离上面的距离
+    距离有定位的父级
+
+求距离最左边的距离
+    
+    obj.parentNode   结构上父级
+    obj.offsetParent 有定位的父级
+
+    function getPos(obj){
+        var l=0;
+        var t=0;
+
+        while(obj){
+            l+=obj.offsetLeft;
+            t+=obj.offsetTop;
+
+            obj=obj.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+
+网站：
+    图片   90%
+
+图片懒加载(图片延时加载)：
+1、怎么让图片不加载
+    把src写成_src
+2、什么时候加载
+    滚轮滚动的距离+可视区高度>=图片距离顶部的距离
+
+    F12 -> network
+
+属性操作：
+1、.      操作已知属性
+2、[]     可以操作变量
+3、attribute
+    操作自定义属性
+
+自定义属性：
+    设置：
+        obj.setAttribute('属性名', '值');
+    获取：
+        obj.getAttribute('属性名');
+    删除：
+        obj.removeAttribute('属性名');
+
+    * setAttribute需要和getAttribute配合使用
+
+----------------------------------
+
+obj.offsetLeft  距离有定位父级左边的距离
+obj.offsetTop   距离有定位父级上面的距离
+
+绝对位置：
+function getPos(obj){
+    var l=0;
+    var t=0;
+
+    while(obj){
+        l+=obj.offsetLeft;
+        t+=obj.offsetTop;
+
+        obj=obj.offsetParent;
+    }
+    return {left: l, top: t};
+}
+
+getPos(obj).left
+getPos(obj).top
+
+图片懒加载(图片延迟加载)：
+1、怎么让图片不显示
+    _src
+2、什么时候让图片显示
+    var scrollTop
+    var clientH
+
+    aImg[i].top<=scrollTop+clientH
+
+操作属性：
+1、.     操作已知属性
+2、[]    可以操作变量
+3、attribute   操作自定义属性
+
+attribute：
+设置：
+    obj.setAttribute(属性名, 值);
+获取：
+    obj.getAttribute(属性名);
+删除：
+    obj.removeAttribute(属性名);
+
+----------------------------------
+
+获取内容：
+    非表单元素
+        innerHTML
+    表单元素
+        value
+
+innerHTML：
+    重新赋值
+
+----------------------------------
+
+搜索框提示：
+    placeholder
+
+    onfocus   获取焦点事件
+    onblur    失去焦点事件
+
+    强制获取焦点：
+        obj.focus();
+    强制失去焦点：
+        obj.blur();
+
+----------------------------------
+
+吸顶条：
+    
+    scrollTop>=top   变成固定定位
+
+    找个人占位置
+
+----------------------------------
+
+图片：
+    onload      图片加载完成
+    onerror     图片加载失败
+
+图片预加载：悄悄的加载进来
+    var oImg=new Image();
+
+    oImg.src='xxxx';
+
+保留几位小数：
+    toFixed(2)  ->  保留2位小数
+
+----------------------------------
+
+瀑布流：
+    准备很多li，每次往最短的ul里面扔
+
+    页面的高度：
+        document.body.offsetHeight
+        scrollHeight
+
+    获取出来不是数组：getElementsByTagName();
+
+    伪数组     ->     转成真数组
+    linkArray
+
+----------------------------------
+
+作业：
+    吸顶条
+    图片预加载(进度条)
+    瀑布流
+    好123添加修改删除
+    百度新闻(假数据)
+
+----------------------------------
+
+
+
+

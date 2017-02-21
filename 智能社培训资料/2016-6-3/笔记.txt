@@ -1,0 +1,146 @@
+笔记
+
+事件绑定：
+    obj.addEventListener(事件名, 函数, false);
+        事件名：不加on
+        false：事件冒泡
+        true：事件捕获
+
+        事件冒泡：false
+            触发子元素的事件，会传递给父级，如果父级有这个事件，则会触发，如果没有则会继续传递
+
+            子元素 -> 父元素
+        事件捕获：true
+            父元素 -> 子元素
+        不兼容低版本浏览器
+    obj.attachEvent(事件名, 函数);
+        事件名：需要加on
+    事件绑定：
+    function addEvent(obj, sEv, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(sEv, fn, false);
+        }else{
+            obj.attachEvent('on'+sEv, fn);
+        }
+    }
+
+事件解绑定：不能解除匿名函数
+    obj.removeEventListener(事件名, 函数, false);
+    obj.detachEvent(事件名, 函数);
+
+    function removeEvent(obj, sEv, fn){
+        if(obj.removeEventListener){
+            obj.removeEventListener(sEv, fn, false);
+        }else{
+            obj.detachEvent('on'+sEv, fn);
+        }
+    }
+
+拖拽：
+
+键盘事件：
+    onkeydown   键盘按下
+    onkeyup     键盘抬起
+
+    oEvent.keyCode  键盘编码
+
+    ctrlKey
+    shiftKey
+    altKey
+
+    阻止复制：
+    阻止保存：
+    阻止输入非数字：
+    鼠标右键：
+        oncontextmenu
+    阻止默认事件：return false;
+
+if简写：
+1、不写{}  极力反对
+2、三目
+    条件?语句一:语句二
+3、&&
+    条件 && 语句
+
+this：
+1、定时器
+2、多包了一层
+3、行间事件
+4、attachEvent
+
+实时统计文字个数：
+    oninput
+    onpropertychange
+
+    * 事件不兼容不需要处理
+
+    在IE9下面删除有问题：
+        使用定时器
+
+拖拽改变大小：
+
+--------------------------------
+
+window.onload：页面加载完成
+    加载：html、css、js、图片
+
+domReady：dom加载完成
+    DOMContentLoaded
+    兼容性：高级浏览器
+    所有的DOM事件，都需要绑定
+
+    模拟domReady:
+
+    document.onreadystatechange=function(){
+        if(document.readyState=='complete'){
+            alert('DOM');
+        }
+    };
+
+    封装函数：
+        function domReady(fn){
+            if(document.addEventListener){
+                document.addEventListener('DOMContentLoaded', function(){
+                    fn && fn();
+                }, false);
+            }else{
+                document.attachEvent('onreadystatechange', function(){
+                    if(document.readyState=='complete'){
+                        fn && fn();
+                    }
+                })
+            }
+        }
+
+--------------------------------
+
+onmouseover、onouseout：
+    移入、移出子级都算移入移出
+
+onmouseover:
+    oEvent.fromElement  从哪里来
+    兼容性：Chrome、IE系列
+    oEvent.relatedTarget
+    兼容性：高级浏览器
+
+    obj.contains  -> 判断一个元素是否是我的子级
+
+onmouseout：
+    oEvent.toElment
+    oEvent.relatedTarget
+
+onmouseenter：鼠标移入
+onmouseleave：鼠标移出
+
+--------------------------------
+
+作业：
+    微博：整站 html css js
+    不卡顿的键盘控制div
+    课件
+
+--------------------------------
+
+
+
+

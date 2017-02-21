@@ -1,0 +1,99 @@
+笔记
+
+预解析：
+    定义变量、定义函数才会预解析
+
+
+ajax：不能跨域
+
+jsonp：跨域取数据
+
+本质：
+1、函数定义
+    本地定义
+2、函数调用
+    远端js里面
+
+word-break: break-all;  强制换行
+
+token：登录成功以后
+    xxxxxxxxxxxxxxxxxx
+
+webQQ
+    1、注册
+    2、登录
+    3、所有用户
+    4、列出所有留言
+    5、发言
+    6、更新发言信息  1s
+    7、退出登录
+
+    // 注册：http://zhinengshe.com/exercise/im/api.php?a=reg&user=aaa&pass=aaa&face=1&cb=show
+        a:reg,
+        user:用户名,
+        pass：密码，
+        face: 头像
+    // 登录：http://zhinengshe.com/exercise/im/api.php?a=lgn&user=aaa&pass=aaa&cb=show
+        a:lgn,
+        user:用户名,
+        pass：密码
+    // 获取用户列表：http://zhinengshe.com/exercise/im/api.php?a=get_user_list&token=xxx&cb=show
+        a:get_user_list,
+        token: token
+    // 获取完整信息：http://zhinengshe.com/exercise/im/api.php?a=get_msg&token=xxx&cb=show
+        a:get_msg,
+        token: token
+    // 发言：http://www.zhinengshe.com/exercise/im/api.php?a=snd_msg&content=123&token=xxx&cb=show
+        a:snd_msg,
+        content: xxx,
+        token: token
+    // 退出：http://www.zhinengshe.com/exercise/im/api.php?a=logout&token=xxxx
+        a: logout,
+        token: token
+    // 获取更新消息：http://www.zhinengshe.com/exercise/im/api.php?a=get_msg_n&n=2&token=xxxx
+        a:get_msg_n,
+        n: 2最大留言ID,
+        token: token
+
+-----------------------------------
+
+交互：ajax jsonp
+
+ajax(异步的javascript和xml)：无刷新从服务器取数据
+
+jsonp：跨域取数据
+    get
+    不能post
+
+百度搜索：
+    https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=d&cb=show
+
+    下：40
+    上：38
+
+    搜索接口：
+        https://www.baidu.com/s?wd=xx
+
+淘宝手机查询：有一天后台可能给你不常规数据
+    http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=13569854525
+
+jsonp数据问题：
+1、给你一个变量   √
+2、直接把数据给你 ×
+3、函数名有些公司有限制(比如说不能有_)
+
+-----------------------------------
+
+作业：
+    webQQ
+    百度搜索
+
+-----------------------------------
+
+
+
+
+
+
+
+

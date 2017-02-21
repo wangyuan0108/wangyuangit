@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+
+            oBtn.onclick=function(){
+                ajax({
+                    url: 'weibo.txt',
+                    success: function(str){
+                        var arr=eval('('+str+')');
+                        // 先清
+                        oUl.innerHTML='';
+                        for(var i=0; i<5; i++){
+                            var oLi=document.createElement('li');
+                            oLi.innerHTML=arr[i].content;
+                            oUl.appendChild(oLi);
+                        }
+                    }
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="换一换" id="btn1">
+    <ul id="ul1">
+        <li>#819约见至尊宝韩庚#</li>
+        <li>#第11届2016爱心奖#</li>
+        <li>#孩子的视界#</li>
+        <li>#满月宝宝怎护理#</li>
+        <li>#最伤孩子5句话#</li>
+    </ul>
+</body>
+</html>

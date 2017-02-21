@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 无序数组添加    40
+        // 有序数组添加    7800
+        // 二叉树添加      15
+        // 散列添加        50
+
+        // 无序数组查找    44
+        // 有序数组查找    5
+        // 二叉树查找      10
+        // 散列查找        3
+
+        // 无序数组综合   80
+        // 有序数组综合   7800
+        // 二叉树综合     15
+        // 散列综合
+        var arr=[];
+        function unfindAdd(n){
+            if(!unfindArr(n)){
+                arr.push(n);
+            }
+        }
+        function unfindArr(n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        function findAdd(n){
+            if(!findArr(n, 0, arr.length)){
+                arr.push(n);
+                arr.sort(function(n1, n2){
+                    return n1-n2;
+                });
+            }
+        }
+        function findArr(n, s, e){
+            if(s>e){
+                return false;
+            }else if(s==e){
+                if(n==arr[s]){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            var c=Math.floor((s+e)/2);
+            if(arr[c]==n){
+                return true;
+            }else{
+                if(arr[c]>n){
+                    return findArr(n, s, c);
+                }else{
+                    return findArr(n, c+1, e);
+                }
+            }
+        }
+        // 二叉树添加
+        var root=null;
+        function bstAdd(node, n){
+            if(root==null){
+                root={
+                    value: n,
+                    l: null,
+                    r: null
+                };
+            }else{
+                if(node.value==n){
+                    return;
+                }else{
+                    if(n<node.value){
+                        if(node.l==null){
+                            node.l={
+                                value: n,
+                                l: null,
+                                r: null
+                            }
+                        }else{
+                            bstAdd(node.l, n);
+                        }
+                    }else{
+                        if(node.r==null){
+                            node.r={
+                                value: n,
+                                l: null,
+                                r: null
+                            };
+                        }else{
+                            bstAdd(node.r, n);
+                        }
+                    }
+                }
+            }
+        }
+        // 二叉树查找
+        function bstFind(node, n){
+            if(root==null){
+                return false;
+            }else{
+                if(n==node.value){
+                    return true;
+                }else{
+                    if(n<node.value){
+                        if(node.l==null){
+                            return false;
+                        }else{
+                            return bstFind(node.l, n);
+                        }
+                    }else{
+                        if(node.r==null){
+                            return false;
+                        }else{
+                            return bstFind(node.r, n);
+                        }
+                    }
+                }
+            }
+        }
+        // 散列
+        var arr2=[];
+        arr2.length=10;
+        var count=0;
+        function hashAdd(n){
+            var pos=n%arr2.length;
+
+            if(arr2[pos]){
+                while(arr2[pos]){
+                    if(arr2[pos]==n){
+                        return;
+                    }
+                    pos++;
+                    if(pos==arr2.length){
+                        pos=0;
+                    }
+                }
+                arr2[pos]=n;
+            }else{
+                arr2[pos]=n;
+            }
+            // 扩建
+            count++;
+            if(count==arr2.length){
+                var oldArr=arr2;
+                arr2=[];
+                count=0;
+                arr2.length=oldArr.length*2;
+                for(var i=0; i<oldArr.length; i++){
+                    hashAdd(oldArr[i]);
+                }
+            }
+        }
+        function hashFind(n){
+            var pos=n%arr2.length;
+
+            if(arr2[pos]==n){
+                return true;
+            }else{
+                while(arr2[pos]){
+                    if(arr2[pos]==n){
+                        return true;
+                    }
+                    pos++;
+                    if(pos==arr2.length){
+                        pos=0;
+                    }
+                }
+                return false;
+            }
+        }
+
+        var N=10000;
+        for(var i=0; i<N; i++){
+            var n=parseInt(Math.random()*N);
+            // unfindAdd(n);
+            // findAdd(n);
+            // bstAdd(root, n);
+            hashAdd(n);
+        }
+        var s=new Date().getTime();
+        for(var i=0; i<N; i++){
+            var n=parseInt(Math.random()*N);
+            // unfindArr(n);
+            // findArr(n, 0, arr.length-1);
+            // bstFind(root, n);
+            hashFind(n);
+        }
+        alert(new Date().getTime()-s);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

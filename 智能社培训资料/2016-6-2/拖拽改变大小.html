@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: #3bb4f2;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+        }
+        #box .l{
+            width: 20px;
+            height: 100%;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .t{
+            width: 100%;
+            height: 20px;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .r{
+            width: 20px;
+            height: 100%;
+            background: #e74c3c;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #box .b{
+            width: 100%;
+            height: 20px;
+            background: #e74c3c;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        #box .lt{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .rt{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #box .lb{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        #box .rb{
+            width: 20px;
+            height: 20px;
+            background: #2ecc71;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+            var oL=oBox.children[0];
+            var oT=oBox.children[1];
+            var oR=oBox.children[2];
+            var oB=oBox.children[3];
+            var oLt=oBox.children[4];
+            var oRt=oBox.children[5];
+            var oLb=oBox.children[6];
+            var oRb=oBox.children[7];
+            // 右边
+            oR.onmousedown=function(ev){
+                var oEvent=ev || event;
+
+                var downX=oEvent.clientX;
+                var oldW=oBox.offsetWidth;
+                document.onmousemove=function(ev){
+                    var oEvent=ev || event;
+
+                    var targetX=oEvent.clientX-downX;
+                    var newW=oldW+targetX;
+                    oBox.style.width=newW+'px';
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div class="l"></div>
+        <div class="t"></div>
+        <div class="r"></div>
+        <div class="b"></div>
+        <div class="lt"></div>
+        <div class="rt"></div>
+        <div class="lb"></div>
+        <div class="rb"></div>
+    </div>
+</body>
+</html>

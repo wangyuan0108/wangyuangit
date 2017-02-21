@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script src="ajax_post3.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+
+            oBtn.onclick=function(){
+                ajax({
+                    url: 'get2.php',
+                    data: {
+                        a: 12,
+                        b: 5
+                    },
+                    success: function(str){
+                        alert(str);
+                    },
+                    error: function(s){
+                        alert(s);
+                    }
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn1">
+</body>
+</html>

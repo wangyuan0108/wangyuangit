@@ -1,0 +1,218 @@
+笔记
+
+事件对象：
+    var oEvent=ev || event;
+
+    oEvent.clientX
+    oEvent.clientY      可视区的坐标
+
+    * 加上scrollTop scrollLeft
+
+放大镜：
+    2张图片，一张大图，一张小图
+
+-------------------------------------------------
+
+事件冒泡：触发子元素的事件，会传递给父级，如果父级有这个事件，则会触发，如果没有继续传递
+
+    * 如果事件冒泡没有影响到你，那么不用管
+
+    阻止冒泡：
+        oEvent.cancelBubble=true;
+
+-------------------------------------------------
+
+onmousedown     鼠标按下
+onmousemove     鼠标移动
+onmouseup       鼠标抬起
+
+-------------------------------------------------
+
+键盘事件：
+    onkeydown   键盘按下
+    onkeyup     键盘抬起
+
+    事件对象：描述了更加详细的信息
+
+    oEvent.keyCode    键盘编码
+
+    回车：13
+    退格：8
+    左：37
+    上：38
+    右：39
+    下：40
+
+    ctrl: 17
+    c：67
+
+    ctrl：
+        ctrlKey
+    shift:
+        shiftKey
+    alt：altKey
+
+    阻止默认事件：
+        return false;
+
+鼠标右键：
+    oncontextmenu=function(){};
+
+阻止保存：
+    s -> 83
+保存为web格式：
+    ctrl+shift+alt+s
+
+只能输入数字的文本框：
+    48-57
+
+---------------------------------------
+
+正式上线的代码：
+    alert
+    console.log();
+
+---------------------------------------
+
+拖拽：
+    
+    事件捕获：
+        obj.setCapture();
+    释放捕获：
+        obj.releaseCapture();
+
+    onmousemove：里面尽量不要放复杂代码
+
+---------------------------------------
+
+if简写：
+1、不写大括号
+2、条件 && 语句
+    如果你的条件的真，才会执行语句
+
+---------------------------------------
+
+键盘事件：
+    
+    onkeydown   键盘按下
+    onkeyup     键盘抬起
+
+    oEvent.keyCode    键盘编码
+
+    ctrl：
+        ctrlKey
+    shift:
+        shiftKey
+    alt:
+        altKey
+
+右击事件：
+    oncontextmenu
+
+阻止默认事件：
+    return false;
+
+拖拽
+
+--------------------------------------
+
+之前的问题：
+    事件只能加一次
+
+事件绑定：
+    obj.addEventListener(事件, 函数, false);
+        事件：没有on
+        false：
+        兼容性：高级浏览器
+    obj.attachEvent(事件, 函数);
+        兼容性：IE系列
+
+        处理兼容性：把obj.addEventListener当做条件
+
+    事件绑定-封装函数：
+        function addEvent(obj, sEv, fn){
+            if(obj.addEventListener){
+                obj.addEventLisntener(sEv, fn, false);
+            }else{
+                obj.attachEvent('on'+sEv, fn);
+            }
+        }
+
+事件解绑定：
+    obj.removeEventListener(事件, 函数, false);
+    obj.detachEvent(事件，函数);
+    
+    ** 事件解绑定不能解除匿名函数
+
+    函数本质：每一个函数都是new出来的
+
+    function removeEvent(obj, sEv, fn){
+        if(obj.removeEventListener){
+            obj.removeEventListener(sEv, fn, false);
+        }else{
+            obj.detachEvent('on'+sEv, fn);
+        }
+    }
+
+    事件捕获：
+        obj.addEventListener(事件, 函数, true);
+
+        子元素 -> 父元素
+        父元素 -> 子元素
+
+--------------------------------------
+
+this：当前触发事件的元素
+1、定时器
+2、多包了1层
+3、行间事件
+4、attachEvent
+
+--------------------------------------
+
+实时统计输入文字：
+obj.oninput     输入事件
+obj.onpropertychange
+
+* 事件不兼容不需要处理
+
+在IE9下面删除不好用
+
+变态：定时器
+
+--------------------------------------
+
+作业：
+    拖拽改变大小
+    课件
+
+--------------------------------------
+
+周末作业：
+    微博：布局、js效果
+        http://weibo.com/
+
+--------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

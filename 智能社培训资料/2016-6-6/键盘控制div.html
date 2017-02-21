@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.getElementById('div1');
+
+            var timer=null,
+            bLeft=false,
+            bTop=false,
+            bRight=false,
+            bBottom=false;
+
+            document.onkeydown=function(ev){
+                var oEvent=ev || event;
+                switch(oEvent.keyCode){
+                    case 37:
+                        bLeft=true;
+                        break;
+                    case 38:
+                        bTop=true;
+                        break;
+                    case 39:
+                        bRight=true;
+                        break;
+                    case 40:
+                        bBottom=true;
+                        break;
+                }
+            };
+            document.onkeyup=function(ev){
+                var oEvent=ev || event;
+                switch(oEvent.keyCode){
+                    case 37:
+                        bLeft=false;
+                        break;
+                    case 38:
+                        bTop=false;
+                        break;
+                    case 39:
+                        bRight=false;
+                    break;
+                    case 40:
+                        bBottom=false;
+                        break;
+                }
+            };
+
+            setInterval(function(){
+                if(bLeft){
+                    oDiv.style.left=oDiv.offsetLeft-10+'px';
+                }
+                if(bTop){
+                    oDiv.style.top=oDiv.offsetTop-10+'px';
+                }
+                if(bRight){
+                    oDiv.style.left=oDiv.offsetLeft+10+'px';
+                }
+                if(bBottom){
+                    oDiv.style.top=oDiv.offsetTop+10+'px';
+                }
+            }, 30);
+        };
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

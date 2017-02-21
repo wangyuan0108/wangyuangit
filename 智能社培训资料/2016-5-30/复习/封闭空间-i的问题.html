@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var aBtn=document.getElementsByTagName('input');
+            for(var i=0; i<aBtn.length; i++){
+                aBtn[i].index=i;
+                aBtn[i].onclick=function(){
+                    alert(this.index);
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="111">
+<input type="button" value="222">
+<input type="button" value="333">
+</body>
+</html>

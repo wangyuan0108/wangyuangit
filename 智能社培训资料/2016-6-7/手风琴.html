@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #ul1{
+            height: 160px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #ul1 li{
+            width: 256px;
+            height: 160px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #ul1 img{
+            width: 256px;
+            vertical-align: top;
+        }
+    </style>
+    <script src="move.js"></script>
+    <script>
+        window.onload = function () {
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.children;
+
+            // 布局
+            var W=30;
+            oUl.style.width=aLi[0].offsetWidth+(aLi.length-1)*W+'px';
+            for(var i=1; i<aLi.length; i++){
+                aLi[i].style.left=aLi[0].offsetWidth+(i-1)*W+'px';
+            }
+
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].index=i;
+                aLi[i].onmouseover=function(){
+                    for(var i=1; i<aLi.length; i++){
+                        if(i<=this.index){
+                            move(aLi[i], {left: i*W}, 500);
+                        }else{
+                            move(aLi[i], {left: aLi[0].offsetWidth+(i-1)*W}, 500);
+                        }
+                    }
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li><img src="img2/1.jpg"></li>
+        <li><img src="img2/2.jpg"></li>
+        <li><img src="img2/3.jpg"></li>
+        <li><img src="img2/4.jpg"></li>
+        <li><img src="img2/5.jpg"></li>
+        <li><img src="img2/6.jpg"></li>
+    </ul>
+</body>
+</html>

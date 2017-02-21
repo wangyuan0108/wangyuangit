@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 冒泡排序  3500
+        // 选择排序  711
+        // 归并排序  40
+        // 快速排序  30
+        var arr=[];
+        var N=20000;
+        for(var i=0; i<N; i++){
+            arr[i]=parseInt(Math.random()*N);
+        }
+        // 冒泡
+        function bSort(arr){
+            for(var i=0; i<arr.length; i++){
+                for(var j=0; j<arr.length-i; j++){
+                    if(arr[j]>arr[j+1]){
+                        var tmp;
+                        tmp=arr[j];
+                        arr[j]=arr[j+1];
+                        arr[j+1]=tmp;
+                    }
+                }
+            }
+            return arr;
+        }
+        // 快排
+        function qSort(arr){
+            if(arr.length<=0){
+                return [];
+            }
+
+            var cIndex=Math.floor(arr.length/2);
+            var c=arr.splice(cIndex, 1);
+            var l=[];
+            var r=[];
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]<c[0]){
+                    l.push(arr[i]);
+                }else{
+                    r.push(arr[i]);
+                }
+            }
+            return qSort(l).concat(c, qSort(r));
+        }
+        // 归并
+        function mSort(arr, s, e){
+            if(s>e){
+                return [];
+            }else if(s==e){
+                return [arr[s]];
+            }
+            var c=Math.floor((s+e)/2);
+            var l=mSort(arr, s, c);
+            var r=mSort(arr, c+1, e);
+            var result=[];
+
+            while(l.length>0 || r.length>0){
+                if(l[0]<r[0]){
+                    result.push(l.shift());
+                }else{
+                    result.push(r.shift());
+                }
+                if(l.length==0){
+                    result=result.concat(r);
+                    break;
+                }else if(r.length==0){
+                    result=result.concat(l);
+                    break;
+                }
+            }
+            return result;
+        }
+        // 选择排序
+        function findMinIndex(arr, start){
+            var iMin=arr[start];
+            var iMinIndex=start;
+            for(var i=start+1; i<arr.length; i++){
+                if(arr[i]<iMin){
+                    iMin=arr[i];
+                    iMinIndex=i;
+                }
+            }
+            return iMinIndex;
+        }
+        function sSort(arr){
+            for(var i=0; i<arr.length; i++){
+                var n=findMinIndex(arr, i);
+
+                var tmp;
+                tmp=arr[i];
+                arr[i]=arr[n];
+                arr[n]=tmp;
+            }
+            return arr;
+        }
+        var s=new Date().getTime();
+
+        // bSort(arr);
+        // sSort(arr);
+        // mSort(arr, 0, arr.length-1);
+        qSort(arr);
+
+        alert(new Date().getTime()-s);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

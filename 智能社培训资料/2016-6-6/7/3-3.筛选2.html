@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+ul, li, em {margin:0; padding:0; list-style:none;}
+#ul1 li {width:750px; overflow:hidden; line-height:20px; margin:10px;}
+#ul1 li em {font-style:normal; width:100px; float:left; text-align:center;}
+#ul1 li a {width:500px; overflow:hidden; float:left; color:#900; text-decoration:none; font-weight:bold; font-size:20px;}
+</style>
+<script>
+window.onload=function(){
+	var oT=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	var oS=document.getElementById('sel1');
+	var oUl=document.getElementById('ul1');
+
+	oS.onchange=function(){
+		try{
+			var arr=eval(oT.value);
+		}catch(e){
+			console.log(e);
+		}
+		oUl.innerHTML='';
+
+		var arr2=[];
+		for(var i=0; i<arr.length; i++){
+			if(arr[i].type==oS.value || oS.value==''){
+				arr2.push(arr[i]);
+			}
+		}
+
+		for(var i=0; i<arr2.length; i++){
+			var oLi=document.createElement('li');
+			oLi.innerHTML='<a href="'+arr2[i].href+'">'+arr2[i].title+'</a>';
+			oUl.appendChild(oLi);
+		}
+	};
+
+	oS.onchange();
+};
+</script>
+</head>
+
+<body>
+输入原始文本(json格式)：<br>
+<textarea style="width:500px; height:200px;" id="txt1">
+[
+	{title: '出现跑路，北京全面排查P2P风险', type: '互联网', href: 'http://tech.163.com/14/0610/08/9UC5IJQE000915BF.html'},
+	{title: '北京傍晚到夜间有雷阵雨 明天白天多云转晴', type: '国内', href: 'http://news.hexun.com/2014-06-10/165566949.html'},
+	{title: '“10亿美元俱乐部”的宠儿有哪些？', type: '互联网', href: 'http://www.pingwest.com/2014-startups-with-billion-dollar-valuations/'},
+	{title: '恒大官方宣布于汉超李学鹏加盟 制海报欢迎(图)', type: '体育', href: 'http://sports.sina.com.cn/j/2014-06-10/19177202125.shtml'},
+	{title: '外交部称美国是“黑客帝国”：地球人都知道', type: '互联网', href: 'http://politics.caijing.com.cn/2014-06-10/114251776.html'},
+	{title: '乌克兰卢甘斯克机场被关闭', type: '军事', href: 'http://stock.sohu.com/20140610/n400627314.shtml'},
+]
+</textarea><br>
+<br>
+类别：
+<select id="sel1">
+	<option value="">全部</option>
+	<option value="互联网">互联网</option>
+	<option value="国内">国内</option>
+	<option value="军事">军事</option>
+	<option value="体育">体育</option>
+</select><br>
+<br>
+这里输出结果：<br>
+<ul class="list" id="ul1">
+</ul>
+</body>
+</html>

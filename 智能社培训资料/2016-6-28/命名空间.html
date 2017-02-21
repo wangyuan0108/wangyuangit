@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+        }
+    </style>
+    <script>
+        var znsWeb={
+            pc:{},
+            mobile:{}
+        };
+        znsWeb.pc={
+            util:{
+                getId: function(id){
+                    var obj=document.getElementById(id);
+                    return obj;
+                },
+                getTagName: function(tag){
+                    var aObj=document.getElementsByTagName(tag);
+                    return aObj;
+                }
+            }
+        };
+        window.onload = function () {
+            var aDiv=znsWeb.pc.util.getTagName('div');
+            for(var i=0; i<aDiv.length; i++){
+                aDiv[i].style.background='red';
+            }
+        };
+    </script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

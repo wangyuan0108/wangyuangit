@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 500px;
+            height: 30px;
+            background: #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        #bar{
+            width: 30px;
+            height: 30px;
+            background: #66ccff;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+            var oBar=document.getElementById('bar');
+
+            oBar.onmousedown=function(ev){
+                var oEvent=ev || event;
+                var disX=oEvent.clientX-oBar.offsetLeft;
+
+                document.onmousemove=function(ev){
+                    var oEvent=ev || event;
+                    oBar.style.left=oEvent.clientX-disX+'px';
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div id="bar"></div>
+    </div>
+</body>
+</html>

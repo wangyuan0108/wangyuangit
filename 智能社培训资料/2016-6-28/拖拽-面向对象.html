@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            font-size: 30px;
+            color: #fff;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+    <script src="drag.js"></script>
+    <script>
+        function LimitDrag(id){
+            Drag.apply(this, arguments);
+        }
+        LimitDrag.prototype=new Drag();
+        LimitDrag.prototype.constructor=LimitDrag;
+        LimitDrag.prototype.fnMove=function(oEvent){
+            this.oDiv.style.left=oEvent.clientX-this.disX+'px';
+            this.oDiv.style.top=oEvent.clientY-this.disY+'px';
+
+            if(this.oDiv.offsetLeft<0){
+                this.oDiv.style.left=0;
+            }
+        };
+        window.onload = function () {
+            new Drag('div1');
+            new LimitDrag('div2');
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+</html>

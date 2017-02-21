@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 设置Cookie
+        function addCookie(name, value, iDay){
+            // 有过期时间
+            if(iDay){
+                var oDate=new Date();
+                oDate.setDate(oDate.getDate()+iDay);
+                document.cookie=name+'='+value+'; path=/; expires='+oDate.toUTCString();
+            // 没有过期时间
+            }else{
+                document.cookie=name+'='+value+'; path=/';
+            }
+        }
+        // 获取Cookie
+        function getCookie(name){
+            var arr=document.cookie.split('; ');
+
+            for(var i=0; i<arr.length; i++){
+                var arr2=arr[i].split('=');
+                if(arr2[0]==name){
+                    return arr2[1];
+                }
+            }
+            return '';
+        }
+        window.onload = function () {
+            addCookie('a', 12, 3);
+            addCookie('b', 5, 3);
+            addCookie('c', 8, 3);
+
+            alert(getCookie('d'));
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

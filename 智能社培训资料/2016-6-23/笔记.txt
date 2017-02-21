@@ -1,0 +1,449 @@
+笔记
+
+正则：操作字符串能用正则尽量使用正则
+1、简单
+2、性能极高
+
+    var reg=new RegExp('内容', '选项');
+        选项：
+            i   忽略大小写
+            m   多行
+            g   全部
+    var reg=/内容/选项;  不能接收变量
+
+    str.search(正则)   查找
+    str.match()        会把正则匹配的项放到数组里面
+
+    reg.test(字符串)   检测字符串是否匹配正则
+
+
+    量词：量词只管前面一项
+        {n}     刚刚好n个
+        {n,m}   最少n个最多m个
+        {n,}    最少n个，最多不限
+
+        +   最少一个，最多不限  {1，}
+        ?   可有可无            {0,1}
+        *   可以没有，有了不限  {0,}
+
+    方括号：
+        1、[abc]     a|b|c
+           /abc[def]/   abcd|abce|abcf
+        2、[a-z]     字母a-z
+        3、[^a]      除了字母a以外任意值
+           /a[^b]c/  a(除了b)c
+    修饰：
+        ^   开头
+        $   结尾
+
+    特性：
+        懒
+
+    转义：
+        \d    数字[0-9]
+        \w    [0-9a-zA-Z_]
+        \s    空白符
+
+        \D    [^0-9]    非数字
+        \W    [^0-9a-zA-Z_] 非数字字母_
+        \S    非空白
+
+        \b    边界
+
+        .     任意字符
+        \.    点本身
+
+        \     转义
+        \\
+
+----------------------------------------
+
+MVC：
+    M    module    模型   数据
+    V    view      视图   展示
+    C    controller 控制器 从M里面拿数据，到V里面展示
+
+    职责分明、分工明确
+
+前端模板：
+
+----------------------------------------
+
+jQuery：原生js，以后每天使用jQuery
+
+库、框架、引擎
+
+为什么要学：
+1、好用
+2、使用的人够多，公司够多
+
+百度：jQuery-1.10.2
+京东：jQuery-1.6.4
+当当：jQuery
+新浪：jQuery
+网易：jQuery-1.11.3
+亚马逊：jQuery-1.2.6
+
+版本号：
+    大版本号.中版本号.小版本号
+    1.10.2
+
+    变动较小的改版 -> 升级小版本号
+    1.10.3
+    变动较大的改版 -> 升级中版本号 
+    1.11.3
+    翻天覆地的变化 -> 升级大版本号
+    2.x.x
+
+jQuery官网：
+    http://jquery.com/
+
+最新版：jQuery-3.0.0
+
+jQuery-1.0.0：
+    兼容IE6 7 8   亚非拉
+jQuery-2.0.0：
+    兼容IE9+      欧美
+
+我们：jQuery-1.7.2
+
+压缩版：
+https://code.jquery.com/jquery-x.xx.x.min.js
+未压缩版：
+https://code.jquery.com/jquery-x.xx.x.js
+
+API：手册
+看手册一点都不丢人
+
+使用jQuery：
+1、引入jQuery
+
+编写原生js步骤：
+1、window.onload=function(){};
+2、获取元素
+3、加事件
+
+jQuery步骤：
+1、domReady
+    $(function(){
+        // code
+    });
+2、获取元素
+    $('#btn1')
+3、加事件
+    $('#btn1').click(function(){
+        alert(1);
+    });
+
+
+$(obj).hide()   // 消失
+$(obj).show()   // 显示
+$(obj).slideDown() // 下滑
+$(obj).slideUp()   // 上滑
+$(obj).fadeOut()   // 淡出
+$(obj).fadeIn()    // 淡入
+
+$('#div1').fadeIn(时间)
+
+运动：
+$(obj).animate(json, options);
+    json：哪些值动
+    options：
+        duration: 事件
+        complete：运动结束回调函数
+        easing：
+            linear：匀速
+            swing：先加速再减速
+$('#div1').animate({left: 500});
+
+jQuery：切图、后台
+
+选择器：
+    基本选择器：
+        $('#div1')  -> ID
+        $('.box')   -> class
+        $('div')    -> 标签
+        $('div span')
+        $('div,p')
+    伪类选择器：
+        $(obj:first)   第一个
+        $('obj:last')  最后一个
+        $('obj:eq(n)') 第n个
+        $('obj:odd')   奇数行
+        $('obj:even')  偶数行
+        $('obj:gt(n)') 大于n
+        $('obj:lt(n)') 小于n
+    属性选择器：
+        $('input[type=button]')
+    包含选择器：
+        $('obj:has(p)')  包含p标签
+        $('obj:contains(p)')  包含p文本
+
+$('#div1').css('background', 'blue');
+
+this：
+    $(this)
+
+选项卡：
+    $(this)
+    addClass
+    removeClass
+    $('#box div').eq(n)   第n个div
+    $(this).index()       索引值
+
+class：
+    addClass       添加class
+    removeClass    删除class 
+
+链式操作：
+
+内容操作：
+    表单元素
+        obj.value
+
+        $(obj).val();   获取
+        $(obj).val('xx');  赋值
+    非表单元素
+        obj.innerHTML
+
+        $(obj).html();  获取
+        $(obj).html('你不是一个div'); 赋值
+css：
+    $('#div1').css('width')   获取
+    $('#div1').css('width', '500px');  赋值
+
+    $('#div1').css({
+        width: '500px',
+        height: '500px',
+        background: 'blue'
+    });                     设置多个值
+
+attr：
+    $(obj).attr('属性名')  获取
+    $(obj).attr('属性名', '属性值'); 设置
+    $(obj).attr({})        设置多个值
+
+----------------------------------------
+
+jQuery步骤：
+1、$(function(){})
+2、$('#div1')
+3、$('#div1').click(function(){});
+
+选择器：
+    基本选择器
+        $('#id')
+        $('.class')
+        $('li')
+        $('ul li')
+        $('div,p')
+        $('div.active')
+    伪类选择器
+        $('div:first')
+        $('div:last')
+        $('div:eq(n)')
+        $('div:odd')
+        $('div:even')
+        $('div:gt(n)')
+        $('div:lt(t)')
+    属性选择器
+        $('input[type=button]')
+    包含选择器
+        $('div:has(p)')
+        $('div:contains(p)')
+
+内容：
+    $(obj).val()
+    $(obj).html()
+css：
+    $(obj).css('width')
+    $(obj).css('width', '500px')
+    $(obj).css({})
+attr:
+    $(obj).attr('xx')
+    $(obj).attr('xx', 'xxx')
+    $(obj).attr({})
+this：
+    $(this)
+链式操作：
+
+索引值：
+    $(obj).index()
+
+----------------------------------------
+
+animate:
+    * 最好加上.stop();
+
+----------------------------------------
+
+DOM：
+原生：
+    创建元素：
+        document.createElement();
+    添加元素：
+        obj.appendChild();
+        obj.insertBefore();
+    删除元素：
+        obj.removeChild();
+jQuery：
+    创建元素：
+        $('<p>我是一个p标签</p>')
+    添加元素：
+        $('<p>我是一个p标签</p>').appendTo();     
+        添加到内部的后面
+        $('<p>我是一个p标签</p>').prependTo($('#div1'));
+        添加到内部的前面
+        $('<p>我是一个p标签</p>').insertBefore($('#div1'));
+        添加到外部的前面
+        $('<p>我是一个p标签</p>').insertAfter($('#div1'));
+        添加到外部的后面
+    删除元素：
+        $('#div1').remove();
+
+    简易留言板：
+
+父级：
+    $(obj).parent();    结构上的父级
+    $(obj).offsetParent();  定位上的父级
+
+事件：
+    click
+    mouseover
+    mouseout
+    mousedown
+    mousemove
+    mouseup
+    mouseenter
+    mouseleave
+    contextmenu
+    keydown
+    keyup
+    change
+    focus
+    blur
+
+    input
+
+    事件绑定：
+        $('#div1').bind(sEv, fn);
+    事件解绑定：
+        $('#div1').unbind(sEv, fn);
+        * 不能解绑匿名函数
+
+    $(obj).live(sEv, fn);
+    $(obj).die(sEv, fn);
+
+    $('#ul1').on('click', 'li a', fn);
+    $('#ul1 li').off('click', 'a', fn);
+
+事件对象：
+    ev
+阻止事件冒泡：
+    原生js：
+        ev.cancelBubble=true;
+
+    jQuery：
+        return false;
+    单独阻止事件冒泡：
+        ev.stopPropagation();
+阻止默认事件：
+    原生js：
+        return false;
+    jQuery：
+        return false;
+    单独阻止默认事件：
+        ev.preventDefault();
+
+----------------------------------------
+
+jQuery：
+
+编写jQuery步骤：
+1、$(function(){})
+2、$('#div1')
+3、$('#div1').click()
+
+选择器：
+    基本选择器：
+        $('#div1')
+        $('.box')
+        $('div')
+        $('div.active')
+        $('ul li')
+        $('div,p')
+    伪类选择器：
+        $('div:first')
+        $('div:last')
+        $('div:eq(n)')
+        $('div:odd')
+        $('div:even')
+        $('div:gt(n)')
+        $('div:lt(n)')
+    属性选择器：
+        $('input[type=button]')
+    包含选择器：
+        $('div:has(p)')
+        $('div:contains(a)')
+css：
+    $(obj).css('width')
+    $(obj).css('width','200px')
+    $(obj).css({})
+attr
+    $(obj).attr('xx')
+    $(obj).attr('xx','200px')
+    $(obj).attr({})
+
+class：
+    $(obj).addClass();
+    $(obj).removeClass();
+
+this：
+    $(this)
+
+索引值：
+    $(obj).index()
+
+内容：
+    $(obj).val()
+    $(obj).html()
+
+DOM：
+    创建元素
+        $('<p></p>')
+    添加元素
+        $('<p></p>').appendTo();
+        $('<p></p>').prependTo();
+        $('<p></p>').insertBefore();
+        $('<p></p>').insertAfter();
+    删除元素
+        $(obj).remove();
+
+事件：
+    事件绑定：
+    $(obj).bind(sEv, fn);
+    $(obj).unbind(sEv, fn);
+
+    $(obj).on(sEv, 'li a', fn);
+    $(obj).off(sEv, 'li a', fn);
+
+事件对象：
+    ev 兼容的
+
+阻止默认事件：
+    return false;
+
+    ev.preventDefault();
+阻止冒泡：
+    return false;
+
+    ev.stopPropagation();
+
+----------------------------------------
+
+作业：
+    jQuery例子10个
+
+----------------------------------------
+
+

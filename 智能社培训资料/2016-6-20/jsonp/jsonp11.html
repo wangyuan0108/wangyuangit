@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('search');
+            var oUl=document.getElementById('ul1');
+
+            oT.onkeyup=function(){
+                jsonp({
+                    url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                    data: {
+                        wd: oT.value
+                    },
+                    success: function(json){
+                        alert(json.s);
+                    }
+                });
+            };
+            function jsonp(json){
+                // 考虑默认值
+                var json=json || {};
+                if(!json.url)return;
+                json.data=json.data || {};
+                json.cbName=json.cbName || 'cb';
+
+                var fnName='show'+Math.random();
+                fnName=fnName.replace('.', '');
+                window[fnName]=function(data){
+                    json.success && json.success(data);
+                    // 删除多余script标签
+                    oHead.removeChild(oS);
+                };
+                json.data[json.cbName]=fnName;
+                var arr=[];
+                for(var name in json.data){
+                    arr.push(name+'='+json.data[name]);
+                }
+                var str=arr.join('&');
+                var oS=document.createElement('script');
+                oS.src=json.url+'?'+str;
+                var oHead=document.getElementsByTagName('head')[0];
+                oHead.appendChild(oS);
+            }
+        };
+    </script>
+</head>
+<body>
+<input type="text" id="search">
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

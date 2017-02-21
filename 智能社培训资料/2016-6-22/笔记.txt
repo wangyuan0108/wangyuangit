@@ -1,0 +1,124 @@
+笔记
+
+正则：
+1、简单
+2、性能极高
+
+准备一个正则：
+    var reg=new RegExp('内容', '选项');
+
+        选项：
+            i   ignore  忽略大小写
+            m   mutil-line 多行
+            g   global  全部
+    var reg=/内容/选项;
+
+    new RegExp() -> 可以接受变量
+
+    量词：
+        {n}     刚好n个
+        {n,m}   最少n个，最多m个
+        {n,}    最少n个，最多不限
+
+        +   最少一个，最多不限   {1,}
+        ?   可有可无             {0,1}
+        *   可以没有，有了不限   {0,}
+    方括号：
+        1、[abc]  a|b|c
+        2、[1-9]  数字1-9
+           [a-z]  字母a-z
+        3、[^a]   除了a以外
+    转义：
+        \d  数字[0-9]
+        \w  数字字母下划线 [0-9a-zA-Z_]
+        \s  空白符
+
+        \D  非数字
+        \W  非数字字母下划线
+        \S  非空白符
+
+        \b  边界
+
+        .   任意值
+        \.  点本身
+        \\  \本身
+    修饰：
+        ^   开始
+        $   结尾
+
+getByClass()
+hasClass()
+addClass()
+removeClass()
+
+---------------------------------------
+
+校验：
+    getElementsByName -> 通过name获取
+
+    onsubmit -> 提交表单事件
+
+    邮箱：
+        xxxx@xx.xx
+
+        \w+@[0-9a-zA-Z-]+(\.[a-z]{2,8}){1,2}
+
+---------------------------------------
+
+MVC：三层模型、三层架构
+    M  Module  模型   数据
+    V  View    视图   展示
+    C  Controller 控制器    从M里面拿数据，到V里面展示
+MVP：
+    Presenter -> 主持人
+MVVM：V直接去M里面拿数据
+MV*：
+
+好处：
+    分工明确，职责分明
+
+拆
+
+模块化：
+1、定义一个模块
+2、使用一个模块
+
+MVC_jsonp:
+    百度：
+    https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=1&cb=show
+
+    360：
+    https://sug.so.360.cn/suggest?callback=show&word=d
+
+重用：
+    重用M
+    重用V
+
+---------------------------------------
+
+前端模板：
+    
+    var newDiv=obj.cloneNode(true);  ->  深度克隆
+    * 使用cloneNode一定要把ID删掉
+    newDiv.removeAttribute('id');
+
+---------------------------------------
+
+http://www.zhaopin.com
+http://www.lagou.com/
+http://www.bosszhipin.com
+https://www.liepin.com/
+http://www.51job.com/
+http://www.chinahr.com/
+http://www.neitui.me/
+
+---------------------------------------
+
+
+
+
+
+
+
+
+

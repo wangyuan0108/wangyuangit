@@ -1,0 +1,267 @@
+笔记
+
+Cookie(4K)：存
+    使用Cookie：放在服务器环境下
+
+    设置Cookie
+    function addCookie(name, value, iDay){
+        if(iDay){
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+
+            document.cookie=name+'='+value+'; path=/; expires='+oDate.toUTCString();
+        }else{
+            document.cookie=name+'='+value+'; path=/';
+        }
+    }
+    获取Cookie
+    function getCookie(name){
+        var arr=document.cookie.split('; ');
+        for(var i=0; i<arr.length; i++){
+            var arr2=arr[i].split('=');
+
+            if(arr2[0]==name){
+                return arr2[1];
+            }
+        }
+        return '';
+    }
+    删除Cookie
+    function removeCookie(name){
+        addCookie(name, 'aaa', -10);
+    }
+
+1、什么时候存
+2、什么时候取
+
+模块化：
+    sea.js
+    require.js
+
+    1、怎么定义一个模块
+        define(function(require, exports, module){
+            // require 引用其他模块
+            // exports 导出模块
+            // module  批量导出模块
+
+            exports.a=12;
+        });
+    2、怎么引用一个模块
+        seajs.use('模块名', function(mod){
+            // mod.xx
+        });
+
+        seajs.use(['模块1', '模块2'], function(mod1, mod2){
+            // mod1.xx
+            // mod2.xx
+        });
+
+        <script src="sea.js" data-main="主模块名"></script>
+
+优点：
+1、自动引入js
+2、解决依赖关系
+3、解决命名冲突
+
+---------------------------------------------
+
+交互：
+
+form：
+    action
+    name
+    value
+
+    GET：不安全、容量小(32K)、有缓存
+    POST：相对安全、容量大(1G)、没有缓存
+
+    GET：分享
+
+缺点：
+1、刷新页面
+2、无法从服务器获取数据
+
+ajax(Asynchronous Javascript And XML)：异步的Javascript和XML
+    无刷新从服务器取数据
+
+    JSON:
+        {key: value}
+
+1、怎么用Ajax
+    微博换一换
+    百度新闻
+
+    [{
+        content: ,
+        href: ,
+        num: 
+    },{},{},{}];
+2、怎么写Ajax
+
+缓存(cache)：
+    浏览器对于同一个url只访问一次
+
+    http://www.baidu.com
+    http://www.baidu.com?a=12
+
+使用ajax需要注意的地方：
+1、从后台拿到的数据都是字符串
+    eval('('+str+')');
+2、编码格式一定要一样
+    utf-8
+3、有缓存
+    加随机因子
+    防止缓存：
+        加随机数
+        Math.random();
+4、数据跟格式没有任何关系
+    格式：给人看的
+
+**
+1、不能有中文目录
+2、一定要在服务器环境下面
+
+---------------------------------------------
+
+注册登录：
+    form：
+        http://www.zhinengshe.com?username=123&password=456
+
+        ? 之后数据
+
+        多个数据之间用&隔开
+    name：
+
+    接口文档：
+        url:
+        name：
+
+    ** 中文问题
+        以后使用ajax遇到中文一定要转编码
+        encodeURIComponent  转编码
+        decodeURIComponent  解编码  前端用不到
+
+    你发现你的代码没问题
+
+    后台代码
+    环境
+    你的代码
+    缓存
+        ctrl+h -> 清除历史记录
+
+    排错：
+        1、success有没有执行
+        2、事件有没有执行
+        3、依次往上找
+
+    后台的数据：
+        F12 -> network -> 去找你发的请求
+
+---------------------------------------------
+
+打电话：
+1、有一个手机
+2、拨号
+3、说话
+4、听
+
+写ajax：
+
+1、准备一个ajax
+    var oAjax=new XMLHttpRequest();
+    兼容性：非IE6
+    var oAjax=new ActiveXObject('Microsoft.XMLHTTP');
+    兼容性：低版本IE
+
+    处理兼容性：判断window下面有没有这个对象
+        if(window.XMLHttpRequest){
+            var oAjax=new XMLHttpRequest();
+        }else{
+            var oAjax=new ActiveXObject('Microsoft.XMLHTTP');
+        }
+2、建立连接
+    oAjax.open('GET', url, true);
+        url：地址
+        true：异步     同时进行
+        false：同步    一个一个来
+
+        异步、同步：
+            同步：同时进行
+            异步：一个一个来
+3、发送请求
+    oAjax.send();
+4、接收数据
+    oAjax.onreadystatechange=function(){
+        if(oAjax.readyState==4){
+            if(oAjax.status==200){
+                alert('成功'+oAjax.responseText);
+            }else{
+                alert('失败');
+            }
+        }
+    };
+
+0   ajax对象准备完成，并且发送数据
+1   数据发送成功
+2   原始数据接收成功
+3   解析数据完成
+4   完成
+
+状态码：描述http请求状态
+200    OK
+301    Moved Permanently   永久重定向
+302    Move temporarily    临时重定向
+304    Not Modified    缓存没有更新
+403    Forbidden       没有权限
+404    Not Found       文件没有找到
+414    Request-URI Too Long    请求太长了
+500    Internal Server Error   服务器错误
+502    Bad Gateway             服务器没有响应
+
+* 4XX   一般就是前端的问题
+* 5XX   一般就是后台的问题
+
+* 后台不存在兼容性问题
+
+---------------------------------------------
+
+回调函数：
+    只管定义，不管调用
+
+    username=xxx&password=xxx
+
+---------------------------------------------
+
+调研期
+启动会
+    前端 -> 技术难度 -> 估时(领导)
+研发期
+测试期
+回归期
+上线
+
+
+项目组：
+
+---------------------------------------------
+
+作业：
+    1、微博留言
+        a). 留言
+        b). 顶
+        c). 踩
+        d). 删除
+        e). 获取所有留言
+        f). 分页
+
+---------------------------------------------
+
+
+
+
+
+
+
+
+
+

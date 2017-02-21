@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #ul1{
+            width: 808px;
+            margin: 100px auto;
+            position: relative;
+        }
+        #ul1 li{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        #ul1 li.block{
+            width: 202px;
+            height: 52px;
+            border: 0;
+            background: #5dcaff;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            opacity: 0.5;
+            z-index: -9;
+        }
+    </style>
+    <script src="elastic.js"></script>
+    <script>
+        window.onload = function () {
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.children;
+            var oBlock=aLi[aLi.length-1];
+
+            for(var i=0; i<aLi.length-1; i++){
+                aLi[i].onmouseover=function(){
+                    elastic(oBlock, this.offsetLeft);
+                };
+                aLi[i].onmouseout=function(){
+                    elastic(oBlock, 0);
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li>课程介绍</li>
+        <li>视频教程</li>
+        <li>CSS课程</li>
+        <li>JS课程</li>
+        <li class="block"></li>
+    </ul>
+</body>
+</html>

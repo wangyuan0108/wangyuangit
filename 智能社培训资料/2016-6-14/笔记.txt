@@ -1,0 +1,224 @@
+笔记
+
+交互：前端和后台交互  数据
+
+环境：服务器环境
+
+-----------------------------------
+
+验证环境：
+    浏览器 -> localhost
+
+    本地回环地址：127.0.0.1    127.255.255.254
+    MAC
+
+    IP -> 打开网络和共享中心 -> 更改适配器设置 -> 打开相应的网卡 -> 详细信息
+
+-----------------------------------
+
+静态页面：所有的操作页面关闭之后，就没了
+
+-----------------------------------
+
+Cookie：能够保留一些东西
+
+Cookie -> 需要服务器环境
+
+wamp -> www -> 把文件放到这下面
+
+1、怎么存一个东西
+    document.cookie='abc=123';
+    改变生存周期：
+    document.cookie='abc=123; expires='+oDate;
+
+    改变Path：
+    document.cookie='name=value; path=/; expires='+oDate;
+    Path：
+        |--2016-6-14
+            |--path1
+                |-a.html    存一个Cookie
+                |-c.html
+            |--path2
+                |-b.html    取Cookie
+2、怎么取一个东西
+    document.cookie
+
+封装函数：
+    // 设置Cookie：
+    function addCookie(name, value, iDay){
+        // 有过期时间
+        if(iDay){
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+            document.cookie=name+'='+value+'; path=/; expires='+oDate.toUTCString();
+        // 没有过期时间
+        }else{
+            document.cookie=name+'='+value+'; path=/';
+        }
+    }
+    // 获取Cookie
+    function getCookie(name){
+        var arr=document.cookie.split('; ');
+
+        for(var i=0; i<arr.length; i++){
+            var arr2=arr[i].split('=');
+            if(arr2[0]==name){
+                return arr2[1];
+            }
+        }
+        return '';
+    }
+    // 删除
+    function removeCookie(name){
+        addCookie(name, '123', -1);
+    }
+Cookie生存时间：
+    默认：Session(会话)
+
+时间：
+    oDate.toUTCString();
+
+    oDate.toGMTString();    不建议使用
+
+怎么看cookie:
+    F12 -> Resources -> Cookies -> 里面
+
+Cookie：不能跨浏览器
+
+大小：4K
+
+** 不能有中文
+
+坑爹的事情：缓存
+
+使用Cookie：
+1、什么时候存
+2、什么时候取
+
+记住密码
+
+拖拽
+
+-----------------------------------
+
+模块化：
+a). seajs       http://seajs.org/docs/
+b). requirejs   http://requirejs.org/
+
+模块：文件
+
+1、怎么写一个模块
+    define(function(require, exports, module){
+        // require  移入其他模块
+        // exports  导出模块
+        // module   批量导出模块
+        exports.a=12;
+    });
+    导出多个模块：
+        define(function(require, exports, module){
+            module.exports={
+                a: 12,
+                b: 6
+            };
+        });
+
+2、怎么用一个模块
+    seajs.use('a.js', function(modA){
+        alert(modA.a);
+    });
+    // 引入多个模块
+    seajs.use(['sum-a', 'sum-b'], function(modA, modB){
+        alert(modA.a+modB.a);
+    });
+
+    引入主模块：
+    <script src="sea.js" data-main="init"></script>
+
+之前：
+1、引入js要有顺序
+2、程序员自己手动引入
+
+优点：
+1、自动帮你引入js文件
+2、可以解决依赖关系
+3、解决命名冲突
+
+最好在服务器环境下
+
+require.js：
+1、怎么定义一个模块
+    define(function(require, exports, module){
+        // require 引入模块
+        // exports 导出模块
+        // module  批量导出模块
+        exports.a=12;
+    });
+2、怎么引入一个模块
+    require(['a'], function(modA){
+        alert(modA.a);
+    });
+
+-----------------------------------
+
+1、切图仔   ->   写静态页面
+2、效果    难
+3、交互    简单
+
+交互：数据
+    
+form：
+    action  地址
+    name
+    value
+
+    method：
+        GET：不安全、容量小(32K)、有缓存
+        POST：相对安全、容量大(1G)、没有缓存
+
+        GET：分享
+
+缺点：
+1、刷新页面
+    用户：增加你的等待时间
+    公司：增加费用
+2、无法从服务器取数据
+
+ajax(Asynchronous Javascript And XML)：
+    异步的Javascript和XML
+    无刷新从服务器取数据
+
+1、怎么用ajax
+    ajax({
+        url: 'a.txt',            // 地址
+        success: function(str){  // 成功回调函数
+            alert(str);
+        },
+        error: function(s){      // 失败回调函数
+            alert('失败了'+s);
+        }
+    });
+2、怎么写ajax
+    
+回调函数(callback)：
+    你只管定义，不管调用
+
+eval：
+    把字符串解释成js可以理解的语句
+
+-----------------------------------
+
+作业：
+    课件一遍
+    微博换一换
+    百度新闻
+
+-----------------------------------
+
+
+
+
+
+
+
+
+

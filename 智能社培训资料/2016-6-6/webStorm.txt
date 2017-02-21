@@ -1,0 +1,50 @@
+webStorm使用：
+
+换皮肤：
+file -> settings -> Editor -> colors & fonts -> font -> Scheme -> Darcule
+
+字体大小：
+    save as -> font
+
+标签：
+div + tab
+
+div#div1   -> 创建一个有ID的div
+div.div1   -> 创建一个有class的div
+
+批量创建：
+div*10
+
+div.div$*10  创建div1-div10
+
+选中多行：按住滚轮
+
+input:button  直接创建一个button
+
+input:button[value=111]
+
+input:button[value=111]#t1.input1
+      type   属性       ID  class
+
+div>span    子级
+
+快速创建：
+    alt+insert
+
+替换：
+    ctrl+r
+
+设置模板：
+    file -> settings -> Editor -> file and code templates
+
+快速打开浏览器：
+    alt+f2
+
+自动折行：
+    http://jingyan.baidu.com/article/c85b7a645728ad003bac958b.html
+
+格式化代码：
+    code -> reformat Code
+
+注册：
+    help -> reg -> licence server

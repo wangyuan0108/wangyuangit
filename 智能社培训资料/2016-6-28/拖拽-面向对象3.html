@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            font-size: 30px;
+            color: #fff;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .div3{
+            width: 200px;
+            height: 200px;
+            background: green;
+            position: absolute;
+            left: 40%;
+            top: 0;
+        }
+    </style>
+    <script src="drag.js"></script>
+    <script src="limitDrag.js"></script>
+    <script>
+        function MoveDrag(id){
+            Drag.apply(this, arguments);
+        }
+        MoveDrag.prototype=new Drag();
+        MoveDrag.prototype.constructor=MoveDrag;
+
+        var parent={};
+        for(var name in MoveDrag.prototype){
+            parent[name]=MoveDrag.prototype[name];
+        }
+        MoveDrag.prototype.fnDown=function(){
+            parent.fnDown.apply(this, arguments);
+
+            this.oNewDiv=this.oDiv.cloneNode(true);
+            this.oNewDiv.removeAttribute('id');
+            this.oNewDiv.style.opacity='0.5';
+            this.oDiv.parentNode.appendChild(this.oNewDiv);
+            // 狸猫换太子
+            this.oldDiv=this.oDiv;
+            this.oDiv=this.oNewDiv;
+        };
+        MoveDrag.prototype.fnUp=function(){
+            parent.fnUp.apply(this, arguments);
+
+            this.oldDiv.style.left=this.oDiv.style.left;
+            this.oldDiv.style.top=this.oDiv.style.top;
+            // 删除透明的div
+            this.oldDiv.parentNode.removeChild(this.oDiv);
+            // 太子换狸猫
+            this.oDiv=this.oldDiv;
+        };
+        window.onload = function () {
+            new Drag('div1');
+            new LimitDrag('div2');
+            new MoveDrag('div3');
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div class="div3" id="div3"></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            float: left;
+            margin: 10px;
+        }
+    </style>
+    <script src="zQuery-fn.js"></script>
+    <script>
+        /*$.fn.toRed=function(){
+            this.css('background', 'red');
+        };*/
+        $.fn.extend({
+            toRed: function(){
+                this.css('background', 'red');
+            },
+            toBlue: function(){
+                this.css('background', 'blue');
+            }
+        });
+        $(function(){
+            $('div:odd').toRed();
+            $('div:even').toBlue();
+        });
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

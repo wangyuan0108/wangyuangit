@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script src="sea.js"></script>
+    <script>
+        seajs.use('Cookie', function(Cookie){
+            Cookie.addCookie('aaaa', 5555, 3);
+            alert(Cookie.getCookie('aaaa'));
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

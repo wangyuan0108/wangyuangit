@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        /*内容页*/
+        #main{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            margin: 50px auto;
+        }
+        #left{
+            width: 350px;
+            height: 100%;
+            background: #ccc;
+            float: left;
+        }
+        #right{
+            width: 150px;
+            height: 100%;
+            background: #999;
+            float: right;
+        }
+        #left_top{
+            width: 100%;
+            height: 400px;
+        }
+        #left_bottom{
+            width: 100%;
+            height: 100px;
+            background: #333;
+        }
+        /*用户列表*/
+        #user_list{
+            height: 500px;
+            overflow-y: scroll;
+        }
+        #user_list li{
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            border-bottom: 1px dashed #000;
+        }
+        #user_list li span{
+            width: 110px;
+            float: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #user_list li img{
+            width: 20px;
+            float: right;
+        }
+        /*留言*/
+        #left_bottom{
+            position: relative;
+        }
+        #t1{
+            width: 100%;
+            height: 100px;
+            resize: none;
+        }
+        #send{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        /*留言信息*/
+        #msg_list{
+            height: 400px;
+            overflow-y: scroll;
+        }
+        #msg_list li{
+            width: 313px;
+            padding: 10px;
+            border-bottom: 1px dashed #000;
+        }
+        .msg_top{
+            margin-bottom: 10px;
+        }
+        .msg_bottom{
+            word-break: break-all;
+        }
+        .msg_top span{
+            width: 150px;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script src="jsonp.js"></script>
+    <script>
+        window.onload = function () {
+            var oFace=document.getElementById('face_next');
+            var oImg=document.getElementById('face_img');
+            var oReg=document.getElementById('reg');
+            var oLogin=document.getElementById('login_btn');
+            var oUser=document.getElementById('user');
+            var oPass=document.getElementById('pass');
+            var oBox=document.getElementById('box');
+            var oMain=document.getElementById('main');
+            var oUserList=document.getElementById('user_list');
+            var oSend=document.getElementById('send');
+            var oT=document.getElementById('t1');
+            var oMsgList=document.getElementById('msg_list');
+
+            // 换头像
+            var iNow=1;
+            var iMsg=0;
+            oFace.onclick=function(){
+                iNow++;
+                if(iNow>8)iNow=1;
+                oImg.src='face/'+iNow+'.jpg';
+            };
+            // 注册
+            var URL='http://zhinengshe.com/exercise/im/api.php';
+            oReg.onclick=function(){
+                jsonp({
+                    url: URL,
+                    data: {
+                        a: 'reg',
+                        user: oUser.value,
+                        pass: oPass.value,
+                        face: iNow
+                    },
+                    success: function(json){
+                        if(json.err){
+                            alert(json.msg);
+                        }else{
+                            alert(json.msg);
+                        }
+                    }
+                })
+            };
+            // 登录
+            oLogin.onclick=function(){
+                jsonp({
+                    url: URL,
+                    data: {
+                        a: 'lgn',
+                        user: oUser.value,
+                        pass: oPass.value
+                    },
+                    success: function(json){
+                        if(json.err){
+                            alert(json.msg);
+                        }else{
+                            alert(json.msg);
+                            oBox.style.display='none';
+                            oMain.style.display='block';
+                            // 调用各种函数
+                            getUserList(json.token);
+                            getAllMsg(json.token);
+                            sendMsg(json.token);
+                            // 实时更新消息
+                            setInterval(function(){
+                                getNewMsg(json.token);
+                            }, 1000);
+                        }
+                    }
+                });
+            };
+
+            // 获取用户列表
+            function getUserList(token){
+                jsonp({
+                    url: URL,
+                    data: {
+                        a: 'get_user_list',
+                        token: token
+                    },
+                    success: function(json){
+                        if(json.err){
+                            alert('获取用户列表失败');
+                        }else{
+                            var arr=json.data;
+                            for(var i=0; i<arr.length; i++){
+                                var oLi=document.createElement('li');
+                                oLi.innerHTML='<span>'+arr[i].username+'</span><img src="face/'+arr[i].face+'.jpg">';
+                                oUserList.appendChild(oLi);
+                            }
+                        }
+                    }
+                });
+            }
+            // 获取完整信息
+            function getAllMsg(token){
+                jsonp({
+                    url: URL,
+                    data: {
+                        a: 'get_msg',
+                        token: token
+                    },
+                    success: function(json){
+                        if(json.err){
+                            alert('获取留言失败');
+                        }else{
+                            var arr=json.data;
+                            for(var i=0; i<arr.length; i++){
+                                var oLi=document.createElement('li');
+                                oLi.innerHTML='<div class="msg_top">\
+                                        <span>'+arr[i].username+'</span>\
+                                        <span>'+arr[i].post_time+'</span>\
+                                </div>\
+                                <div class="msg_bottom">'+arr[i].content+'</div>';
+                                oMsgList.appendChild(oLi);
+                                oMsgList.scrollTop=oMsgList.scrollHeight;
+                                // 更新ID
+                                if(iMsg<arr[i].ID){
+                                    iMsg=arr[i].ID;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            // 发言
+            function sendMsg(token){
+                oSend.onclick=function(){
+                    jsonp({
+                        url: URL,
+                        data: {
+                            a: 'snd_msg',
+                            content: oT.value,
+                            token: token
+                        },
+                        success: function(json){
+                            if(json.err){
+                                alert('留言失败');
+                            }else{
+                                var oLi=document.createElement('li');
+                                oLi.innerHTML='<div class="msg_top">\
+                                        <span>'+oUser.value+'</span>\
+                                        <span>'+json.time+'</span>\
+                                </div>\
+                                <div class="msg_bottom">'+oT.value+'</div>';
+                                oMsgList.appendChild(oLi);
+                                oMsgList.scrollTop=oMsgList.scrollHeight;
+                                oT.value='';
+                                // 更新ID
+                                if(iMsg<json.ID){
+                                    iMsg=json.ID;
+                                }
+                            }
+                        }
+                    });
+                };
+            }
+            // 实时更新消息
+            function getNewMsg(token){
+                jsonp({
+                    url: URL,
+                    data: {
+                        a: 'get_msg_n',
+                        token: token,
+                        n: iMsg
+                    },
+                    success: function(json){
+                        if(json.err){
+                            alert('实时获取消息失败');
+                        }else{
+                            var arr=json.data;
+                            for(var i=0; i<arr.length; i++){
+                                var oLi=document.createElement('li');
+                                oLi.innerHTML='<div class="msg_top">\
+                                        <span>'+arr[i].username+'</span>\
+                                        <span>'+arr[i].post_time+'</span>\
+                                </div>\
+                                <div class="msg_bottom">'+arr[i].content+'</div>';
+                                oMsgList.appendChild(oLi);
+                                oMsgList.scrollTop=oMsgList.scrollHeight;
+
+                                if(iMsg<arr[i].ID){
+                                    iMsg=arr[i].ID;
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div id="face">
+            <img src="face/1.jpg" id="face_img">
+            <a href="javascript:;" id="face_next">→</a>
+        </div>
+        <div id="login">
+            user:<input type="text" id="user"><br>
+            pass:<input type="text" id="pass"><br>
+            <input type="button" value="注册" id="reg">
+            <input type="button" value="登录" id="login_btn">
+        </div>
+    </div>
+    <div id="main" style="display: none;">
+        <div id="left">
+            <div id="left_top">
+                <ul id="msg_list">
+                    <!--<li>
+                        <div class="msg_top">
+                            <span>xxxxx</span>
+                            <span>2016-6-20 11:11:11</span>
+                        </div>
+                        <div class="msg_bottom">
+                            撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的撒爱上大声大声的aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        </div>
+                    </li>-->
+                </ul>
+            </div>
+            <div id="left_bottom">
+                <textarea id="t1"></textarea>
+                <input type="button" value="发言" id="send">
+            </div>
+        </div>
+        <div id="right">
+            <ul id="user_list">
+                <!--<li><span>xxxx</span><img src="face/1.jpg"></li>-->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

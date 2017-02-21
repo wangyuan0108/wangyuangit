@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 400px;
+            height: 30px;
+            background: #999999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -115px;
+        }
+        #box #bar{
+            width: 0;
+            height: 100%;
+            background: #3bb4f2;
+        }
+        #box span{
+            position: absolute;
+            left: 50%;
+            top: 6px;
+            color: #fff;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBar=document.getElementById('bar');
+            var oBox=document.getElementById('box');
+            var oSpan=oBox.getElementsByTagName('span')[0];
+
+            var iCount=0;
+            // http://www.zhinengshe.com/works/3525/img/0.jpg
+            for(var i=0; i<77; i++){
+                var oImg=new Image();
+                oImg.src='http://www.zhinengshe.com/works/3525/img/'+i+'.jpg';
+                oImg.onload=function(){
+                    iCount++;
+                    // 比例
+                    var scale=iCount/77;
+                    oBar.style.width=oBox.offsetWidth*scale+'px';
+                    oSpan.innerHTML=parseInt(scale*100)+'%';
+                    if(iCount==77){
+                        alert('加载完成');
+                    }
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div id="bar"></div>
+        <span>0%</span>
+    </div>
+</body>
+</html>

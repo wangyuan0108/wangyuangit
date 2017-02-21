@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+            var oBtn=document.getElementById('btn');
+
+            oBtn.onclick=function(){
+                oT.value=oT.value.replace(/^/gm, '    ');
+            };
+        };
+    </script>
+</head>
+<body>
+<textarea id="t1" cols="50" rows="30"></textarea>
+<input type="button" value="发表" id="btn">
+</body>
+</html>

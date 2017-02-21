@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function createPerson(name, age){
+            var obj=new Object();
+            // 属性
+            obj.name=name;
+            obj.age=age;
+            // 方法
+            obj.showName=function(){
+                alert(this.name);
+            };
+            obj.showAge=function(){
+                alert(this.age);
+            };
+            return obj;
+        }
+
+        var p1=createPerson('i++', 18);
+        var p2=createPerson('blue', 50);
+        // p1.showName();
+        p2.showAge();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

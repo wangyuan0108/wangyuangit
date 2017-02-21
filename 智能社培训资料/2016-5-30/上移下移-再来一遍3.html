@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <script>
+        window.onload = function () {
+            var oUl=document.getElementById('ul1');
+            var aA=oUl.getElementsByTagName('a');
+
+            for(var i=0; i<aA.length; i++){
+                // 下移
+                if(i%2){
+                    aA[i].onclick=function(){
+                        alert('下移');
+                    };
+                // 上移
+                }else{
+                    aA[i].onclick=function(){
+                        // 父级
+                        var oParent=this.parentNode;
+                        // 判断是否到头
+                        if(oParent==oUl.children[0]){
+                            alert('已经到头了');
+                            return;
+                        }
+                        // 父级上移个节点
+                        var oPrev=oParent.previousElementSibling || oParent.previousSibling;
+                        oUl.insertBefore(oParent, oPrev);
+                    };
+                }
+
+            }
+        };
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li><a href="javascript:;">上移</a>1111111111111<a href="javascript:;">下移</a></li>
+        <li><a href="javascript:;">上移</a>222222222222<a href="javascript:;">下移</a></li>
+        <li><a href="javascript:;">上移</a>33333333333<a href="javascript:;">下移</a></li>
+        <li><a href="javascript:;">上移</a>4444444444<a href="javascript:;">下移</a></li>
+        <li><a href="javascript:;">上移</a>555555555<a href="javascript:;">下移</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,130 @@
+笔记
+
+面向对象
+
+造人：
+1、属性：名字，年龄
+2、方法：showName、showAge
+
+对象：
+1、属性：变量，属于某一个对象
+2、方法：函数，属于某一个对象
+
+空白对象：
+    var obj=new Object();
+
+工厂模式：
+    原料 -> 加工 -> 出厂
+new：
+1、准备一个空白对象，并且赋值给this
+2、返回给外界
+
+原型：prototype    往原型上添加方法
+    arr.indexOf();
+    str.trim();
+    Date.getCnDay();
+
+this：
+    this优先级：多包一层失效
+    new -> object
+    定时器 -> window
+    事件 -> 触发事件的元素
+    方法 -> 方法属于谁
+
+面向对象：对象 对象 对象
+面向过程：函数 函数 函数
+
+面向对象特征：
+1、封装
+2、继承
+3、多态
+
+继承：
+1、属性
+    Person.call(this, name, age);
+    Person.apply(this, [name, age]);
+
+    Person.apply(this, arguments);  √
+2、方法
+    a). Worker.prototype=Person.prototype;
+    b). for(var name in Person.prototype){
+            Worker.prototype[name]=Person.prototype[name];
+        }
+
+        w1 instanceof Person // false
+    c). Worker.prototype=new Person();
+        Worker.prototype.constructor=Worker;
+
+继承：
+1、属性：
+    父类构造函数.call(this, 参数1, 参数2...);
+    父类构造函数.apply(this, arguments);
+2、方法：
+    构造函数.prototype=new 父类构造函数();
+    构造函数.prototype.constructor=构造函数;
+
+强制改变this指向：
+    show.call(this指向谁, 参数1, 参数2)
+    show.apply(this指向谁, [参数1, 参数2]);
+
+面向对象：
+重用
+
+选项卡：
+自动播放选项卡：
+
+-----------------------------------------
+
+改：
+1、window.onload=   提出去，封成构造函数 new 
+2、把函数挂到prototype上报错
+    a). 把变量定义成全局
+    b). 改this
+3、把变量变成属性
+
+
+拖拽：
+限制范围拖拽：
+透明拖拽：
+
+-----------------------------------------
+
+构造函数/原型混合模式
+Constructor / prototype mixed mode
+工厂模式：
+    原料 -> 加工 -> 出厂
+单体模式(单例模式)：
+    好处：简单
+    缺点：不能复用
+
+-----------------------------------------
+
+prototype：原型
+
+另外一种添加方式：
+Person.prototype={
+    showName: function(){
+        return this.name;
+    },
+    showAge: function(){
+        return this.age;
+    }
+};
+
+小缺点：
+    constructor 没了
+
+建议：prototype一个一个添加
+
+-----------------------------------------
+
+变量名冲突：
+1、封闭空间
+2、模块化
+3、面向对象
+4、命名空间
+
+-----------------------------------------
+
+
+

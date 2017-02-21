@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // 假数据
+            var arr=[
+                {
+                    title: '习近平祝全国小朋友节日快乐',
+                    href: 'http://top.chinadaily.com.cn/2016-05/31/content_25559729.htm'
+                },
+                {
+                    title: '李克强：促进科技成果转化应用',
+                    href: 'http://top.chinadaily.com.cn/2016-05/31/content_25559729.htm'
+                },{
+                    title: '联想财报不佳好',
+                    href: 'http://top.chinadaily.com.cn/2016-05/31/content_25559729.htm'
+                },{
+                    title: '北京检方对雷洋案5名涉事警察立案侦查',
+                    href: 'http://top.chinadaily.com.cn/2016-05/31/content_25559729.htm'
+                },{
+                    title: '蒋尊玉独生女受审：结婚时被送保时捷金条',
+                    href: 'http://top.chinadaily.com.cn/2016-05/31/content_25559729.htm'
+                }
+            ];
+
+            var oBox=document.getElementById('box');
+
+            for(var i=0; i<arr.length; i++){
+                var oDiv=document.createElement('div');
+                oDiv.innerHTML='<a href="'+arr[i].href+'">'+arr[i].title+'</a>';
+                oBox.appendChild(oDiv);
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

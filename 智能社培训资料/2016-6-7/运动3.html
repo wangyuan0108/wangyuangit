@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            font-size: 100px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            position: absolute;
+            left: 200px;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.getElementById('div1');
+
+            var timer;
+            oDiv.onclick=function(){
+                move(oDiv);
+            };
+            function move(obj){
+                var start=obj.offsetLeft;// 起始点
+                var target=500;     // 终点
+                var dis=target-start;   // 总距离
+
+                var count=Math.floor(1000/30);  // 总步数
+                var n=0;
+                timer=setInterval(function(){
+                    n++;
+                    obj.style.left=start+dis/count*n+'px';  // 每步走多远
+                    if(n==count){
+                        clearInterval(timer);
+                    }
+                }, 30);
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">小明</div>
+</body>
+</html>

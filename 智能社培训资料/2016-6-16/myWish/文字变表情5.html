@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+
+            oDiv.onclick=function(){
+                oDiv.innerHTML=str2img(oDiv.innerHTML);
+            };
+            function str2img(str){
+                var arr=['[抓狂]','[抱抱]','[害羞]','[酷]','[嘻嘻]','[太开心]','[偷笑]','[钱]','[花心]','[挤眼]'];
+                var arr2=['zhuakuang.gif','baobao.gif','haixiu.gif','ku.gif','xixi.gif','taikaixin.gif','touxiao.gif','qian.gif','huaxin.gif','jiyan.gif',];
+
+                for(var i=0; i<arr.length; i++){
+                    if(str.indexOf(arr[i])!=-1){
+                        str=str.replace(arr[i], '<img src="Images/phiz/'+arr2[i]+'">');
+                        i--;
+                    }
+                }
+                return str;
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">[酷][太开心][太开心]</div>
+</body>
+</html>

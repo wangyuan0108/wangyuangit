@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[12,8,5,64,90,125,256,32,55,-100,-23,88,203,111];
+
+        function qSort(arr){
+            if(arr.length<=0){
+                return [];
+            }
+
+            var cIndex=Math.floor(arr.length/2);
+            var c=arr.splice(cIndex, 1);
+            var l=[];
+            var r=[];
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]<c[0]){
+                    l.push(arr[i]);
+                }else{
+                    r.push(arr[i]);
+                }
+            }
+            return qSort(l).concat(c, qSort(r));
+        }
+        alert(qSort(arr));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

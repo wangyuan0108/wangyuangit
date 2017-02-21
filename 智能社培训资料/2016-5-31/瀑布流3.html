@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 200px;
+            border: 1px solid #000;
+            float: left;
+            margin: 20px;
+        }
+        ul li{
+            width: 180px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function rnd(n, m){
+            return parseInt(Math.random()*(m-n))+n;
+        }
+        function createLi(){
+            var oLi=document.createElement('li');
+            oLi.style.height=rnd(100, 300)+'px';
+            oLi.style.background='rgb('+rnd(1, 256)+','+rnd(1, 256)+','+rnd(1, 256)+')';
+            return oLi;
+        }
+        window.onload=function () {
+            var oUl=document.getElementsByTagName('ul');
+
+            for(var i=0; i<20; i++){
+                var oLi=createLi();
+
+                var h1=oUl[0].offsetHeight;
+                var h2=oUl[1].offsetHeight;
+                var h3=oUl[2].offsetHeight;
+                // 最小高的ul
+                var oMin=null;
+
+                // h1<h2
+                if(h1<h2){
+                    // h1<h3
+                    // h1<h2
+                    if(h1<h3){
+                        oMin=oUl[0];
+                    // h1<h2
+                    // h3<h1
+                    }else{
+                        oMin=oUl[2];
+                    }
+                }else{
+                    // h2<h1
+                    // h2<h3
+                    if(h2<h3){
+                        oMin=oUl[1];
+                    // h2<h1
+                    // h3<h2
+                    }else{
+                        oMin=oUl[2];
+                    }
+                }
+                oMin.appendChild(oLi);
+            }
+        };
+    </script>
+</head>
+<body>
+<ul></ul>
+<ul></ul>
+<ul></ul>
+</body>
+</html>

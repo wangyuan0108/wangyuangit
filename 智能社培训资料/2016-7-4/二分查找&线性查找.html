@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 线性查找 7300
+        // 二分查找 40
+        var arr=[0];
+        var N=100000;
+        for(var i=1; i<N; i++){
+            arr[i]=arr[i-1]+parseInt(Math.random()*10);
+        }
+
+        // 二分查找
+        function find2(n, s, e){
+            if(s>e){
+                return false;
+            }else if(s==e){
+                if(n==arr[s]){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+            var c=Math.floor((s+e)/2);
+            if(arr[c]==n){
+                return true;
+            }else{
+                if(n<arr[c]){
+                    return find2(n, s, c);
+                }else{
+                    return find2(n, c+1, e);
+                }
+            }
+        }
+        // 线性查找
+        function findInArr(n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        var s=new Date().getTime();
+        for(var i=0; i<N; i++){
+            var n=parseInt(Math.random()*N);
+            // findInArr(n);
+            find2(n, 0, arr.length-1);
+        }
+
+        alert(new Date().getTime()-s);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

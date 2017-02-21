@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <script>
+        function getByClass(oParent, sClass){
+            if(oParent.getElementsByClassName){
+                return oParent.getElementsByClassName(sClass);
+            }else{
+                var aEle=oParent.getElementsByTagName('*');
+                var arr=[];
+                var reg=new RegExp('\\b'+sClass+'\\b');
+                for(var i=0; i<aEle.length; i++){
+                    if(reg.test(aEle[i].className)){
+                        arr.push(aEle[i]);
+                    }
+                }
+                return arr;
+            }
+        }
+        function getByStr(aParent, str){
+            var aChild=[];
+            for(var i=0; i<aParent.length; i++){
+                switch(str.charAt(0)){
+                    case '#':
+                        var obj=document.getElementById(str.substring(1));
+                        aChild.push(obj);
+                        break;
+                    case '.':
+                        var aEle=getByClass(aParent[i], str.substring(1));
+                        for(var j=0; j<aEle.length; j++){
+                            aChild.push(aEle[j]);
+                        }
+                        break;
+                    default:
+                        if(/^\w+\.\w+$/.test(str)){ // li.red   \w+\.\w+
+                            var aStr=str.split('.');
+                            var aEle=aParent[i].getElementsByTagName(aStr[0]);
+                            var reg=new RegExp('\\b'+aStr[1]+'\\b');
+                            for(var j=0; j<aEle.length; j++){
+                                if(reg.test(aEle[j].className)){
+                                    aChild.push(aEle[j]);
+                                }
+                            }
+                        }else if(/^\w+\:\w+(\(\d+\))?$/.test(str)){  // 伪类 li:first li:last li:eq()
+                            // str -> li:firt
+                            // str -> li:eq(2)
+                            var aStr=str.split(/:|\(|\)/);
+                            var aEle=aParent[i].getElementsByTagName(aStr[0]);
+                            switch(aStr[1]){
+                                case 'first':
+                                    aChild.push(aEle[0]);
+                                    break;
+                                case 'last':
+                                    aChild.push(aEle[aEle.length-1]);
+                                    break;
+                                case 'eq':
+                                    aChild.push(aEle[aStr[2]]);
+                                    break;
+                                case 'odd':
+                                    for(var j=1; j<aEle.length; j+=2){
+                                        aChild.push(aEle[j]);
+                                    }
+                                    break;
+                                case 'even':
+                                    for(var j=0; j<aEle.length; j+=2){
+                                        aChild.push(aEle[j]);
+                                    }
+                                    break;
+                                case 'gt':
+                                    for(var j=parseInt(aStr[2])+1; j<aEle.length; j++){
+                                        aChild.push(aEle[j]);
+                                    }
+                                    break;
+                                case 'lt':
+                                    for(var j=0; j<aStr[2]; j++){
+                                        aChild.push(aEle[j]);
+                                    }
+                                    break;
+                            }
+                        }else if(/^\w+\[\w+=\w+\]$/.test(str)){ // 属性
+                            var aStr=str.split(/\[|\]|=/);
+                            var aEle=aParent[i].getElementsByTagName(aStr[0]);
+                            for(var j=0; j<aEle.length; j++){
+                                if(aEle[j].getAttribute(aStr[1])==aStr[2]){
+                                    aChild.push(aEle[j]);
+                                }
+                            }
+                        }else{
+                            var aEle=aParent[i].getElementsByTagName(str);
+                            for(var j=0; j<aEle.length; j++){
+                                aChild.push(aEle[j]);
+                            }
+                        }
+                        break;
+                }
+            }
+            return aChild;
+        }
+        function getEle(str){
+            var arr=str.replace(/^\s+|\s+$/g, '').split(' ');
+            var aParent=[document];
+            var aChild=[];
+
+            for(var i=0; i<arr.length; i++){
+                aChild=getByStr(aParent, arr[i]);
+                aParent=aChild;
+            }
+            return aChild;
+        }
+        window.onload = function () {
+            var aLi=getEle('li[aaa=abc]');
+            // alert(aLi.length);
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].style.background='red';
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <ul id="ul1">
+            <li aaa="abc" class="red blue">11111 <input type="text"></li>
+            <li class="red2">22222 <input type="button" value="按钮"></li>
+            <li class="blue yellow">3333 <input type="text"></li>
+            <li class="red green">444444<input type="button" value="按钮"></li>
+        </ul>
+        <ol>
+            <li class="red blue">11111 <input type="text"></li>
+            <li class="red2">22222 <input type="button" value="按钮"></li>
+            <li class="blue yellow">3333 <input type="text"></li>
+            <li class="red green">444444<input type="button" value="按钮"></li>
+        </ol>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

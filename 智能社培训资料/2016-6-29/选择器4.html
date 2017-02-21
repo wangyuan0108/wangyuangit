@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <script>
+        function getByClass(oParent, sClass){
+            if(oParent.getElementsByClassName){
+                return oParent.getElementsByClassName(sClass);
+            }else{
+                var aEle=oParent.getElementsByTagName('*');
+                var arr=[];
+                var reg=new RegExp('\\b'+sClass+'\\b');
+                for(var i=0; i<aEle.length; i++){
+                    if(reg.test(aEle[i].className)){
+                        arr.push(aEle[i]);
+                    }
+                }
+                return arr;
+            }
+        }
+        function getByStr(aParent, str){
+            var aChild=[];
+            for(var i=0; i<aParent.length; i++){
+                switch(str.charAt(0)){
+                    case '#':
+                        var obj=document.getElementById(str.substring(1));
+                        aChild.push(obj);
+                        break;
+                    case '.':
+                        var aEle=getByClass(aParent[i], str.substring(1));
+                        for(var j=0; j<aEle.length; j++){
+                            aChild.push(aEle[j]);
+                        }
+                        break;
+                    default:
+                        if(/^\w+\.\w+$/.test(str)){ // li.red   \w+\.\w+
+                            var aStr=str.split('.');
+                            var aEle=aParent[i].getElementsByTagName(aStr[0]);
+                            var reg=new RegExp('\\b'+aStr[1]+'\\b');
+                            for(var j=0; j<aEle.length; j++){
+                                if(reg.test(aEle[j].className)){
+                                    aChild.push(aEle[j]);
+                                }
+                            }
+                        }else{
+                            var aEle=aParent[i].getElementsByTagName(str);
+                            for(var j=0; j<aEle.length; j++){
+                                aChild.push(aEle[j]);
+                            }
+                        }
+                        break;
+                }
+            }
+            return aChild;
+        }
+        function getEle(str){
+            var arr=str.replace(/^\s+|\s+$/g, '').split(' ');
+            var aParent=[document];
+            var aChild=[];
+
+            for(var i=0; i<arr.length; i++){
+                aChild=getByStr(aParent, arr[i]);
+                aParent=aChild;
+            }
+            return aChild;
+        }
+        window.onload = function () {
+            var oUl=getEle('#ul1 li.red');
+            // alert(aLi.length);
+            for(var i=0; i<oUl.length; i++){
+                oUl[i].style.background='red';
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <ul id="ul1">
+            <li class="red blue">11111 <input type="text"></li>
+            <li class="red2">22222 <input type="button" value="按钮"></li>
+            <li class="blue yellow">3333 <input type="text"></li>
+            <li class="red green">444444<input type="button" value="按钮"></li>
+        </ul>
+        <ol>
+            <li class="red blue">11111 <input type="text"></li>
+            <li class="red2">22222 <input type="button" value="按钮"></li>
+            <li class="blue yellow">3333 <input type="text"></li>
+            <li class="red green">444444<input type="button" value="按钮"></li>
+        </ol>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

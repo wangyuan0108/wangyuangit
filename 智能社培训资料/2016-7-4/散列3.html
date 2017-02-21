@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr2=[];
+        arr2.length=10;
+        var count=0;
+        function hashAdd(n){
+            var pos=n%arr2.length;
+
+            if(arr2[pos]){
+                while(arr2[pos]){
+                    if(arr2[pos]==n){
+                        return;
+                    }
+                    pos++;
+                    if(pos==arr2.length){
+                        pos=0;
+                    }
+                }
+                arr2[pos]=n;
+            }else{
+                arr2[pos]=n;
+            }
+            // 扩建
+            count++;
+            if(count==arr2.length){
+                var oldArr=arr2;
+                arr2=[];
+                count=0;
+                arr2.length=oldArr.length*2;
+                for(var i=0; i<oldArr.length; i++){
+                    hashAdd(oldArr[i]);
+                }
+            }
+        }
+        function hashFind(n){
+            var pos=n%arr2.length;
+
+            if(arr2[pos]==n){
+                return true;
+            }else{
+                while(arr2[pos]){
+                    if(arr2[pos]==n){
+                        return true;
+                    }
+                    pos++;
+                    if(pos==arr2.length){
+                        pos=0;
+                    }
+                }
+                return false;
+            }
+        }
+        hashAdd(12);
+        hashAdd(34);
+        hashAdd(55);
+        hashAdd(66);
+        hashAdd(7);
+        hashAdd(17);
+        hashAdd(27);
+        hashAdd(37);
+        hashAdd(47);
+        hashAdd(107);
+        hashAdd(117);
+
+        alert(hashFind(88));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

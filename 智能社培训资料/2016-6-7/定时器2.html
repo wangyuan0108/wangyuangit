@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+
+            var s=new Date().getTime();
+            var timer;
+            timer=setInterval(function(){
+                var now=new Date().getTime();
+                oT.value+=(now-s)+'\n';
+                s=now;
+            }, 10);
+            document.onclick=function(){
+                clearInterval(timer);
+            };
+        };
+    </script>
+</head>
+<body>
+<textarea id="t1" cols="30" rows="10"></textarea>
+</body>
+</html>

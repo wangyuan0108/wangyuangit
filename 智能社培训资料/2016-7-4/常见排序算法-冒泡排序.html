@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[12,8,5,64,90,125,256,32,55,-100,-23,88,203,111];
+
+        function bSort(arr){
+            for(var i=0; i<arr.length; i++){
+                for(var j=0; j<arr.length; j++){
+                    if(arr[j]>arr[j+1]){
+                        var tmp;
+                        tmp=arr[j];
+                        arr[j]=arr[j+1];
+                        arr[j+1]=tmp;
+                    }
+                }
+            }
+            return arr;
+        }
+        alert(bSort(arr));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

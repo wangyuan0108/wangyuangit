@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            // $('div:has(p)').css('background', 'red');
+            $('div:contains(p)').css('background', 'red');
+        });
+    </script>
+</head>
+<body>
+<div>
+    ppppppppp
+    <span>我是一个span</span>
+</div>
+<div>
+    <p>我是一个标签</p>
+    <span>我是一个san</span>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

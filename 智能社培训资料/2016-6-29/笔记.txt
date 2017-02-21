@@ -1,0 +1,109 @@
+笔记
+
+zQuery
+
+选择器：
+基本选择器：
+    ID
+    class
+    标签
+    嵌套
+    筛选
+伪类选择器：\w+\:\w+(\(\d+\))?
+    li:first
+    li:last
+    li:eq(n)
+    li:odd
+    li:even
+    li:gt(n)
+    li:lt(n)
+属性选择器：
+    input[type=button]  \w+\[\w+=\w+\]
+
+zQuery：面向对象
+
+
+css：
+    $(obj).css('width')
+    $(obj).css('width', '200px');
+    $(obj).css({})
+attr：
+    $(obj).attr('xxx');
+    $(obj).attr('xxx', 'yy');
+    $(obj).attr({})
+事件：
+    批量加事件
+bind：
+
+事件对象：
+
+阻止冒泡：
+    addEvent -> 阻止冒泡
+阻止默认事件：
+    return false -> 碰到addEventListener失效
+    oEvent.preventDefault();
+
+DOM：
+    创建
+        document.createElement();
+
+        $('<p>我是一个P标签</p>')
+    添加
+        obj.appendChild();
+        obj.insertBefore();
+
+        $(obj).appendTo();
+        $(obj).prependTo();
+        $(obj).insertBefore();
+        $(obj).insertAfter();
+    删除
+        父级.removeChild(子级);
+
+创建DOM：
+    obj.insertAdjacentHTML('beforeEnd', str)
+
+    beforeEnd -> appendTo
+    afterBegin -> prependTo
+    beforeBegin -> insertBefore
+    afterEnd  -> insertAfter
+
+运动：
+    $(obj).animate();
+内容：
+    $(obj).val();   表单元素
+        $(obj).val();
+        $(obj).val('abc');
+    $(obj).html();  非表单元素
+
+class：
+    $(obj).addClass();
+    $(obj).removeClass();
+
+.show();
+.hide();
+
+.eq(n)   
+.get()  
+.index()
+    兄弟元素里面的第几个
+
+交互：
+    ajax
+    jsonp
+
+
+
+this：
+1、定时器
+2、多包一层
+3、行间
+4、attach
+
+
+
+
+
+
+
+
+

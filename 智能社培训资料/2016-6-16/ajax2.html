@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function json2url(json){
+            json.t=Math.random();
+            var arr=[];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            return arr.join('&');
+        }
+
+        function ajax(json){
+            // 1、准备一个ajax
+            if(window.XMLHttpRequest){
+                var oAjax=new XMLHttpRequest();
+            }else{
+                var oAjax=new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            // 2、建立链接
+            oAjax.open('GET', json.url+'?'+json2url(json.data), true);
+            // 3、发送请求
+            oAjax.send();
+            // 4、接收数据
+            oAjax.onreadystatechange=function(){
+                if(oAjax.readyState==4){
+                    if((oAjax.status>=200 && oAjax.status<300) || oAjax.status==304){
+                        json.success && json.success(oAjax.responseText);
+                    }else{
+                        json.error && json.error(oAjax.status);
+                    }
+                }
+            };
+        }
+
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+
+            oBtn.onclick=function(){
+                ajax({
+                    url: 'a.txt',
+                    data: {
+                        a: 12,
+                        b: 5
+                    },
+                    success: function(str){
+                        // var json=eval('('+str+')');
+                        var json=new Function('return '+str)();
+                        alert(json.a);
+                    },
+                    error: function(s){
+                        alert(s);
+                    }
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="数据" id="btn1">
+</body>
+</html>

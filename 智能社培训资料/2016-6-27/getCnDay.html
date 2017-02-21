@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        Date.prototype.getCnDay=function(){
+            var arr=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+            return arr[this.getDay()];
+        };
+        var oDate=new Date();
+        alert(oDate.getCnDay());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

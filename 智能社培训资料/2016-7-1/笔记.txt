@@ -1,0 +1,361 @@
+笔记
+
+前端 -> 后台
+
+后台：
+    jsp
+    php
+    asp
+
+php：后台语言
+    
+    wamp：windows apache mysql php
+
+    验证环境：
+        localhost
+
+html -> xxx.html
+css  -> xxx.css
+js   -> xxx.js
+
+php  -> xxx.php
+
+后台安全，前端不安全
+
+php不能直接通过sublime打开
+    
+    php里面可以直接编写html、css、js代码
+
+php代码：
+    <?php
+        // 代码
+    ?>
+php怎么输出东西：
+    echo 东西;
+php声明变量：
+    $str='abc';
+流程控制：
+    if
+    switch
+循环：
+    for
+    while
+函数：
+    function show($a, $b){
+        // code
+    }
+    show(12, 5);
+
+    function show(){
+        return 12;
+    }
+
+        js              php
++   字符串拼接、运算    运算
+
+php字符串拼接：
+    .
+
+注意：
+1、每段代码结束都需要有";"
+2、在整个地址里面都不能有中文
+
+------------------------------
+
+混合编码格式：
+    恶心
+
+编码格式
+
+------------------------------
+
+交互：
+    form
+    ajax
+
+    get：容量小、不安全、有缓存
+    post：容量大、相对安全、没有缓存
+
+    form:
+        action
+        name
+        value
+
+------------------------------
+
+把数据给后台：后台干什么了？
+
+    后台怎么接收数据：
+        GET：
+            $user=$_GET['name'];
+        POST:
+            $user=$_POST['name'];
+
+假登录：
+    admin   admin  登录成功
+
+------------------------------
+
+数据库：
+    mysql、orcle、sql server、db2.....
+
+    mysql：用的人多、免费
+
+    phpMyAdmin -> 图形管理界面
+
+库：文件夹
+表：文件
+
+建库：
+    phpMyAdmin -> new -> 数据库名 -> 排序规则 -> urf-8 unicode -> 创建
+建表：用户
+    名字 -> 
+    字段数 -> 2
+
+    字段名 -> usernaem password
+
+    类型：
+        INT    整数
+        VARCHAR 字符串
+        TEXT   大量文本
+        DATE   时间
+
+    保存 -> 新建出来一张表
+
+------------------------------
+
+php怎么连接数据库：
+
+1、连接数据库
+    mysql_connect('地址', '用户名', '密码');
+    mysql_connect('localhost', 'root', 'admin123');
+2、选择数据库
+    mysql_select_db('库名');
+3.编写sql语句
+    $sql="SELECT * FROM user";
+4.执行sql语句
+    $result=mysql_query(sql语句);
+5.抓取一条数据
+    $row=mysql_fetch_row($result);
+
+sql：
+    增、删、改、查
+
+    查：
+        SELECT 字段名 FROM 表名;
+        SELECT 字段名,字段名2 FROM 表名;
+        SELECT * FROM 表名;
+
+        SELECT username FROM user;
+        SELECT username,password FROM user;
+        SELECT * FROM user;
+
+        带条件查找
+        SELECT * FROM user WHERE 条件;
+        SELECT * FROM user WHERE username='admin'
+    增：
+        INSERT INTO 表名 VALUES(字段1,字段2);
+
+        INSERT INTO user VALUES('kkk','kkk123')
+
+
+------------------------------
+
+登录、注册：
+http://localhost/user.php?act=xxx&user=xxx&pass=xxx;
+
+    act: 
+        add     注册
+        login   登录
+    user：用户名
+    pass：密码
+
+    return {err: 0, msg: "xxx"};
+        err：是否有错误
+        msg：信息
+
+    报错：数据有问题
+        Uncaught SyntaxError: Unexpected token <
+    {err: 1, msg: "用户名不存在"}
+
+    接口：纯php代码
+
+------------------------------
+
+nodejs：
+    https://nodejs.org/en/
+
+    安装nodejs:
+        下载 -> 安装 -> 一直下一步
+    验证：
+        window+r -> cmd -> node -v
+    手册：
+    https://nodejs.org/en/docs/
+
+为什么学nodejs：
+1、入门难度低
+2、大公司推
+3、性能高
+
+性能高：
+nodejs    php    86倍
+
+nodejs：2台     4W
+php：   172     344W
+
+用户：
+nodejs: 2s
+php：172s    3分钟
+
+缺点：
+1、太年轻
+2、服务提供商少
+    云
+3、对程序员要求高
+
+------------------------------
+
+xxx.php  
+
+xxx.js -> 
+
+运行 -> 找个这个文件 -> node 文件名
+    node 1.js 
+    node 1
+
+DOC：
+    切换盘符：
+        d:
+    列出文件：
+        dir
+    进入某一个文件：
+        cd xxx
+    cd ..   退回上一级目录
+
+    tab     补全
+
+    cls   清屏
+
+    shift+右击 -> 在此处打开命令窗口
+
+------------------------------
+
+1、DOM
+2、BOM
+
+nodejs：
+1、文件操作
+2、数据库操作
+
+------------------------------
+
+http服务器:
+    apache、IIS、tomcat、nginx....
+    * nodejs里面什么都是自己写
+
+    rfc2616
+
+    模块(第三方模块，系统模块)
+
+http服务：
+1、引入模块
+    var http=require('http');
+2、创建服务器
+    var httpServer=http.createServer(function(){
+
+    });
+3、监听端口号
+    httpServer.listen(8080);
+
+    端口号：标明确定的服务(这个服务的端口号)
+
+    端口号：1-65535
+    我们：1024以后
+
+    选择：8080 8081
+4、给用户东西
+    var httpServer=http.createServer(function(req, res){
+        // request 请求  客户端 -> 服务器
+        // response 回复 服务器 -> 客户端
+        console.log('有人来了');
+        res.write('abc');
+    });
+
+------------------------------
+
+导航页：
+
+问题：
+1、代码太乱了
+2、修改代码重启服务
+
+------------------------------
+
+文件操作：
+
+fs模块
+    
+    fs.readFile('文件名', function(err, data){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(data);
+        }
+    });
+
+------------------------------
+
+简易博客：
+    [
+        {
+            title: 
+            time: 
+            author:
+            content
+        },
+        {},
+        {}
+        ....
+    ]
+
+数据库：
+    第三方模块
+
+    验证npm安装好
+        npm -v
+安装mysql
+    npm install mysql
+
+使用mysql：
+1、引入mysql模块
+    var mysql=require('mysql');
+2、连接数据库
+    var db=mysql.createConnection({
+        host: 'localhost',  // 数据库地址
+        user: 'root',       // 用户名
+        password: 'admin123', // 密码
+        database: '2016-7-1'
+    });
+3、编写sql语句
+    var sql='SELECT * FROM article';
+4、执行sql语句
+    db.query(sql, function(err, data){
+        if(err){
+            console.log(err);
+        }else{
+            // console.log(data);
+            res.write(data);
+            res.end();
+        }
+    });
+
+    JSON.stringify(json)
+
+------------------------------
+
+作业：个人站
+
+------------------------------
+
+
+

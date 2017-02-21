@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        function show(){
+            alert(this);
+        }
+        // show();     // window
+        var arr=[1,2,3,4,5];
+        arr.show=show;
+        // show();  // window
+        // arr.show(); // 1,2,3,4,5
+        document.onclick=arr.show;      // document
+        // document.onclick();           // document
+
+        // new show(); // object
+        // new arr.show(); // object
+        // new document.onclick(); // object
+
+        // setTimeout(show, 100);  // window
+        // setTimeout(arr.show, 100);  // window
+        // setTimeout(document.onclick ,100); // window
+
+        // setTimeout(new show, 100);  // object
+        // setTimeout(new arr.show, 100); // object
+        // setTimeout(new document.onclick, 100);  // object
+
+        var oDate=new Date();
+        oDate.show=show;
+
+        // oDate.show();
+        document.onclick=oDate.show;
+        // document.onclick();
+        // setTimeout(oDate.show, 100);
+        // new oDate.show();   // object
+        setTimeout(new oDate.show, 199);    // object
+    </script>
+</head>
+<body>
+
+</body>
+</html>

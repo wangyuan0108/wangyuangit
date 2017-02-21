@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        span{
+            font-size: 100px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('t1');
+            var oSpan=document.getElementById('span1');
+
+            oT.onkeydown=oT.onkeyup=function(){
+                oSpan.innerHTML=oT.value.length;
+            };
+        };
+    </script>
+</head>
+<body>
+<textarea id="t1" cols="30" rows="10"></textarea>
+<span id="span1">0</span>
+</body>
+</html>

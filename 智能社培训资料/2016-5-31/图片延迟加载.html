@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #ul1 li{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            float: left;
+            margin: 20px;
+        }
+        #ul1 li img{
+            width: 100%;
+        }
+    </style>
+    <script>
+        function getPos(obj){
+            var l=0;
+            var t=0;
+            while(obj){
+                l+=obj.offsetLeft;
+                t+=obj.offsetTop;
+
+                obj=obj.offsetParent;
+            }
+            return {left: l, top: t};
+        }
+        window.onscroll=window.onresize=window.onload = function () {
+            var oUl=document.getElementById('ul1');
+            var aImg=oUl.getElementsByTagName('img');
+
+            var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+            var clientH=document.documentElement.clientHeight;
+            var scrollBottom=scrollTop+clientH;
+
+            for(var i=0; i<aImg.length; i++){
+                var top=getPos(aImg[i]).top;
+
+                if(scrollBottom>=top){
+                    aImg[i].src=aImg[i].getAttribute('_src');
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+<ul id="ul1">
+    <li><img _src="cat/1.jpg"></li>
+    <li><img _src="cat/2.jpg"></li>
+    <li><img _src="cat/3.jpg"></li>
+    <li><img _src="cat/4.jpg"></li>
+    <li><img _src="cat/5.jpg"></li>
+    <li><img _src="cat/6.jpg"></li>
+    <li><img _src="cat/7.jpg"></li>
+    <li><img _src="cat/8.jpg"></li>
+</ul>
+</body>
+</html>

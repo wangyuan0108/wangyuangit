@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1,#div2{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+        #div2{
+            top: 300px;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            $('#btn1').click(function(){
+                $('#div1').animate({left: 500}, {duration: 2000, easing: 'swing'});
+                $('#div2').animate({left: 500}, {duration: 2000,easing: 'linear'});
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn1">
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

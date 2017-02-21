@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #0000ff;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            function wheel(){
+                $(this).css('background', 'red');
+            }
+            $('#div1').bind('mousewheel', wheel);
+            $('#div1').unbind('mousewheel', wheel);
+        });
+    </script>
+</head>
+<body>
+<input type="text" id="t1">
+    <div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[];
+        function unfindAdd(n){
+            if(!unfindArr(n)){
+                arr.push(n);
+            }
+        }
+        function unfindArr(n){
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]==n)return true;
+            }
+            return false;
+        }
+        unfindAdd(12);
+        unfindAdd(8);
+        unfindAdd(3);
+        unfindAdd(3);
+        unfindAdd(3);
+        unfindAdd(3);
+        unfindAdd(3);
+        unfindAdd(123);
+        unfindAdd(55);
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

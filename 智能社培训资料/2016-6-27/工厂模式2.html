@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        // 工厂模式
+        // 构造函数
+        function CreatePerson(name, age){
+            // 准备原料
+            var obj=new Object();
+            // 加工
+            obj.name=name;
+            obj.age=age;
+            obj.showName=function(){
+                return this.name;
+            };
+            obj.showAge=function(){
+                return this.age;
+            };
+            // 出厂
+            return obj;
+        }
+
+        var p1=new CreatePerson('i++', 18);
+        var p2=new CreatePerson('blue', 50);
+        alert(p1.showName==p2.showName);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

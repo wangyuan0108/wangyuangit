@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr2=[];
+        arr2.length=10;
+        function hashAdd(n){
+            var pos=n%arr2.length;
+
+            if(arr2[pos]){
+                while(arr2[pos]){
+                    if(arr2[pos]==n){
+                        return;
+                    }
+                    pos++;
+                    if(pos==arr2.length){
+                        pos=0;
+                    }
+                }
+                arr2[pos]=n;
+            }else{
+                arr2[pos]=n;
+            }
+        }
+        hashAdd(12);    alert(arr2);
+        hashAdd(34);    alert(arr2);
+        hashAdd(55);    alert(arr2);
+        hashAdd(66);    alert(arr2);
+        hashAdd(7);    alert(arr2);
+        hashAdd(17);    alert(arr2);
+        hashAdd(27);    alert(arr2);
+        hashAdd(37);    alert(arr2);
+        hashAdd(47);    alert(arr2);
+        hashAdd(107);    alert(arr2);
+        hashAdd(117);    alert(arr2);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

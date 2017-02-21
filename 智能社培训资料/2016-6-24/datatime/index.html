@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css"/>
+    <style type="text/css">
+        .custom-date-style {
+    background-color: red !important;
+    }
+    .input{
+    }
+    .input-wide{
+    width: 500px;
+    }
+    </style>
+    <script src="./jquery.js"></script>
+    <script src="build/jquery.datetimepicker.full.js"></script>
+    <script>
+        $(function(){
+            $('#s').datetimepicker({
+                format: 'Y-m-d',
+                timepicker: false,
+                todayButton: false
+            });
+            $.datetimepicker.setLocale('ch');//设置中文
+        });
+    </script>
+</head>
+<body>
+<input id="s" type="text">
+</body>
+</html>

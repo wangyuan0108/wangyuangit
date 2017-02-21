@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+
+            oDiv.onclick=function(){
+                var arr=['[抓狂]','[抱抱]','[害羞]','[酷]','[嘻嘻]','[太开心]','[偷笑]','[钱]','[花心]','[挤眼]'];
+                var arr2=['zhuakuang.gif','baobao.gif','haixiu.gif','ku.gif','xixi.gif','taikaixin.gif','touxiao.gif','qian.gif','huaxin.gif','jiyan.gif',];
+
+                for(var i=0; i<arr.length; i++){
+                    if(oDiv.innerHTML.indexOf(arr[i])!=-1){
+                        oDiv.innerHTML='<img src="Images/phiz/'+arr2[i]+'">';
+                    }
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">[酷][太开心]</div>
+</body>
+</html>

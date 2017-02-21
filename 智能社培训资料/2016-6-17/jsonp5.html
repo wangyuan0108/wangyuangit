@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+    </style>
+    <script>
+        function show(json){
+            // console.log(a);
+            window.onload=function(){
+                var oUl=document.getElementById('ul1');
+                for(var i=0; i<json.s.length; i++){
+                    var oLi=document.createElement('li');
+                    oLi.innerHTML=json.s[i];
+                    oUl.appendChild(oLi);
+                }
+            };
+        }
+    </script>
+    <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=show"></script>
+</head>
+<body>
+    <ul id="ul1"></ul>
+</body>
+</html>

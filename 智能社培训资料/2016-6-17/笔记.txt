@@ -1,0 +1,101 @@
+笔记
+
+前端没有权限来修改后台传给你的数据
+
+-----------------------------------------
+
+post:
+     oAjax.open('POST', json.url, true);
+     // 设置头部
+     oAjax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+     oAjax.send(json2url(json.data));
+
+-----------------------------------------
+
+Ajax：无刷新从服务器取数据
+
+缺点：
+    ajax不能跨域
+
+    http://www.baidu.com
+
+    XMLHttpRequest cannot load http://www.baidu.com/?t=0.7303189277810958. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost' is therefore not allowed access.
+
+jsonp：json+padding  可以跨域
+
+1、定义函数
+    在当前文件定义
+2、函数调用
+    在远端调用
+
+百度：
+    https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=show
+
+    script 改变src不会重新加载资源
+
+360：
+    https://sug.so.360.cn/suggest?callback=show&word=a
+
+    cb
+    callback
+
+-----------------------------------------
+
+作业：
+    微博留言
+    许愿墙
+    
+    webQQ
+
+    1、注册
+    2、登录
+    3、所有用户
+    4、列出所有留言
+    5、发言
+    6、更新发言信息  1s
+    7、退出登录
+    // 注册：http://zhinengshe.com/exercise/im/api.php?a=reg&user=aaa&pass=aaa&face=1&cb=show
+        a:reg,
+        user:用户名,
+        pass：密码，
+        face: 头像
+    // 登录：http://zhinengshe.com/exercise/im/api.php?a=lgn&user=aaa&pass=aaa&cb=show
+        a:lgn,
+        user:用户名,
+        pass：密码
+    // 获取用户列表：http://zhinengshe.com/exercise/im/api.php?a=get_user_list&token=xxx&cb=show
+        a:get_user_list,
+        token: token
+    // 获取完整信息：http://zhinengshe.com/exercise/im/api.php?a=get_msg&token=xxx&cb=show
+        a:get_msg,
+        token: token
+    // 发言：http://www.zhinengshe.com/exercise/im/api.php?a=snd_msg&content=123&token=xxx&cb=show
+        a:snd_msg,
+        content: xxx,
+        token: token
+    // 退出：http://www.zhinengshe.com/exercise/im/api.php?a=logout&token=xxxx
+        a: logout,
+        token: token
+    // 获取更新消息：http://www.zhinengshe.com/exercise/im/api.php?a=get_msg_n&n=2&token=xxxx
+        a:get_msg_n,
+        n: 2最大留言ID,
+        token: token
+
+-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

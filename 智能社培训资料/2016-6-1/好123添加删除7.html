@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul li{
+            border: 1px dashed #000;
+            width: 160px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+            position: relative;
+            margin: 20px;
+            float: left;
+        }
+        ul li span{
+            width: 12px;
+            height: 12px;
+            background: url(sprite-site.png) -61px 0;
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            cursor: pointer;
+        }
+        ul li i{
+            width: 9px;
+            height: 9px;
+            background: url(sprite-site.png) -88px -2px;
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            cursor: pointer;
+        }
+        #btn2{
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oT=document.getElementById('t1');
+            var oT2=document.getElementById('t2');
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+            var aSpan=oUl.getElementsByTagName('span');
+            var aI=oUl.getElementsByTagName('i');
+            var oBtn2=document.getElementById('btn2');
+
+            // 添加
+            oBtn.onclick=function(){
+                var oLi=document.createElement('li');
+                oLi.innerHTML='<a target="_blank" href="'+oT2.value+'">'+oT.value+'</a><span></span><i></i>';
+                oUl.appendChild(oLi);
+                oT.value=oT2.value='';
+
+                // 删除
+                var oSpan=oLi.children[1];
+                oSpan.onclick=function(){
+                    oUl.removeChild(this.parentNode);
+                };
+                // 修改
+                var oI=oLi.children[2];
+                oI.onclick=function(){
+                    var oLi=this.parentNode;
+                    var sName=this.parentNode.children[0].innerHTML;
+                    var sHref=this.parentNode.children[0].href;
+                    oT.value=sName;
+                    oT2.value=sHref;
+
+                    oBtn.style.display='none';
+                    oBtn2.style.display='inline-block';
+                    // 回写
+                    oBtn2.onclick=function(){
+                        var oA=oLi.children[0];
+
+                        oA.innerHTML=oT.value;
+                        oA.href=oT2.value;
+                        oT.value=oT2.value='';
+
+                        oBtn2.style.display='none';
+                        oBtn.style.display='inline-block';
+                    };
+                };
+            };
+            // 删除
+            for(var i=0; i<aSpan.length; i++){
+                aSpan[i].onclick=function(){
+                    oUl.removeChild(this.parentNode);
+                };
+            }
+            // 修改
+            for(var i=0; i<aI.length; i++){
+                aI[i].onclick=function(){
+                    var oLi=this.parentNode;
+                    var sName=this.parentNode.children[0].innerHTML;
+                    var sHref=this.parentNode.children[0].href;
+                    oT.value=sName;
+                    oT2.value=sHref;
+
+                    oBtn.style.display='none';
+                    oBtn2.style.display='inline-block';
+                    // 回写
+                    oBtn2.onclick=function(){
+                        var oA=oLi.children[0];
+
+                        oA.innerHTML=oT.value;
+                        oA.href=oT2.value;
+                        oT.value=oT2.value='';
+
+                        oBtn2.style.display='none';
+                        oBtn.style.display='inline-block';
+                    };
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+网站名称：<input type="text" id="t1">
+网站地址：<input type="text" id="t2">
+<input type="button" value="添加" id="btn1">
+<input type="button" value="修改" id="btn2">
+<ul id="ul1">
+    <li><a target="_blank" href="http://www.baidu.com">百度</a><span></span><i></i></li>
+    <li><a target="_blank" href="http://www.jd.com">京东</a><span></span><i></i></li>
+    <li><a target="_blank" href="http://www.zhinengshe.com">智能社</a><span></span><i></i></li>
+</ul>
+</body>
+</html>

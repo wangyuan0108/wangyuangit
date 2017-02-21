@@ -1,0 +1,225 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>智能课堂 —— 微博ajax接口测试 - www.zhinengshe.com</title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+<script src="../ajax.js"></script>
+<script>
+    function toDouble(n){
+        return n<10?'0'+n:''+n;
+    }
+    window.onload=function(){
+        var oBtn=document.getElementById('btn1');
+        var oT=document.getElementById('t1');
+        var oMsgBox=document.getElementById('msg_box');
+        var oPage=document.getElementById('page');
+
+        var URL='weibo.php';
+        // 添加
+        oBtn.onclick=function(){
+            if(oT.value==''){
+                alert('留言不能为空');
+                return;
+            }
+            ajax({
+                // weibo.php?act=add&content=xxx	添加一条
+                url: URL,
+                data: {
+                    act: 'add',
+                    content: oT.value
+                },
+                success: function(str){
+                    var json=eval('('+str+')');
+                    if(json.error){
+                        alert('添加留言失败');
+                    }else{
+                        var oDiv=createMsg(oT.value, json.time, json.id, 0, 0);
+                        getPage(1);
+                        getPageCount();
+
+                        oT.value='';
+                    }
+                },
+                error: function(){
+                    alert('添加留言失败');
+                }
+            });
+        };
+
+        // 创建留言
+        function createMsg(content, time, id, acc, ref){
+            var oDate=new Date();
+            oDate.setTime(time*1000);
+            var sDate=oDate.getFullYear()+'-'+toDouble(oDate.getMonth()+1)+'-'+toDouble(oDate.getDate())+' '+toDouble(oDate.getHours())+':'+toDouble(oDate.getMinutes())+':'+toDouble(oDate.getSeconds());
+            var oDiv=document.createElement('div');
+            oDiv.className='reply';
+            oDiv.innerHTML='<p class="replyContent">'+content+'</p>\
+                                <p class="operation">\
+                                <span class="replyTime">'+sDate+'</span>\
+                                <span class="handle">\
+                                <a href="javascript:;" class="top">'+acc+'</a>\
+                                <a href="javascript:;" class="down_icon">'+ref+'</a>\
+                                <a href="javascript:;" class="cut">删除</a>\
+                                </span>\
+                                </p>';
+            var aA=oDiv.getElementsByTagName('a');
+            // 顶
+            aA[0].onclick=function(){
+                // weibo.php?act=acc&id=12
+                ajax({
+                    url: URL,
+                    data: {
+                        act: 'acc',
+                        id: id
+                    },
+                    success: function(str){
+                        var json=eval('('+str+')');
+                        if(json.error){
+                            alert('顶失败了');
+                        }else{
+                            aA[0].innerHTML++;
+                        }
+                    }
+                });
+            };
+            // 踩
+            aA[1].onclick=function(){
+                // weibo.php?act=ref&id=12
+                ajax({
+                    url: URL,
+                    data: {
+                        act: 'ref',
+                        id: id
+                    },
+                    success: function(str){
+                        var json=eval('('+str+')');
+                        if(json.error){
+                            alert('踩失败了');
+                        }else{
+                            aA[1].innerHTML++;
+                        }
+                    }
+                });
+            };
+            // 删除
+            aA[2].onclick=function(){
+                // weibo.php?act=del&id=12
+                ajax({
+                    url: URL,
+                    data: {
+                        act: 'del',
+                        id: id
+                    },
+                    success: function(str){
+                        var json=eval('('+str+')');
+                        if(json.error){
+                            alert('删除失败');
+                        }else{
+                            var t=confirm('你确定删除么?');
+                            if(t){
+                                oMsgBox.removeChild(oDiv);
+                            }
+                        }
+                    }
+                });
+            };
+            return oDiv;
+        }
+        // 获取一页数据
+        // weibo.php?act=get&page=1
+        getPage(1);
+        function getPage(n){
+            oMsgBox.innerHTML='';
+            ajax({
+                url: URL,
+                data: {
+                    act: 'get',
+                    page: n
+                },
+                success: function(str){
+                    var arr=eval('('+str+')');
+                    console.log(arr);
+                    for(var i=0; i<arr.length; i++){
+                        var oDiv=createMsg(arr[i].content, arr[i].time, arr[i].id, arr[i].acc, arr[i].ref);
+                        oMsgBox.appendChild(oDiv);
+                    }
+                },
+                error: function(){
+                    alert('获取数据失败');
+                }
+            });
+        }
+        // 获取页数
+        // weibo.php?act=get_page_count
+        getPageCount();
+        function getPageCount(){
+            oPage.innerHTML='';
+            ajax({
+                url: URL,
+                data: {
+                    act: 'get_page_count'
+                },
+                success: function(str){
+                    var json=eval('('+str+')');
+
+                    for(var i=0; i<json.count; i++){
+                        var oA=document.createElement('a');
+                        oA.innerHTML=i+1;
+                        oA.href='javascript:;';
+                        if(i==0){
+                            oA.className='active';
+                        }
+                        oPage.appendChild(oA);
+
+                        // 换页
+                        oA.onclick=function(){
+                            getPage(this.innerHTML);
+                            for(var i=0; i<oPage.children.length; i++){
+                                oPage.children[i].className='';
+                            }
+                            this.className='active';
+                        };
+                    }
+                },
+                error: function(){
+                    alert('获取页数失败');
+                }
+            });
+        }
+    };
+</script>
+</head>
+
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="t1"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" id="btn1"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="msg_box">
+        	<!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2011-09-08 16:37:60</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+        	<!--<a href="javascript:;" class="active">1</a>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

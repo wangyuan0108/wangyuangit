@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var arr=[5,8,12,15,25,48,68,102,132,147,290,310];
+
+        function find2(n, s, e){
+            if(s>e){
+                return false;
+            }else if(s==e){
+                if(n==arr[s]){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+            var c=Math.floor((s+e)/2);
+            if(arr[c]==n){
+                return true;
+            }else{
+                if(n<arr[c]){
+                    return find2(n, s, c);
+                }else{
+                    return find2(n, c+1, e);
+                }
+            }
+        }
+        alert(find2(48, 0, arr.length-1));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

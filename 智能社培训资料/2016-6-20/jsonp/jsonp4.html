@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+    </style>
+    <script>
+        window.onload = function () {
+            var oT=document.getElementById('search');
+            var oUl=document.getElementById('ul1');
+
+            oT.onkeyup=function(){
+                jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su');
+            };
+            function jsonp(url){
+                var fnName='show'+Math.random();
+                fnName=fnName.replace('.', '');
+                window[fnName]=function(json){
+                    alert(json.s);
+                };
+                var oS=document.createElement('script');
+                // 把url提出去
+                oS.src=url+'?wd='+oT.value+'&cb='+fnName;
+                var oHead=document.getElementsByTagName('head')[0];
+                oHead.appendChild(oS);
+            }
+        };
+    </script>
+</head>
+<body>
+<input type="text" id="search">
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

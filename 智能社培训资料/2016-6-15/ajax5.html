@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oBtn=document.getElementById('btn1');
+
+            oBtn.onclick=function(){
+                ajax('a.txt', {
+                    username: '123',
+                    password: '456'
+                }, function(str){
+                    alert(str);
+                }, function(s){
+                    alert(s);
+                });
+            };
+            function json2url(json){
+                var arr=[];
+                for(var name in json){
+                    arr.push(name+'='+json[name]);
+                }
+                return arr.join('&');
+            }
+            function ajax(url, data, fnSucc, fnError){
+                // 1、准备ajax对象
+                if(window.XMLHttpRequest){
+                    var oAjax=new XMLHttpRequest();
+                }else{
+                    var oAjax=new ActiveXObject('Microsoft.XMLHTTP');
+                }
+                // 2、建立连接
+                oAjax.open('GET', url+'?'+json2url(data)+'&t='+Math.random(), true);
+                // 3、发送请求
+                oAjax.send();
+                // 4、接收数据
+                oAjax.onreadystatechange=function(){
+                    if(oAjax.readyState==4){
+                        if((oAjax.status>=200 && oAjax.status<300) || oAjax.status==304){
+                            // alert('成功：'+oAjax.responseText);
+                            fnSucc && fnSucc(oAjax.responseText);
+                        }else{
+                            // alert('失败');
+                            fnError && fnError(oAjax.status);
+                        }
+                    }
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="拿数据" id="btn1">
+</body>
+</html>

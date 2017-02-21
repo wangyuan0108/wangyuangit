@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 100%;
+            height: 300px;
+            background: #e74c3c;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.getElementById('div1');
+
+            window.onresize=function(){
+                var clientW=document.documentElement.clientWidth;
+
+                if(clientW>=600){
+                    oDiv.style.background='#ccc';
+                }else if(clientW>=400 && clientW<600){
+                    oDiv.style.background='#2ECC71';
+                }else{
+                    oDiv.style.background='#E74C3C';
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

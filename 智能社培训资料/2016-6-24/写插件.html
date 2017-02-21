@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $.fn.toRed=function(){
+            this.css('background', 'red');
+        };
+        $(function(){
+            $('#div1').click(function(){
+                $('#div1').toRed();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

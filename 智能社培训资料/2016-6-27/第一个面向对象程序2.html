@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #c945ff;
+        }
+    </style>
+    <script>
+        function ToRed(){
+            this.oDiv=document.getElementById('div1');
+
+            var _this=this;
+            this.oDiv.onclick=function(){
+                _this.fnClick();
+            };
+        }
+        ToRed.prototype.fnClick=function(){
+            this.oDiv.style.background='red';
+        };
+        window.onload = function(){
+            new ToRed();
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

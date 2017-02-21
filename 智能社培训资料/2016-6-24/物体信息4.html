@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div3{
+            width: 500px;
+            height: 500px;
+            background: green;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+        #div2{
+            width: 400px;
+            height: 400px;
+            background: blue;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            alert($('#div1').offset().left);
+            // alert($('#div1').offset().top);
+        });
+    </script>
+</head>
+<body>
+    <div id="div3">
+        <div id="div2">
+            <div id="div1"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

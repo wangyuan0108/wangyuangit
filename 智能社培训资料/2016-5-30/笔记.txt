@@ -1,0 +1,462 @@
+笔记
+
+姓名：韩腾飞
+      i++
+qq:2538114547
+tel:18518315140
+
+优点：
+缺点：
+    1、近视
+    2、耳背
+
+-----------------------------------
+
+希望大家学好
+    19:30
+
+-----------------------------------
+
+预解析：
+    定义变量、定义函数会预解析，当前作用域的最顶端
+
+undefined出现的情况：
+1、定义变量未赋值
+2、函数没有返回值
+3、访问一个不存在的属性
+
+全局变量：在程序的任何地方都可以访问
+局部变量：只能在当前作用域内访问的变量
+闭包：子函数可以访问父函数的局部变量
+
+-----------------------------------
+
+* 
+1、缩进
+2、命名一定要有意义
+
+-----------------------------------
+
+对象引用：
+
+-----------------------------------
+
+封闭空间(自执行匿名函数)：
+    (function(){
+
+    })();
+
+好处：
+1、解决变量冲突
+2、解决i的问题
+
+-----------------------------------
+
+return：函数的返回值
+    谁调用返回给谁
+
+-----------------------------------
+
+定时器：
+    setInterval();每过一段时间执行一次
+    setTimeout();只会执行一次
+
+    clearInterval();
+    clearTimeout();
+
+-----------------------------------
+
+时间对象：身上有很多方法，可以告诉你现在你想知道的时间
+    oDate.getFullYear()
+    oDate.getMonth()    从0开始
+    oDate.getDay()      从0开始,星期日是0
+    oDate.getDate();    日
+    oDate.getHours();   小时
+    oDate.getMinutes(); 分钟
+    oDate.getSeconds(); 秒
+
+    oDate.getTime();    时间戳
+        1970年1月1月
+
+-----------------------------------
+
+异常捕获：
+try{
+    
+}catch(e){
+    
+}
+
+第三方代码
+
+-----------------------------------
+    
+什么是真，什么是假？
+真：非空字符串、非零数字、true、非空对象
+假：空字符串、0、false、undefined、null、NaN
+
+-----------------------------------
+
+js组成：
+
+ECMAScript：
+    解释器、翻译器
+    把你写的代码翻译给计算机
+    arr.push();
+    arr.pop();
+    str.substring(1);
+    if(){}
+    for(){}
+    while(){}
+
+    兼容性：非常好，基本上都兼容
+DOM：Document Object Model
+     文档对象模型
+     所有跟页面打交道的都是DOM
+
+     document.getElementById();
+     oDiv.style.background='red';
+     ......
+     兼容性：比较好，大部分都可以兼容，不兼容我们可以处理
+BOM：Browser Object Model
+     浏览器对象模型
+
+     alert();
+     console.log();
+     .......
+     兼容性：不太好，我们也处理不了
+     能用就用，不能用拉倒
+
+-----------------------------------
+
+DOM：Document Object Model
+     文档对象模型
+    树：
+        根、分支
+    DOM树：
+
+    之前的问题：
+        子级：getElementsByTagName
+        不仅仅获取到子级，会一直获取下面所有符合的标签
+    DOM关系：
+        父级：
+            obj.parentNode
+            获取出来是一个元素
+        子级：只能获取一层
+            obj.children
+            获取出来是一组元素
+        兄：
+            obj.previousElementSibling
+            兼容性：高级浏览器
+            obj.previousSibling
+            兼容性：低级浏览器
+            高级浏览器下面可以获取文本节点
+
+            处理兼容：
+                1、if else
+                2、||
+                var oLi2=oLi.previousElementSibling || oLi.previousSibling;
+        弟：
+            obj.nextElementSibling
+                兼容性：高级浏览器
+            obj.nextSibling
+                兼容性：低级浏览器
+            处理兼容：
+                var obj2=obj.nextElementSibling || obj.nextSibling;
+        首节点：
+            obj.firstElementChild
+                兼容性：高级浏览器
+            obj.firstChild
+                兼容性：低级浏览器
+            var oFirst=oUl.firstElementChild || oUl.firstChild;
+
+            oUl.children[0];
+        尾节点：
+            var oLast=oUl.lastElementChild || oUl.lastChild;
+
+            oUl.children[oUl.children.length-1];
+
+    点击隐藏：
+
+-----------------------------------
+
+元素、对象、节点
+
+||：条件1 || 条件2
+
+js组成：
+    ECMAScript
+    DOM
+    BOM
+
+DOM：Document Object Model
+    
+    DOM树：
+    DOM关系：
+        1、父级
+            obj.parentNode
+            一个元素
+        2、子级
+            obj.children
+            一组元素
+        3、兄节点
+            obj.previousElementSibling || obj.previousSibling
+        4、弟节点
+            obj.nextElementSibling || obj.nextSibling
+        5、首节点
+            obj.firstElementChild || obj.firstChild
+
+            obj.children[0];
+        6、尾节点
+            obj.lastElementChild || obj.lastChild
+
+            obj.children[obj.children.length-1];
+
+-----------------------------------
+
+DOM关系：
+    父级
+        obj.parentNode
+    子级
+        obj.children
+    兄节点
+        obj.previousElementSibling || obj.previousSibling
+    弟节点
+        obj.nextElementSibling || obj.nextSibling
+    首节点
+        obj.firstElementChild || obj.firstChild
+    尾节点
+        obj.lastElementChild || obj.lastChild
+
+-----------------------------------
+
+DOM操作：
+    创建：
+        document.createElement('div');
+    添加：
+        父级.appendChild(节点);
+        往父节点后面添加
+        document.body.appendChild(oDiv);
+
+        oUl.insertBefore(添加的元素, 谁之前);
+        往前面添加
+    删除：
+        父级.removeChild(子级);
+
+    简易留言板：
+        1、创建元素
+            document.createElement()
+        2、添加元素
+            obj.appendChild();
+            添加到父级的最后
+            obj.insertBefore(要添加的元素, 谁之前);
+            添加到谁之前
+        3、删除元素
+            obj.removeChild(子级);
+
+    appendChild、insertBefore添加已有元素的时候类似剪切的功能
+
+    上移、下移
+
+-----------------------------------
+
+BOM：Browser Object Model
+    浏览器对象模型
+
+    window.open新打开一个页面
+
+    window.open(地址, 打开方式);
+        打开方式：
+            _blank  新页面
+            _self   当前页面
+    Chrome：拦截      从用户体验
+    FF：阻止
+    IE：直接打开
+
+    如果是用户触发：直接打开
+
+    var win=window.open();
+
+    window.close();
+
+    Chrome：直接关闭
+    FF：没有反应
+    IE：给个提示框
+
+-----------------------------------
+
+BOM：
+    
+    window.location.href 当前页面的地址
+    window.location.search 数据
+    window.location.hash   锚点
+
+    其他信息：
+        window.location.host      地址
+        window.location.hostname  域名
+        window.location.pathname  路径
+        window.location.port      端口
+        window.location.protocol  协议
+
+
+关于地址：
+    http://localhost:63342/2016-5-30/BOM2.html?aaa=12&bbb=5
+    问号后面是数据
+    aaa=12&bbb=5 数据
+
+    http://localhost:63342/2016-5-30/BOM3.html#1
+    警号后面是锚点
+
+    历史记录：
+        window.history
+
+        window.history.forward(); 前进
+        window.history.back();    后退
+
+        window.history.go(数字);
+            数字：
+                1  前进
+                -1 后退
+
+                2  前进2个页面
+                -2 后退2个页面
+
+-----------------------------------
+
+右下角悬浮广告：
+    
+    1、滚动条滚动的距离
+        document.body.scrollTop
+        兼容性：Chrome
+        document.documentElement.scrollTop
+        兼容性：FF、IE
+
+        纵向滚动条
+        var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+
+        横向滚动条
+        var scrollLeft=document.documentElement.scrollLeft || document.body.scrollLeft;
+    2、可视区的高度
+        document.documentElement.clientHeight
+
+        可视区宽度
+        document.documentElement.clientWidth
+    3、物体的高度
+        obj.offsetHeight
+        物体的宽度
+        obj.offsetWidth
+
+    右下角广告:
+        top=scrollTop+clientHeight-offsetHeight
+
+    滚动条滚动事件：
+        window.onscroll
+    窗口大小改变：
+        window.onresize
+
+        getStyle        offsetWidth
+类型     string            number
+display 实际的宽度            0
+大小    实际的宽度      盒模型的宽度
+
+-----------------------------------
+
+回顾：
+
+js组成：
+1、ECMAScript
+    解析器
+2、DOM
+    文档对象模型
+3、BOM
+    浏览器对象模型
+
+DOM：
+    DOM树
+    DOM关系：
+        父级
+            obj.parentNode
+        子级
+            obj.children
+        兄弟
+            obj.previousElementSibling || obj.previousSibling
+
+            obj.nextElementSibling || obj.nextSibling
+        首节点
+            obj.firstElementChild || obj.firstChild
+
+            obj.children[0]
+        尾节点
+            obj.lastElementChild || obj.lastChild
+
+            obj.children[obj.children.length-1]
+
+    DOM操作：
+        创建
+            var oDiv=document.createElement('div')
+        添加
+            obj.appendChild(oDiv);
+            添加到父级最后
+            obj.insertBefore(添加的元素, 谁之前);
+        删除
+            obj.removeChild(子级);
+
+    * 简易留言板
+    上移下移
+BOM：
+    window.open();
+    window.close();
+
+    window.location.href    当前页面你的地址
+    window.location.search  数据
+    window.location.hash    锚点
+
+    其他信息：
+        window.location.host
+        window.location.hostname
+        window.location.pathname
+        window.location.port
+        window.location.protocol
+
+    history：历史记录
+    window.history.forward();
+    window.history.back();
+
+    window.history.go();
+
+右下角悬浮广告：
+1、滚动条滚动的距离
+    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+2、可视区的高度
+    var clientH=document.docuementElement.clientHeight;
+3、物体的高度
+    var oH=obj.offsetHeight;
+4、滚动条滚动事件
+    window.onscroll
+5、窗口大小改变事件
+    window.onresize
+
+    top=scrlllTop+clientH-oH+'px';
+
+    判断浏览器：
+        navigator.userAgent.indexOf('MSIE 6.0')!=-1
+
+        getStyle        offsetWidth
+类型     string            number
+display 实际的宽度            0
+大小    实际的宽度      盒模型的宽度
+
+-----------------------------------
+
+作业：
+    简易留言板
+    右下角悬浮广告
+    上移下移
+    对联广告
+    浏览器宽度-控制列数
+    浏览器宽度-控制颜色
+
+-----------------------------------
+
+
+

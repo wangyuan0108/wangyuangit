@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        #ImageSlider{
+            height:380px;
+            width:800px;
+            text-align:left;
+        }
+        #gellery{
+            height:380px;
+            width:800px;
+            text-align:left;
+            position:absolute;
+        }
+        #ImageSlider #loader{
+            background:url(img/loading_animated.gif) no-repeat;
+            height:65px;
+            width:65px;
+            margin-top:150px;
+            margin-left:355px;
+            position:absolute;
+            z-index:400;
+        }
+        #gellery div{
+            position:absolute;
+            overflow:hidden;
+            height:428px;
+            width:981px;
+            text-align:left;
+            display:none;
+        }
+        #gellery img{
+            position:absolute;
+            height:380px;
+            width:800px;
+            text-align:left;
+        }
+    </style>
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="transformer.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#gellery').transformer({
+                __Effects:new Array('Optimus','Ironhide','Scorponok','Megatron','Starscream','Jazz'),
+                __Columns:7,
+                __Rows:3,
+                __Speed:10000,
+                __Title_Height:100,
+                __Title_Width:0
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="ImageSlider">
+    <div id="gellery">
+        <div>
+            <img  src="img/1.jpg">
+            <p>图片描述信息...</p>
+        </div>
+        <div>
+            <img src="img/2.jpg">
+            <p>图片描述信息...</p>
+        </div>
+        <div>
+            <img src="img/3.jpg">
+            <p>图片描述信息...
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

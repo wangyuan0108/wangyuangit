@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>三维图片轮换 - 智能设 - www.zhinengshe.com</title>
+<link href="zns_style.css" rel="stylesheet" type="text/css" />
+<script src="../move.js"></script>
+<script>
+	window.onload=function(){
+		var oUl=document.getElementById('znsRotatePic');
+		var aLi=oUl.children;
+		var aImg=oUl.getElementsByTagName('img');
+		var aA=oUl.getElementsByTagName('a');
+
+
+		// 加事件
+		aA[0].onclick=function(){
+			toRight();
+			return false;
+		};
+		aA[2].onclick=function(){
+			toLeft();
+			return false;
+		};
+		// 存坐标
+		var aPos=[];
+		for(var i=0; i<aLi.length; i++){
+			aPos[i]={
+				left: aLi[i].offsetLeft,
+				top: aLi[i].offsetTop,
+				width: aImg[i].offsetWidth,
+				height: aImg[i].offsetHeight,
+				opacity: getStyle(aImg[i], 'opacity'),
+				oImgTop: aImg[i].offsetTop,
+				fnClick: aA[i].onclick
+			}
+		}
+		function toLeft(){
+			// 删除最后一项，添加到第一项
+			aPos.unshift(aPos.pop());
+			changePos();
+		}
+		function toRight(){
+			aPos.push(aPos.shift());
+			changePos();
+		}
+		function changePos(){
+			for(var i=0; i<aLi.length; i++){
+				move(aLi[i], {left: aPos[i].left, top: aPos[i].top});
+				move(aImg[i], {width: aPos[i].width, height: aPos[i].height, opacity: aPos[i].opacity, top: aPos[i].oImgTop});
+				aA[i].onclick=aPos[i].fnClick;
+			}
+		}
+
+	};
+</script>
+</head>
+
+<body>
+<ul id="znsRotatePic">
+	<li class="pic1">
+		<a href="http://baidu.com/"><img src="images/pic1.gif" alt="pic1" class="unactive" longdesc="http://www.zns.com" width="187" /></a><!-- 208 -->
+		<span></span>
+	</li>
+	<li class="pic2">
+		<a href="http://google.com/"><img src="images/pic2.gif" alt="pic2" longdesc="http://www.zns.com" width="208" /></a>
+		<span></span>
+	</li>
+	<li class="pic3">
+		<a href="http://www.zns.com/"><img src="images/pic3.gif" alt="pic3" class="unactive" longdesc="http://www.zns.com" width="187" /></a>
+		<span></span>
+	</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            margin: 100px auto;
+            font-size: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        #box span{
+            width: 100%;
+            height: 100%;
+            background: red;
+            position: absolute;
+            left: 200px;
+            top: 0;
+            opacity: 0.6;
+        }
+    </style>
+    <script src="move.js"></script>
+    <script>
+        function hoverDir(obj, ev){
+            var x=obj.offsetLeft+obj.offsetWidth/2-ev.clientX;
+            var y=obj.offsetTop+obj.offsetHeight/2-ev.clientY;
+
+            return Math.round((Math.atan2(y, x)*180/Math.PI+180)/90)%4;
+        }
+        window.onload = function () {
+            var oBox=document.getElementById('box');
+            var oSpan=oBox.children[0];
+
+            oBox.onmouseenter=function(ev){
+                var oEvent=ev || event;
+                var n=hoverDir(oBox, oEvent);
+
+                switch(n){
+                    case 0:
+                        oSpan.style.left='200px';
+                        oSpan.style.top=0;
+                        break;
+                    case 1:
+                        oSpan.style.left=0;
+                        oSpan.style.top='200px';
+                        break;
+                    case 2:
+                        oSpan.style.left='-200px';
+                        oSpan.style.top=0;
+                        break;
+                    case 3:
+                        oSpan.style.left=0;
+                        oSpan.style.top='-200px';
+                        break;
+                }
+                move(oSpan, {left: 0, top: 0});
+            };
+            oBox.onmouseleave=function(ev){
+                var oEvent=ev || event;
+                var n=hoverDir(oBox, oEvent);
+
+                switch(n){
+                    case 0:
+                        move(oSpan, {left: 200, top: 0});
+                        break;
+                    case 1:
+                        move(oSpan, {left: 0, top: 200});
+                        break;
+                    case 2:
+                        move(oSpan, {left: -200, top: 0});
+                        break;
+                    case 3:
+                        move(oSpan, {left: 0, top: -200});
+                        break;
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <span>我是一个span</span>
+    </div>
+</body>
+</html>

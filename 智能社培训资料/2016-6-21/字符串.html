@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        var str='a88 oo99 456 yy88oopp44 xx92df 25kh 90ww 66hh 22xx 66';
+
+        var arr=[];
+        var tmp='';
+        for(var i=0; i<str.length; i++){
+            if(str.charAt(i)>='0' && str.charAt(i)<='9'){
+                tmp+=str.charAt(i);
+            }else{
+                if(tmp){
+                    arr.push(tmp);
+                    tmp='';
+                }
+            }
+        }
+        if(tmp){
+            arr.push(tmp);
+            tmp='';
+        }
+        alert(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

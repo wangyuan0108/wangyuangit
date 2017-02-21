@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <script>
+        /*
+        *   {
+        *       value: n,
+        *       l: ,
+        *       r:
+        *   }
+        * */
+        // 12 5 22 33 45 15 17 4 8
+        var root=null;
+        function bstAdd(node, n){
+            if(root==null){
+                alert('没有根节点，把'+n+'当做根节点');
+                root={
+                    value: n,
+                    l: null,
+                    r: null
+                };
+            }else{
+                if(node.value==n){
+                    alert('已经有这个数了');
+                    return;
+                }else{
+                    if(n<node.value){
+                        alert('试图往左走');
+                        if(node.l==null){
+                            alert('左边没人，来吧，把'+n+'放到'+node.value+'的左边');
+                            node.l={
+                                value: n,
+                                l: null,
+                                r: null
+                            }
+                        }else{
+                            alert('左边有人，接着找');
+                            bstAdd(node.l, n);
+                        }
+                    }else{
+                        alert('试图往右走');
+                        if(node.r==null){
+                            alert('右边没人，来吧，把'+n+'放到'+node.value+'的右边');
+                            node.r={
+                                value: n,
+                                l: null,
+                                r: null
+                            };
+                        }else{
+                            alert('右边有人，接着找');
+                            bstAdd(node.r, n);
+                        }
+                    }
+                }
+            }
+        }
+        bstAdd(root, 12);
+        bstAdd(root, 5);
+        bstAdd(root, 22);
+        bstAdd(root, 33);
+        bstAdd(root, 45);
+        bstAdd(root, 15);
+        bstAdd(root, 17);
+        bstAdd(root, 4);
+        bstAdd(root, 8);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

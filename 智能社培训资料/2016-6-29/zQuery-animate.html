@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="zQuery-animate.js"></script>
+    <script>
+        $(function(){
+            $('div').click(function(){
+                $('div').animate({left: 500},{easing: Tween.Bounce.easeInOut});
+            });
+        });
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

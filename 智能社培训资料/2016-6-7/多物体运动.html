@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width: 100px;
+            height: 50px;
+            background: red;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function getStyle(obj, name){
+            return (obj.currentStyle || getComputedStyle(obj, false))[name];
+        }
+        window.onload = function () {
+            var aDiv=document.getElementsByTagName('div');
+
+            for(var i=0; i<aDiv.length; i++){
+                aDiv[i].onmouseover=function(){
+                    move(this, 'width', 200, 500);
+                };
+                aDiv[i].onmouseout=function(){
+                    move(this, 'width', 100, 500);
+                };
+            }
+            var timer;
+            function move(obj, name, iTarget, duration, complete){
+                var start=parseFloat(getStyle(obj, name));
+                var dis=iTarget-start;   // 总距离
+
+                var count=Math.floor(duration/30);  // 总步数
+                var n=0;
+                clearInterval(timer);
+                timer=setInterval(function(){
+                    n++;
+                    obj.style[name]=start+dis/count*n+'px';  // 每步走多远
+                    if(n==count){
+                        clearInterval(timer);
+                        complete && complete();
+                    }
+                }, 30);
+            }
+        };
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>
